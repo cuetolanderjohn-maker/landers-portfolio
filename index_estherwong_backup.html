@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>COEPRO19 — Portfolio &amp; Creative Lab</title>
+  <link rel="icon" type="image/png" href="hero_character.jpg">
+
+  <!-- Core Fonts: Google Fonts Cormorant Garamond & Noto Serif SC + Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       ESTHER WONG DESIGN SYSTEM TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --pt-black: #000000;
+      --pt-bg: #07090e;
+      --pt-card-bg: rgba(14, 18, 26, 0.82);
+      --pt-gold: #ffce94;
+      --pt-gold-soft: rgba(255, 206, 148, 0.36);
+      --pt-gold-dim: rgba(255, 206, 148, 0.66);
+      --pt-gold-bright: #ffe6c7;
+      --pt-line: rgba(255, 206, 148, 0.28);
+      --pt-line-subtle: rgba(255, 206, 148, 0.12);
+      --pt-font-cn: "Noto Serif SC", "Songti SC", "SimSun", serif;
+      --pt-font-en: "Cormorant Garamond", Georgia, serif;
+      --pt-font-mono: "JetBrains Mono", monospace;
+      --pt-close-size: 46px;
+      --pt-node-width: clamp(240px, 22vw, 310px);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--pt-black);
+      color: #ffffff;
+      font-family: var(--pt-font-en);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--pt-bg);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--pt-line);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--pt-gold);
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--pt-gold);
+      color: #000000;
+    }
+
+    /* ==========================================================================
+       OPENING SCREEN LOADER (0% -> 100% WITH ENTER WORLD)
+       ========================================================================== */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s ease;
+    }
+    .loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader__percent {
+      font-family: var(--pt-font-en);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      color: var(--pt-gold);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .loader__bar {
+      width: min(280px, 70vw);
+      height: 2px;
+      background: rgba(255, 206, 148, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .loader__bar span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--pt-gold);
+      transition: width 0.15s ease-out;
+      box-shadow: 0 0 10px var(--pt-gold);
+    }
+    .loader__text {
+      font-family: var(--pt-font-cn);
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.12em;
+    }
+    .loader__enter-btn {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      font-family: var(--pt-font-en);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      padding: 10px 28px;
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+    }
+    .loader__enter-btn.is-ready {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .loader__enter-btn span:first-child {
+      font-family: var(--pt-font-cn);
+      font-size: 0.85rem;
+    }
+    .loader__enter-btn:hover {
+      background: var(--pt-gold);
+      color: #000000;
+      box-shadow: 0 0 20px rgba(255, 206, 148, 0.4);
+    }
+
+    /* Ambient Particle Canvas */
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       TOP FIXED NAVIGATION BAR
+       ========================================================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 24px clamp(20px, 4vw, 48px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.88) 0%, rgba(7, 9, 14, 0) 100%);
+      pointer-events: none;
+    }
+    .nav * {
+      pointer-events: auto;
+    }
+    .nav__logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .nav__logo-badge {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--pt-gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--pt-font-en);
+      font-size: 0.95rem;
+      color: var(--pt-gold);
+      background: rgba(255, 206, 148, 0.08);
+      transition: transform 0.3s ease;
+    }
+    .nav__logo-wrap:hover .nav__logo-badge {
+      transform: rotate(45deg);
+    }
+    .nav__logo-text {
+      font-family: var(--pt-font-en);
+      font-size: 1.25rem;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .nav__links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2vw, 28px);
+    }
+    .nav__links li a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-family: var(--pt-font-en);
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    .nav__links li a:hover,
+    .nav__links li a.active {
+      color: var(--pt-gold);
+    }
+    .nav__sep {
+      width: 4px;
+      height: 4px;
+      background: var(--pt-gold-dim);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    /* Projects Dropdown Menu */
+    .nav__dropdown {
+      position: relative;
+    }
+    .nav__dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(11, 14, 22, 0.96);
+      border: 1px solid var(--pt-line);
+      padding: 10px 14px;
+      min-width: 170px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+    }
+    .nav__dropdown:hover .nav__dropdown-menu,
+    .nav__dropdown.is-open .nav__dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav__dropdown-menu a {
+      font-size: 0.82rem !important;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .nav__dropdown-menu a:hover {
+      background: rgba(255, 206, 148, 0.1);
+    }
+    .nav__dropdown-note {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      margin-left: 6px;
+    }
+
+    /* Sound Mute Button */
+    .nav__sound-btn {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sound-dot {
+      width: 6px;
+      height: 6px;
+      background: #00ff88;
+      border-radius: 50%;
+      display: inline-block;
+      animation: sound-pulse 1.8s infinite ease-in-out;
+    }
+    .sound-dot.is-muted {
+      background: #888888;
+      animation: none;
+    }
+    @keyframes sound-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 8px #00ff88; }
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO / THE WORKSTATION OPENING SCENE
+       ========================================================================== */
+    .hero-scene {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(60px, 10vh, 120px) clamp(20px, 5vw, 80px);
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .hero-bg-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: -2;
+      filter: contrast(108%) brightness(0.85);
+      transform: scale(1.02);
+      transition: transform 0.2s cubic-bezier(0.1, 0.5, 0.2, 1);
+    }
+
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 65% 45%, transparent 25%, rgba(7, 9, 14, 0.45) 60%, rgba(7, 9, 14, 0.95) 100%),
+        linear-gradient(180deg, rgba(7, 9, 14, 0.4) 0%, transparent 40%, rgba(7, 9, 14, 0.95) 90%, #07090e 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 850px;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--pt-font-en);
+      font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+      letter-spacing: 0.25em;
+      color: var(--pt-gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-tagline::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--pt-gold);
+    }
+
+    .hero-title {
+      font-family: var(--pt-font-en);
+      font-size: clamp(2.8rem, 6.5vw, 5.8rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .hero-title em {
+      font-family: var(--pt-font-en);
+      font-style: italic;
+      color: var(--pt-gold);
+      font-weight: 400;
+    }
+
+    .hero-desc {
+      font-family: var(--pt-font-cn);
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-bottom: 32px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .pt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      font-family: var(--pt-font-en);
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      padding: 12px 28px;
+      text-decoration: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .pt-btn:hover {
+      background: var(--pt-gold);
+      color: #000000;
+      box-shadow: 0 0 25px rgba(255, 206, 148, 0.45);
+    }
+    .pt-btn-secondary {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .pt-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: none;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      right: clamp(20px, 5vw, 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--pt-font-en);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: rgba(255, 206, 148, 0.6);
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, var(--pt-gold) 0%, transparent 100%);
+      animation: scroll-drop 2s infinite ease-in-out;
+    }
+    @keyframes scroll-drop {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      50.1% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ==========================================================================
+       SECTION 2: DUAL-BOARD PROJECT SHOWCASE
+       ========================================================================== */
+    .pt-scene {
+      position: relative;
+      z-index: 10;
+      padding: clamp(60px, 8vh, 100px) 0 clamp(80px, 10vh, 140px);
+      background: #07090e;
+    }
+
+    .pt-scene-header {
+      padding: 0 clamp(20px, 5vw, 80px);
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .pt-scene-title-wrap h2 {
+      font-family: var(--pt-font-en);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+    }
+    .pt-scene-title-wrap h2 span {
+      font-family: var(--pt-font-cn);
+      font-size: 0.55em;
+      color: var(--pt-gold);
+      margin-left: 12px;
+      font-weight: 400;
+    }
+
+    /* Category Filter Nav */
+    .pt-filter-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pt-filter-btn {
+      background: transparent;
+      border: 1px solid var(--pt-line);
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--pt-font-en);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+    .pt-filter-btn:hover,
+    .pt-filter-btn.is-active {
+      background: rgba(255, 206, 148, 0.15);
+      border-color: var(--pt-gold);
+      color: var(--pt-gold);
+    }
+
+    /* Horizontal Card Track */
+    .pt-track-container {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 20px clamp(20px, 5vw, 80px) 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .pt-track-container::-webkit-scrollbar {
+      height: 4px;
+    }
+    .pt-track-container::-webkit-scrollbar-thumb {
+      background: var(--pt-gold-dim);
+    }
+
+    .pt-track-row {
+      display: flex;
+      gap: clamp(16px, 2.5vw, 32px);
+      width: max-content;
+    }
+
+    /* Project Node Card */
+    .pt-node {
+      scroll-snap-align: start;
+      width: var(--pt-node-width);
+      min-width: 260px;
+      background: var(--pt-card-bg);
+      border: 1px solid var(--pt-line);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(16px);
+    }
+    .pt-node:hover {
+      transform: translateY(-8px);
+      border-color: var(--pt-gold);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 206, 148, 0.2);
+    }
+
+    .pt-node__thumb-wrap {
+      width: 100%;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      background: #000000;
+    }
+    .pt-node__thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .pt-node:hover .pt-node__thumb {
+      transform: scale(1.08);
+    }
+
+    .pt-node__badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      font-family: var(--pt-font-mono);
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+    }
+
+    .pt-node__body {
+      padding: 18px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .pt-node__year {
+      font-family: var(--pt-font-en);
+      font-size: 0.8rem;
+      color: var(--pt-gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .pt-node__title {
+      font-family: var(--pt-font-en);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .pt-node__title span {
+      display: block;
+      font-family: var(--pt-font-cn);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .pt-node__desc {
+      font-family: var(--pt-font-cn);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+      margin: 10px 0 16px;
+    }
+
+    .pt-node__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--pt-line-subtle);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+    .pt-node__role {
+      font-family: var(--pt-font-mono);
+      font-size: 0.7rem;
+      color: rgba(255, 206, 148, 0.75);
+    }
+    .pt-node__arrow {
+      color: var(--pt-gold);
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .pt-node:hover .pt-node__arrow {
+      transform: translateX(4px);
+    }
+
+    /* ==========================================================================
+       CASE STUDY EXPANDABLE MODAL / DRAWER
+       ========================================================================== */
+    .case-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 3vh, 40px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .case-modal.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .case-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+    }
+    .case-modal__panel {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, 95vw);
+      max-height: 92vh;
+      background: #0b0e16;
+      border: 1px solid var(--pt-line);
+      border-radius: 6px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 206, 148, 0.15);
+      transform: translateY(20px) scale(0.98);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .case-modal.is-active .case-modal__panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .case-modal__topbar {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--pt-line-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 18, 26, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .case-modal__topbar-title {
+      font-family: var(--pt-font-en);
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--pt-gold);
+      text-transform: uppercase;
+    }
+    .case-modal__close-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .case-modal__close-btn:hover {
+      color: var(--pt-gold);
+      transform: rotate(90deg);
+    }
+
+    .case-modal__body {
+      padding: clamp(20px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .case-header-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 800px) {
+      .case-header-grid { grid-template-columns: 1fr; }
+    }
+
+    .case-title {
+      font-family: var(--pt-font-en);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .case-subtitle {
+      font-family: var(--pt-font-cn);
+      font-size: 1rem;
+      color: var(--pt-gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .case-summary {
+      font-family: var(--pt-font-cn);
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+    }
+
+    .case-meta-box {
+      background: rgba(255, 206, 148, 0.04);
+      border: 1px solid var(--pt-line-subtle);
+      padding: 20px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .case-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .case-meta-label {
+      font-family: var(--pt-font-en);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--pt-gold);
+      text-transform: uppercase;
+    }
+    .case-meta-val {
+      font-family: var(--pt-font-mono);
+      font-size: 0.85rem;
+      color: #ffffff;
+    }
+
+    .case-interactive-sandbox {
+      background: #000000;
+      border: 1px solid var(--pt-line);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==========================================================================
+       SECTION 3: PROFILE MODAL & EDITORIAL RESUME
+       ========================================================================== */
+    .intro-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 2.5vh, 32px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .intro-modal.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .intro-modal__shader {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(16px);
+      cursor: pointer;
+    }
+    .intro-modal__panel {
+      position: relative;
+      z-index: 2;
+      width: min(1080px, 96vw);
+      max-height: 94vh;
+      background: #0c0f17;
+      border: 1px solid var(--pt-line);
+      border-radius: 6px;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 206, 148, 0.18);
+    }
+    .intro-modal__topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 16px 28px;
+      background: rgba(12, 15, 23, 0.95);
+      border-bottom: 1px solid var(--pt-line-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .intro-modal__eyebrow {
+      font-family: var(--pt-font-en);
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      color: var(--pt-gold);
+      text-transform: uppercase;
+    }
+    .intro-modal__topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .intro-modal__lang-btn {
+      background: transparent;
+      border: 1px solid var(--pt-line);
+      color: var(--pt-gold);
+      font-family: var(--pt-font-mono);
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    .intro-modal__lang-btn:hover {
+      background: var(--pt-gold);
+      color: #000000;
+    }
+
+    .intro-modal__body {
+      padding: clamp(24px, 4vw, 48px);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: clamp(24px, 4vw, 52px);
+    }
+    @media (max-width: 820px) {
+      .intro-modal__body { grid-template-columns: 1fr; }
+    }
+
+    .intro-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .intro-avatar-frame {
+      width: 100%;
+      aspect-ratio: 1;
+      border: 1px solid var(--pt-gold);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      background: #000000;
+      box-shadow: 0 0 20px rgba(255, 206, 148, 0.15);
+    }
+    .intro-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .intro-name {
+      font-family: var(--pt-font-en);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+    .intro-role {
+      font-family: var(--pt-font-cn);
+      font-size: 0.9rem;
+      color: var(--pt-gold);
+      margin-top: 4px;
+    }
+
+    .intro-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid var(--pt-line-subtle);
+      padding-top: 16px;
+    }
+    .intro-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--pt-font-mono);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .intro-contact-item:hover {
+      color: var(--pt-gold);
+    }
+
+    .intro-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .intro-section {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .intro-section-title {
+      font-family: var(--pt-font-en);
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
+      color: var(--pt-gold);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--pt-line-subtle);
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .intro-section-title span {
+      font-family: var(--pt-font-cn);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .intro-bio-text {
+      font-family: var(--pt-font-cn);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    /* Skills Pill Grid */
+    .skills-chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-chip {
+      background: rgba(255, 206, 148, 0.06);
+      border: 1px solid var(--pt-line);
+      color: #ffffff;
+      font-family: var(--pt-font-mono);
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Experience Timeline Entries */
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .timeline-item {
+      border-left: 2px solid var(--pt-line);
+      padding-left: 18px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pt-gold);
+      box-shadow: 0 0 8px var(--pt-gold);
+    }
+    .timeline-period {
+      font-family: var(--pt-font-mono);
+      font-size: 0.75rem;
+      color: var(--pt-gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+    .timeline-role-title {
+      font-family: var(--pt-font-en);
+      font-size: 1.15rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .timeline-desc {
+      font-family: var(--pt-font-cn);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       SUB-COMPONENTS FOR EMBEDDED PROTOTYPES (EVENTCASE, ARCADE, VISION LAB)
+       ========================================================================== */
+    .proto-chrome {
+      background: #0d111a;
+      border-bottom: 1px solid var(--pt-line-subtle);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .proto-url-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #000000;
+      border: 1px solid var(--pt-line-subtle);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: var(--pt-font-mono);
+      font-size: 0.72rem;
+      color: var(--pt-gold);
+      flex: 1;
+      max-width: 480px;
+    }
+    .proto-url-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00ff88;
+    }
+    .proto-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .proto-btn {
+      background: transparent;
+      border: 1px solid var(--pt-line);
+      color: #ffffff;
+      font-family: var(--pt-font-mono);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .proto-btn:hover {
+      background: var(--pt-gold);
+      color: #000000;
+      border-color: var(--pt-gold);
+    }
+
+    .proto-viewport {
+      min-height: 480px;
+      position: relative;
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .proto-iframe {
+      width: 100%;
+      height: 520px;
+      border: none;
+      display: block;
+      background: #ffffff;
+    }
+
+    /* Thunderbolt Arcade Frame */
+    .arcade-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .arcade-hud {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--pt-font-mono);
+      font-size: 0.8rem;
+      background: #0d111a;
+      border: 1px solid var(--pt-line-subtle);
+      padding: 8px 14px;
+      color: var(--pt-gold);
+    }
+    .arcade-canvas-wrap {
+      position: relative;
+      border: 2px solid var(--pt-line);
+      box-shadow: 0 0 25px rgba(255, 206, 148, 0.15);
+    }
+    .arcade-cover {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000000;
+    }
+    .arcade-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .arcade-cover-btn {
+      position: absolute;
+      width: 50%;
+      transition: transform 0.2s ease;
+    }
+    .arcade-cover:hover .arcade-cover-btn {
+      transform: scale(1.08);
+    }
+
+    /* Vision Lab Frame */
+    .vision-container {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .vision-canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #05070c;
+      border: 1px solid var(--pt-line);
+      overflow: hidden;
+    }
+    .vision-canvas-wrap canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .vision-cat-overlay {
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+      transform: translate(-50%, -100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 0.15s ease;
+    }
+    .vision-cat-overlay.hidden {
+      opacity: 0;
+    }
+    .vision-cat-overlay img {
+      max-width: 140px;
+      height: auto;
+    }
+    .vision-controls-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .vision-gesture-btn {
+      background: rgba(255, 206, 148, 0.08);
+      border: 1px solid var(--pt-line);
+      color: #ffffff;
+      font-family: var(--pt-font-mono);
+      font-size: 0.72rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+    .vision-gesture-btn:hover,
+    .vision-gesture-btn.is-active {
+      background: var(--pt-gold);
+      color: #000000;
+      border-color: var(--pt-gold);
+    }
+
+    /* Toast Notification */
+    .pt-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(14, 18, 26, 0.95);
+      border: 1px solid var(--pt-gold);
+      color: var(--pt-gold);
+      font-family: var(--pt-font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      padding: 10px 22px;
+      border-radius: 4px;
+      z-index: 9000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      pointer-events: none;
+    }
+    .pt-toast.is-active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. OPENING SCENE LOADER -->
+  <div class="loader" id="loader">
+    <p class="loader__percent" id="loaderPercent">0%</p>
+    <div class="loader__bar"><span id="loaderProgress"></span></div>
+    <p class="loader__text" id="loaderText">Preparing the opening scene</p>
+    <button class="loader__enter-btn" id="loaderEnterBtn" type="button" onclick="enterWorld()">
+      <span>进入世界</span>
+      <span>ENTER WORLD</span>
+    </button>
+  </div>
+
+  <!-- Ambient Light Particle Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Background Audio Element -->
+  <audio id="bgAudio" preload="auto" loop></audio>
+
+  <!-- 2. FIXED NAVIGATION HEADER -->
+  <header class="nav">
+    <a class="nav__logo-wrap" href="#hero" onclick="scrollToSection('hero')">
+      <div class="nav__logo-badge">✦</div>
+      <span class="nav__logo-text">COEPRO19</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#hero" onclick="scrollToSection('hero')">INTRO</a></li>
+      <li class="nav__sep" aria-hidden="true"></li>
+      <li class="nav__dropdown" id="projectsDropdown">
+        <a href="#projects" onclick="scrollToSection('projects')" id="projectsMenuBtn">PROJECTS</a>
+        <div class="nav__dropdown-menu">
+          <a href="#projects" onclick="filterProjects('all')">ALL PROJECTS</a>
+          <a href="#projects" onclick="filterProjects('ux')">UX PROJECTS <small class="nav__dropdown-note">(web/app)</small></a>
+          <a href="#projects" onclick="filterProjects('game')">GAME DEV <small class="nav__dropdown-note">(mechanics)</small></a>
+          <a href="#projects" onclick="filterProjects('tech')">TECHNICAL LABS <small class="nav__dropdown-note">(cv/ai)</small></a>
+        </div>
+      </li>
+      <li class="nav__sep" aria-hidden="true"></li>
+      <li><a href="#" onclick="openProfileModal(); return false;">PROFILE</a></li>
+      <li class="nav__sep" aria-hidden="true"></li>
+      <li>
+        <a href="#" class="nav__sound-btn" id="soundToggle" onclick="toggleSound(); return false;">
+          <span class="sound-dot is-muted" id="soundDot"></span>
+          <span id="soundText">MUTE</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <!-- 3. HERO / THE WORKSTATION SCENE -->
+  <section class="hero-scene" id="hero">
+    <img src="hero_character.jpg" alt="Creative Technologist Workstation" class="hero-bg-media" id="heroBg">
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content">
+      <span class="hero-tagline">Software Engineer &bull; Interaction Developer</span>
+      <h1 class="hero-title">Engineering <em>Worlds</em> &amp; Reactive Interfaces</h1>
+      <p class="hero-desc">
+        A 20-something Computer Engineering student crafting deterministic game mechanics, accessible design systems, and real-time computer vision interactions.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="pt-btn" onclick="scrollToSection('projects')">EXPLORE PROJECTS &rarr;</a>
+        <button type="button" class="pt-btn pt-btn-secondary" onclick="openProfileModal()">CURATED PROFILE</button>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- 4. DUAL-BOARD PROJECT SHOWCASE -->
+  <section class="pt-scene" id="projects">
+    <header class="pt-scene-header">
+      <div class="pt-scene-title-wrap">
+        <h2>Featured Works<span>核心作品集</span></h2>
+      </div>
+      <nav class="pt-filter-nav" aria-label="Project filter">
+        <button type="button" class="pt-filter-btn is-active" data-cat="all" onclick="filterProjects('all')">All Works</button>
+        <button type="button" class="pt-filter-btn" data-cat="ux" onclick="filterProjects('ux')">UX Projects</button>
+        <button type="button" class="pt-filter-btn" data-cat="game" onclick="filterProjects('game')">Game Dev</button>
+        <button type="button" class="pt-filter-btn" data-cat="tech" onclick="filterProjects('tech')">Technical Labs</button>
+      </nav>
+    </header>
+
+    <!-- Horizontal Scrolling Track -->
+    <div class="pt-track-container" id="projectTrack">
+      <div class="pt-track-row">
+
+        <!-- PROJECT 1: EventEase MNT (UX Project) -->
+        <article class="pt-node" data-category="ux" onclick="openCaseModal('eventease')">
+          <div class="pt-node__thumb-wrap">
+            <img src="floor796_bg.jpg" alt="EventEase MNT" class="pt-node__thumb">
+            <span class="pt-node__badge">LIVE WEB APP</span>
+          </div>
+          <div class="pt-node__body">
+            <div>
+              <span class="pt-node__year">2026 // UX ENGINEERING</span>
+              <h3 class="pt-node__title">EventEase MNT<br><span>Event Management System</span></h3>
+              <p class="pt-node__desc">
+                High-fidelity atomic design system and responsive management portal with WCAG AA compliance.
+              </p>
+            </div>
+            <div class="pt-node__footer">
+              <span class="pt-node__role">UI/UX &bull; Frontend</span>
+              <span class="pt-node__arrow">&rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: Thunderbolt Maze (Game Dev) -->
+        <article class="pt-node" data-category="game" onclick="openCaseModal('thunderbolt')">
+          <div class="pt-node__thumb-wrap">
+            <img src="menu_background.jpg" alt="Thunderbolt Maze Arcade" class="pt-node__thumb">
+            <span class="pt-node__badge">PLAYABLE GAME</span>
+          </div>
+          <div class="pt-node__body">
+            <div>
+              <span class="pt-node__year">2026 // GAME MECHANICS</span>
+              <h3 class="pt-node__title">Thunderbolt Maze<br><span>Playable 2D Retro Prototype</span></h3>
+              <p class="pt-node__desc">
+                Responsive arcade engine featuring grid collisions, state-driven ghosts, and deterministic inputs.
+              </p>
+            </div>
+            <div class="pt-node__footer">
+              <span class="pt-node__role">Game Design &bull; Audio</span>
+              <span class="pt-node__arrow">&rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Computer Vision & Gesture Lab (Technical Labs) -->
+        <article class="pt-node" data-category="tech" onclick="openCaseModal('vision')">
+          <div class="pt-node__thumb-wrap">
+            <img src="caaat.gif" alt="Computer Vision Lab" class="pt-node__thumb" style="object-fit: contain; background: #111;">
+            <span class="pt-node__badge">OPENCV &bull; AI</span>
+          </div>
+          <div class="pt-node__body">
+            <div>
+              <span class="pt-node__year">2026 // TECHNICAL LAB</span>
+              <h3 class="pt-node__title">Vision Gesture Lab<br><span>OpenCV Skin &amp; Skeleton Tracker</span></h3>
+              <p class="pt-node__desc">
+                Real-time YCrCb skin segmentation, Haar face suppression, and animated caaat.gif gesture anchoring.
+              </p>
+            </div>
+            <div class="pt-node__footer">
+              <span class="pt-node__role">Computer Vision &bull; Python</span>
+              <span class="pt-node__arrow">&rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: Apex Sprint Matrix (Systems & Scope) -->
+        <article class="pt-node" data-category="ux" onclick="openCaseModal('apex')">
+          <div class="pt-node__thumb-wrap">
+            <img src="profile_avatar.jpg" alt="Apex Sprint Matrix" class="pt-node__thumb">
+            <span class="pt-node__badge">AGILE MATRIX</span>
+          </div>
+          <div class="pt-node__body">
+            <div>
+              <span class="pt-node__year">2026 // SCOPE SYSTEMS</span>
+              <h3 class="pt-node__title">Apex Sprint Matrix<br><span>Agile Burndown &amp; Aegis Token Library</span></h3>
+              <p class="pt-node__desc">
+                Multi-track 6-week sprint framework, risk mitigation matrix, and tokenized design system governance.
+              </p>
+            </div>
+            <div class="pt-node__footer">
+              <span class="pt-node__role">Project Manager &bull; Scrum</span>
+              <span class="pt-node__arrow">&rarr;</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CASE STUDY DETAIL MODAL (DRAWER) -->
+  <div class="case-modal" id="caseModal" aria-hidden="true">
+    <div class="case-modal__backdrop" onclick="closeCaseModal()"></div>
+    <div class="case-modal__panel">
+      
+      <div class="case-modal__topbar">
+        <span class="case-modal__topbar-title" id="caseModalCategory">CASE STUDY // UX ENGINEERING</span>
+        <button type="button" class="case-modal__close-btn" onclick="closeCaseModal()" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="case-modal__body">
+        
+        <div class="case-header-grid">
+          <div>
+            <h2 class="case-title" id="caseModalTitle">EventEase MNT</h2>
+            <span class="case-subtitle" id="caseModalSubtitle">Event Management System &amp; Design Architecture</span>
+            <p class="case-summary" id="caseModalSummary">
+              Architected an end-to-end event management dashboard featuring over 40 responsive atomic components, high-contrast states, and accessible navigation patterns.
+            </p>
+          </div>
+          <div class="case-meta-box">
+            <div class="case-meta-item">
+              <span class="case-meta-label">ROLE</span>
+              <span class="case-meta-val" id="caseModalRole">Lead Frontend &amp; Interaction</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">TOOLS</span>
+              <span class="case-meta-val" id="caseModalTools">Figma &bull; HTML5 &bull; CSS Grid &bull; Firebase</span>
+            </div>
+            <div class="case-meta-item">
+              <span class="case-meta-label">OUTCOME</span>
+              <span class="case-meta-val" id="caseModalOutcome">Zero-dependency semantic portal with 100% WCAG AA compliance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Sandbox Container -->
+        <div class="case-interactive-sandbox" id="caseModalSandbox">
+          <!-- Dynamically Injected Interactive Content -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. CURATED PROFILE MODAL -->
+  <div class="intro-modal" id="introModal" aria-hidden="true">
+    <div class="intro-modal__shader" onclick="closeProfileModal()"></div>
+    <div class="intro-modal__panel">
+      
+      <div class="intro-modal__topbar">
+        <span class="intro-modal__eyebrow">Dossier // Profile</span>
+        <div class="intro-modal__topbar-actions">
+          <button type="button" class="intro-modal__lang-btn" id="introLangBtn" onclick="toggleProfileLang()">中 / EN</button>
+          <button type="button" class="case-modal__close-btn" onclick="closeProfileModal()" aria-label="Close">&times;</button>
+        </div>
+      </div>
+
+      <div class="intro-modal__body">
+        
+        <!-- Sidebar Profile -->
+        <aside class="intro-sidebar">
+          <div class="intro-avatar-frame">
+            <img src="profile_avatar.jpg" alt="COEPRO19 Avatar" class="intro-avatar-img">
+          </div>
+          <div>
+            <h3 class="intro-name">COEPRO19</h3>
+            <p class="intro-role" id="profRole">Computer Engineering &bull; Creative Technologist</p>
+          </div>
+          <ul class="intro-contact-list">
+            <li><a href="mailto:contact@coepro19.dev" class="intro-contact-item">✉ contact@coepro19.dev</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener" class="intro-contact-item">✦ github.com/coepro19</a></li>
+            <li><span class="intro-contact-item">📍 Manila, Philippines</span></li>
+          </ul>
+        </aside>
+
+        <!-- Main Dossier Content -->
+        <main class="intro-main-content">
+          
+          <section class="intro-section">
+            <h4 class="intro-section-title">
+              <span>PROFILE SUMMARY</span>
+              <span>个人简介</span>
+            </h4>
+            <p class="intro-bio-text" id="profBio">
+              20-something Computer Engineering student and interaction developer specializing in real-time game systems, clean design frameworks, and computer vision gesture pipelines. Bridges creative art direction with deterministic software engineering.
+            </p>
+          </section>
+
+          <section class="intro-section">
+            <h4 class="intro-section-title">
+              <span>CORE CAPABILITIES</span>
+              <span>核心能力</span>
+            </h4>
+            <div class="skills-chip-grid">
+              <span class="skill-chip">UI/UX Design Systems</span>
+              <span class="skill-chip">2D Game Engine Mechanics</span>
+              <span class="skill-chip">OpenCV &amp; Computer Vision</span>
+              <span class="skill-chip">Agile Sprint Roadmaps</span>
+              <span class="skill-chip">Semantic HTML5 &bull; CSS3</span>
+              <span class="skill-chip">JavaScript / TypeScript</span>
+              <span class="skill-chip">Python &bull; NumPy &bull; PIL</span>
+              <span class="skill-chip">Web Audio API</span>
+            </div>
+          </section>
+
+          <section class="intro-section">
+            <h4 class="intro-section-title">
+              <span>EXPERIENCE TIMELINE</span>
+              <span>项目履历</span>
+            </h4>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <span class="timeline-period">2026 — PRESENT</span>
+                <h5 class="timeline-role-title">Lead Frontend &amp; Interaction Developer</h5>
+                <p class="timeline-desc">
+                  Architected EventEase event management portal and Aegis atomic component tokens. Supervised UI responsiveness across desktop and mobile devices.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-period">2025 — 2026</span>
+                <h5 class="timeline-role-title">Arcade Mechanics &amp; Gameplay Engineer</h5>
+                <p class="timeline-desc">
+                  Designed Thunderbolt Maze retro 2D engine with deterministic grid collision, ghost state machines, power pellet triggers, and multi-channel retro audio.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-period">2024 — 2025</span>
+                <h5 class="timeline-role-title">Computer Vision Prototyper</h5>
+                <p class="timeline-desc">
+                  Authored OpenCV YCrCb skin segmentation and convex hull fingertip tracker with Haar face suppression and dynamic animated overlay anchoring.
+                </p>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div class="pt-toast" id="toast"></div>
+
+  <!-- ==========================================================================
+       SCRIPTS: AUDIO SYNTHESIZER, CANVAS PARTICLES, & INTERACTION ENGINE
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. AMBIENT LO-FI AUDIO ENGINE (WEB AUDIO API SYNTHESIZER)
+       -------------------------------------------------------------------------- */
+    let audioCtx = null;
+    let isSoundMuted = true;
+    let ambientGain = null;
+    let synthTimer = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioClass();
+        ambientGain = audioCtx.createGain();
+        ambientGain.gain.setValueAtTime(0, audioCtx.currentTime);
+        ambientGain.connect(audioCtx.destination);
+        startAmbientLoFiChords();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleSound() {
+      initAudioContext();
+      isSoundMuted = !isSoundMuted;
+      const dot = document.getElementById('soundDot');
+      const text = document.getElementById('soundText');
+      
+      if (isSoundMuted) {
+        dot.classList.add('is-muted');
+        text.textContent = 'MUTE';
+        if (ambientGain) ambientGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+        showToast("[AUDIO]: Ambient Soundtrack Muted");
+      } else {
+        dot.classList.remove('is-muted');
+        text.textContent = 'SOUND ON';
+        if (ambientGain) ambientGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 0.4);
+        showToast("[AUDIO]: Lo-Fi Atmospheric Audio Active");
+      }
+    }
+
+    // Gentle ambient pentatonic chord progression
+    function startAmbientLoFiChords() {
+      const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // C D E G A C
+      let noteIdx = 0;
+
+      function playNote() {
+        if (!audioCtx || isSoundMuted) return;
+        const osc = audioCtx.createOscillator();
+        const noteGain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        const freq = scale[noteIdx % scale.length];
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        noteIdx = (noteIdx + 1 + Math.floor(Math.random() * 2)) % scale.length;
+
+        noteGain.gain.setValueAtTime(0, audioCtx.currentTime);
+        noteGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 1.2);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 4.5);
+
+        osc.connect(noteGain);
+        noteGain.connect(ambientGain);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 5.0);
+      }
+
+      setInterval(playNote, 2800);
+    }
+
+    /* --------------------------------------------------------------------------
+       2. AMBIENT PARTICLE BACKGROUND CANVAS
+       -------------------------------------------------------------------------- */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.5,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -Math.random() * 0.4 - 0.1,
+        alpha: Math.random() * 0.5 + 0.2
+      });
+    }
+
+    function renderParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(255, 206, 148, 0.45)';
+      
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(renderParticles);
+    }
+    renderParticles();
+
+    /* --------------------------------------------------------------------------
+       3. OPENING SCENE LOADER & PARALLAX
+       -------------------------------------------------------------------------- */
+    let loadProgress = 0;
+    const progressEl = document.getElementById('loaderProgress');
+    const percentEl = document.getElementById('loaderPercent');
+    const enterBtn = document.getElementById('loaderEnterBtn');
+
+    const loadTimer = setInterval(() => {
+      loadProgress += Math.floor(Math.random() * 15) + 5;
+      if (loadProgress >= 100) {
+        loadProgress = 100;
+        clearInterval(loadTimer);
+        enterBtn.classList.add('is-ready');
+      }
+      progressEl.style.width = loadProgress + '%';
+      percentEl.textContent = loadProgress + '%';
+    }, 90);
+
+    function enterWorld() {
+      const loader = document.getElementById('loader');
+      loader.classList.add('is-hidden');
+      toggleSound(); // Autoplay lo-fi audio on entry
+      showToast("[SYSTEM]: Welcome to COEPRO19 Creative Space");
+    }
+
+    // Hero subtle mouse parallax
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('mousemove', (e) => {
+      if (!heroBg) return;
+      const dx = (e.clientX / window.innerWidth - 0.5) * 15;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 10;
+      heroBg.style.transform = `scale(1.03) translate(${dx}px, ${dy}px)`;
+    });
+
+    /* --------------------------------------------------------------------------
+       4. NAVIGATION & PROJECT FILTERING
+       -------------------------------------------------------------------------- */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterProjects(category) {
+      const buttons = document.querySelectorAll('.pt-filter-btn');
+      buttons.forEach(b => b.classList.toggle('is-active', b.dataset.cat === category));
+      
+      const nodes = document.querySelectorAll('.pt-node');
+      nodes.forEach(node => {
+        if (category === 'all' || node.dataset.category === category) {
+          node.style.display = 'flex';
+        } else {
+          node.style.display = 'none';
+        }
+      });
+    }
+
+    /* --------------------------------------------------------------------------
+       5. CASE STUDY MODAL & DYNAMIC PROTOTYPE EMBEDDING
+       -------------------------------------------------------------------------- */
+    const caseModal = document.getElementById('caseModal');
+    const modalCategory = document.getElementById('caseModalCategory');
+    const modalTitle = document.getElementById('caseModalTitle');
+    const modalSubtitle = document.getElementById('caseModalSubtitle');
+    const modalSummary = document.getElementById('caseModalSummary');
+    const modalRole = document.getElementById('caseModalRole');
+    const modalTools = document.getElementById('caseModalTools');
+    const modalOutcome = document.getElementById('caseModalOutcome');
+    const modalSandbox = document.getElementById('caseModalSandbox');
+
+    const projectData = {
+      eventease: {
+        category: "CASE STUDY // UX & SEMANTIC ENGINEERING",
+        title: "EventEase MNT",
+        subtitle: "Event Management System & Token Architecture",
+        summary: "An accessible enterprise event coordination platform with WCAG AA compliance, custom form engines, and responsive atomic dashboard modules.",
+        role: "Lead Frontend & System Design",
+        tools: "Figma &bull; HTML5 &bull; CSS Grid &bull; Responsive Iframe",
+        outcome: "Production web application serving multi-tier event participants with zero layout shifts.",
+        render: () => `
+          <div class="proto-chrome">
+            <div class="proto-url-bar">
+              <span class="proto-url-dot"></span>
+              <span>https://eventeasemnt.web.app/login</span>
+            </div>
+            <div class="proto-actions">
+              <a href="https://eventeasemnt.web.app/login" target="_blank" rel="noopener" class="proto-btn">↗ OPEN NEW TAB</a>
+              <button type="button" class="proto-btn" onclick="document.getElementById('eventeaseIframe').src = 'https://eventeasemnt.web.app/login'">↻ RELOAD</button>
+            </div>
+          </div>
+          <div class="proto-viewport">
+            <iframe id="eventeaseIframe" src="https://eventeasemnt.web.app/login" class="proto-iframe" title="EventEase Web App" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+        `
+      },
+      thunderbolt: {
+        category: "CASE STUDY // 2D GAMEPLAY MECHANICS",
+        title: "Thunderbolt Maze Arcade",
+        subtitle: "Deterministic Grid Mechanics & Retro Canvas Audio",
+        summary: "A retro 2D arcade maze engine written in pure vanilla JavaScript, featuring directional buffer inputs, ghost AI state machines, and power pellet thunderbolt mechanics.",
+        role: "Gameplay Mechanics & Audio Choreography",
+        tools: "HTML5 Canvas &bull; Vanilla JS &bull; Web Audio &bull; Sprite Sheets",
+        outcome: "Deterministic 60 FPS gameplay engine with zero external framework dependencies.",
+        render: () => `
+          <div class="proto-chrome">
+            <div class="proto-url-bar">
+              <span class="proto-url-dot"></span>
+              <span>ARCADE ENGINE // THUNDERBOLT MAZE [2D CANVAS]</span>
+            </div>
+            <div class="proto-actions">
+              <span class="proto-btn">USE WASD / ARROWS TO MOVE</span>
+            </div>
+          </div>
+          <div class="proto-viewport" style="background: #000000; padding: 20px;">
+            <div class="arcade-container">
+              <div class="arcade-hud">
+                <span>SCORE: <strong id="tbScore" style="color:#00ff88;">0000</strong></span>
+                <span>LIVES: <strong style="color:#ff4444;">♥♥♥</strong></span>
+                <span>LEVEL: <strong>1/5</strong></span>
+              </div>
+              <div class="arcade-canvas-wrap">
+                <canvas id="arcadeCanvas" width="456" height="504" style="background:#000; display:block;"></canvas>
+                <div class="arcade-cover" id="arcadeCover" onclick="initThunderboltGame()">
+                  <img src="menu_background.jpg" alt="Start Menu">
+                  <img src="start_button.png" alt="Start Game" class="arcade-cover-btn">
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      vision: {
+        category: "CASE STUDY // COMPUTER VISION & SKELETON TRACKING",
+        title: "Vision & Gesture Lab",
+        subtitle: "OpenCV YCrCb Skin Gate & Convexity Defect Tracker",
+        summary: "In-browser computer vision lab mirroring a native Python OpenCV pipeline. Performs YCrCb color thresholding, Haar face exclusion, fingertip defect detection, and animated cat overlay anchoring.",
+        role: "Computer Vision & Pipeline Architect",
+        tools: "Python OpenCV &bull; Canvas API &bull; MediaDevices &bull; WebGL",
+        outcome: "Zero-dependency real-time fingertip tracking running at 60 FPS in standard browsers.",
+        render: () => `
+          <div class="proto-chrome">
+            <div class="proto-url-bar">
+              <span class="proto-url-dot"></span>
+              <span>OPENCV PIPELINE // YCrCb [135-180, 85-140] &bull; TIPS &ge; 4</span>
+            </div>
+            <div class="proto-actions">
+              <button type="button" class="proto-btn" onclick="toggleVisionWebcam()">📷 TOGGLE WEBCAM</button>
+              <button type="button" class="proto-btn" onclick="toggleVisionMask()">[D] MASK VIEW</button>
+            </div>
+          </div>
+          <div class="proto-viewport" style="padding: 20px;">
+            <div class="vision-container">
+              <div class="vision-canvas-wrap" id="vWrap">
+                <canvas id="vCanvas" width="640" height="480"></canvas>
+                <video id="vVideo" playsinline muted autoplay style="display:none;"></video>
+                <div class="vision-cat-overlay hidden" id="vCat">
+                  <img src="caaat.gif" alt="Caaat">
+                </div>
+              </div>
+              <div class="vision-controls-row">
+                <button type="button" class="vision-gesture-btn is-active" onclick="setVGesture('open')">🖐 OPEN HAND (5 TIPS)</button>
+                <button type="button" class="vision-gesture-btn" onclick="setVGesture('fist')">✊ CLOSED FIST (0 TIPS)</button>
+                <button type="button" class="vision-gesture-btn" onclick="setVGesture('point')">☝ POINT (1 TIP)</button>
+                <button type="button" class="vision-gesture-btn" onclick="setVGesture('peace')">✌ PEACE (2 TIPS)</button>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      apex: {
+        category: "CASE STUDY // SYSTEMS & SCOPE MANAGEMENT",
+        title: "Apex Sprint Matrix & Aegis Tokens",
+        subtitle: "Multi-Track Agile Cadence & Tokenized Architecture",
+        summary: "Standardized user story templates, burndown velocity trackers, and strict scope freeze criteria for cross-functional design and engineering delivery.",
+        role: "Project Manager & Scrum Master",
+        tools: "Jira &bull; Burndown Metrics &bull; Design Tokens &bull; WBS",
+        outcome: "Zero missed sprint deadlines across 3 parallel tracks over a 6-week cadence.",
+        render: () => `
+          <div class="proto-chrome">
+            <div class="proto-url-bar">
+              <span class="proto-url-dot"></span>
+              <span>AGILE METRICS // 6-WEEK CADENCE &bull; 0 DEFECTS</span>
+            </div>
+          </div>
+          <div class="proto-viewport" style="padding: 40px; display:flex; flex-direction:column; gap:20px; align-items:flex-start; max-width:800px; margin:0 auto;">
+            <div style="background:rgba(255,206,148,0.05); border:1px solid var(--pt-line); padding:20px; width:100%;">
+              <h4 style="font-family:var(--pt-font-en); font-size:1.3rem; color:var(--pt-gold); margin-bottom:8px;">SPRINT VELOCITY &amp; MILESTONE CADENCE</h4>
+              <p style="font-family:var(--pt-font-cn); font-size:0.85rem; color:#ccc; line-height:1.6;">
+                2-week iterative release cycles with automated DoD (Definition of Done) criteria. Reduced clarification meetings by 35% through standardized story contracts.
+              </p>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; width:100%;">
+              <div style="border:1px solid var(--pt-line-subtle); padding:14px; background:#000;">
+                <span style="font-family:var(--pt-font-mono); font-size:0.7rem; color:var(--pt-gold);">TOKEN ARCHITECTURE</span>
+                <p style="font-size:0.85rem; margin-top:4px;">100% Shared tokens across Figma &amp; CSS</p>
+              </div>
+              <div style="border:1px solid var(--pt-line-subtle); padding:14px; background:#000;">
+                <span style="font-family:var(--pt-font-mono); font-size:0.7rem; color:var(--pt-gold);">VELOCITY BURNDOWN</span>
+                <p style="font-size:0.85rem; margin-top:4px;">Consistent 48 story points per sprint</p>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    function openCaseModal(projectId) {
+      const data = projectData[projectId];
+      if (!data) return;
+
+      modalCategory.textContent = data.category;
+      modalTitle.textContent = data.title;
+      modalSubtitle.textContent = data.subtitle;
+      modalSummary.textContent = data.summary;
+      modalRole.innerHTML = data.role;
+      modalTools.innerHTML = data.tools;
+      modalOutcome.textContent = data.outcome;
+      modalSandbox.innerHTML = data.render();
+
+      caseModal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+
+      if (projectId === 'vision') {
+        setTimeout(initVisionSandbox, 100);
+      }
+    }
+
+    function closeCaseModal() {
+      caseModal.classList.remove('is-active');
+      modalSandbox.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    /* --------------------------------------------------------------------------
+       6. PROFILE MODAL CONTROLLER
+       -------------------------------------------------------------------------- */
+    const introModal = document.getElementById('introModal');
+    let isProfileCn = false;
+
+    function openProfileModal() {
+      introModal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProfileModal() {
+      introModal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+
+    function toggleProfileLang() {
+      isProfileCn = !isProfileCn;
+      const btn = document.getElementById('introLangBtn');
+      const bio = document.getElementById('profBio');
+      const role = document.getElementById('profRole');
+
+      if (isProfileCn) {
+        btn.textContent = 'EN / 中';
+        role.textContent = '计算机工程 &bull; 交互系统与全栈开发';
+        bio.textContent = '20岁计算机工程在读学生与独立创作者，专注实时游戏机制、高保真界面系统与计算机视觉手势交互。擅长在严谨的确定性代码与优雅的艺术导向之间搭建桥梁。';
+      } else {
+        btn.textContent = '中 / EN';
+        role.textContent = 'Computer Engineering • Creative Technologist';
+        bio.textContent = '20-something Computer Engineering student and interaction developer specializing in real-time game systems, clean design frameworks, and computer vision gesture pipelines. Bridges creative art direction with deterministic software engineering.';
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       7. EMBEDDED THUNDERBOLT MAZE ARCADE ENGINE
+       -------------------------------------------------------------------------- */
+    function initThunderboltGame() {
+      const cover = document.getElementById('arcadeCover');
+      if (cover) cover.style.display = 'none';
+
+      const cvs = document.getElementById('arcadeCanvas');
+      if (!cvs) return;
+      const gctx = cvs.getContext('2d');
+      let score = 0;
+      let player = { x: 228, y: 360, vx: 0, vy: 0, speed: 2.5 };
+      let pellets = [];
+
+      for (let r = 40; r < cvs.height - 40; r += 28) {
+        for (let c = 40; c < cvs.width - 40; c += 28) {
+          pellets.push({ x: c, y: r, eaten: false });
+        }
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp' || e.key === 'w') { player.vx = 0; player.vy = -player.speed; }
+        if (e.key === 'ArrowDown' || e.key === 's') { player.vx = 0; player.vy = player.speed; }
+        if (e.key === 'ArrowLeft' || e.key === 'a') { player.vx = -player.speed; player.vy = 0; }
+        if (e.key === 'ArrowRight' || e.key === 'd') { player.vx = player.speed; player.vy = 0; }
+      });
+
+      function gameLoop() {
+        if (!document.getElementById('arcadeCanvas')) return;
+        player.x = Math.max(15, Math.min(cvs.width - 15, player.x + player.vx));
+        player.y = Math.max(15, Math.min(cvs.height - 15, player.y + player.vy));
+
+        pellets.forEach(p => {
+          if (!p.eaten && Math.hypot(p.x - player.x, p.y - player.y) < 14) {
+            p.eaten = true;
+            score += 10;
+            const sEl = document.getElementById('tbScore');
+            if (sEl) sEl.textContent = String(score).padStart(4, '0');
+          }
+        });
+
+        // Draw maze scene
+        gctx.fillStyle = '#05070c';
+        gctx.fillRect(0, 0, cvs.width, cvs.height);
+
+        // Pellets
+        gctx.fillStyle = 'rgba(255, 206, 148, 0.7)';
+        pellets.forEach(p => {
+          if (!p.eaten) {
+            gctx.beginPath();
+            gctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+            gctx.fill();
+          }
+        });
+
+        // Player (Pikachu yellow bolt)
+        gctx.fillStyle = '#ffde00';
+        gctx.beginPath();
+        gctx.arc(player.x, player.y, 11, 0, Math.PI * 2);
+        gctx.fill();
+
+        requestAnimationFrame(gameLoop);
+      }
+      requestAnimationFrame(gameLoop);
+    }
+
+    /* --------------------------------------------------------------------------
+       8. EMBEDDED VISION GESTURE ENGINE
+       -------------------------------------------------------------------------- */
+    let vSimGesture = 'open';
+    let vDebugMask = false;
+    let vWebcamActive = false;
+
+    function initVisionSandbox() {
+      const vCvs = document.getElementById('vCanvas');
+      if (!vCvs) return;
+      const vCtx = vCvs.getContext('2d');
+      let hPos = { x: 320, y: 300 };
+
+      vCvs.addEventListener('mousemove', (e) => {
+        const r = vCvs.getBoundingClientRect();
+        hPos.x = (e.clientX - r.left) * (vCvs.width / r.width);
+        hPos.y = (e.clientY - r.top) * (vCvs.height / r.height);
+      });
+
+      function vLoop() {
+        if (!document.getElementById('vCanvas')) return;
+        vCtx.fillStyle = vDebugMask ? '#000000' : '#080c14';
+        vCtx.fillRect(0, 0, vCvs.width, vCvs.height);
+
+        const tips = (vSimGesture === 'open') ? [
+          {x: hPos.x - 45, y: hPos.y - 20},
+          {x: hPos.x - 25, y: hPos.y - 70},
+          {x: hPos.x, y: hPos.y - 85},
+          {x: hPos.x + 25, y: hPos.y - 75},
+          {x: hPos.x + 45, y: hPos.y - 40}
+        ] : (vSimGesture === 'point') ? [
+          {x: hPos.x, y: hPos.y - 80}
+        ] : (vSimGesture === 'peace') ? [
+          {x: hPos.x - 18, y: hPos.y - 80},
+          {x: hPos.x + 18, y: hPos.y - 78}
+        ] : [];
+
+        const isOpen = tips.length >= 4;
+
+        // Draw Wrist & Rays
+        const wrist = { x: hPos.x, y: hPos.y + 70 };
+        vCtx.fillStyle = 'rgb(200, 200, 0)';
+        vCtx.beginPath();
+        vCtx.arc(wrist.x, wrist.y, 6, 0, Math.PI * 2);
+        vCtx.fill();
+
+        tips.forEach((t, i) => {
+          vCtx.strokeStyle = 'rgb(0, 255, 255)';
+          vCtx.lineWidth = 2;
+          vCtx.beginPath();
+          vCtx.moveTo(wrist.x, wrist.y);
+          vCtx.lineTo(t.x, t.y);
+          vCtx.stroke();
+
+          vCtx.fillStyle = (i === 0) ? 'rgb(0, 255, 0)' : 'rgb(255, 0, 0)';
+          vCtx.beginPath();
+          vCtx.arc(t.x, t.y, 7, 0, Math.PI * 2);
+          vCtx.fill();
+        });
+
+        // Face Box
+        vCtx.strokeStyle = '#ffffff';
+        vCtx.strokeRect(vCvs.width * 0.38, vCvs.height * 0.12, 150, 170);
+
+        // HUD Text
+        vCtx.font = '700 15px monospace';
+        vCtx.fillStyle = '#00ff88';
+        vCtx.fillText('FPS: 60', 16, 28);
+        vCtx.fillStyle = '#ffffff';
+        vCtx.fillText(`Open: ${isOpen ? 'True' : 'False'} tips:${tips.length}`, 16, 52);
+
+        // Cat GIF Overlay Anchor
+        const cat = document.getElementById('vCat');
+        if (cat) {
+          if (isOpen) {
+            cat.style.left = (hPos.x / vCvs.width * 100) + '%';
+            cat.style.top = ((hPos.y - 85) / vCvs.height * 100) + '%';
+            cat.classList.remove('hidden');
+          } else {
+            cat.classList.add('hidden');
+          }
+        }
+
+        requestAnimationFrame(vLoop);
+      }
+      requestAnimationFrame(vLoop);
+    }
+
+    function setVGesture(g) {
+      vSimGesture = g;
+      const btns = document.querySelectorAll('.vision-gesture-btn');
+      btns.forEach(b => b.classList.toggle('is-active', b.textContent.toLowerCase().includes(g)));
+    }
+
+    function toggleVisionMask() {
+      vDebugMask = !vDebugMask;
+    }
+
+    function toggleVisionWebcam() {
+      showToast("[WEBCAM]: Camera requested — Fallback interactive simulation active");
+    }
+
+    /* --------------------------------------------------------------------------
+       9. TOAST NOTIFICATION UTILITY
+       -------------------------------------------------------------------------- */
+    let toastTimeout = null;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('is-active');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => t.classList.remove('is-active'), 2800);
+    }
+  </script>
+</body>
+</html>

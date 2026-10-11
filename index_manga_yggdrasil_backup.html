@@ -1,0 +1,2351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lander John D. Cueto — Portfolio</title>
+
+  <!-- Clean, readable typography: Inter & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Component Stylesheet -->
+  <link rel="stylesheet" href="TextType.css">
+
+  <style>
+    /* ==========================================================================
+       MUTED DARK MANGA PALETTE & DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-canvas: #09090b;
+      --bg-surface: #0e0e11;
+      --bg-panel: rgba(18, 18, 22, 0.94);
+      --bg-panel-solid: #121215;
+      --bg-card: rgba(24, 24, 28, 0.88);
+      --bg-card-hover: rgba(32, 32, 38, 0.96);
+      --border-panel: #27272a;        /* border-zinc-800 */
+      --border-panel-light: #3f3f46;  /* border-zinc-700 */
+      --panel-shadow: 6px 6px 0px rgba(0, 0, 0, 0.85);
+      --panel-shadow-lg: 10px 10px 0px rgba(0, 0, 0, 0.92);
+
+      /* Typography & Ink Contrasts */
+      --text-primary: #f4f4f5;       /* text-zinc-100 */
+      --text-secondary: #a1a1aa;     /* text-zinc-400 */
+      --text-muted: #71717a;         /* text-zinc-500 */
+      --text-highlight: #ffffff;
+      --accent-tag: #fafafa;
+      --accent-tag-bg: #18181b;
+      --accent-orange: #f97316;
+      --accent-cyan: #38bdf8;
+      --accent-green: #22c55e;
+      --accent-amber: #f59e0b;
+
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "Space Mono", "JetBrains Mono", Consolas, monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+    }
+
+    body {
+      background-color: transparent;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      font-size: 16px;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Selection */
+    ::selection {
+      background: #3f3f46;
+      color: #ffffff;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE YGGDRASIL BACKGROUND & SCREENTONE
+       ========================================================================== */
+    .yggdrasil-viewport {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background-color: var(--bg-canvas);
+    }
+
+    #yggdrasilCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .manga-screentone-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+
+    .manga-vignette-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(9, 9, 11, 0.8) 100%);
+    }
+
+    /* Top Status Strip */
+    .manga-top-strip {
+      position: relative;
+      z-index: 20;
+      background-color: #0c0c0e;
+      border-bottom: 1px solid var(--border-panel);
+      padding: 6px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .strip-live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+    }
+
+    .strip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* ==========================================================================
+       NAVIGATION SCHEMA
+       ========================================================================== */
+    .main-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(14, 14, 17, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--border-panel);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .nav-brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-panel);
+      padding: 2px 8px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 8px 14px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #ffffff;
+      background: rgba(39, 39, 42, 0.6);
+      border-color: var(--border-panel);
+    }
+
+    .nav-portal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(24, 24, 27, 0.85);
+      border: 1px solid var(--border-panel-light);
+      color: #f4f4f5;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-portal-btn:hover {
+      background: #27272a;
+      border-color: #52525b;
+      color: #ffffff;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.15);
+    }
+
+    .nexus-sparkle {
+      color: var(--accent-orange);
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       MANGA PANEL ARCHITECTURE
+       ========================================================================== */
+    .manga-panel {
+      position: relative;
+      background: var(--bg-panel);
+      border: 2px solid var(--border-panel);
+      box-shadow: var(--panel-shadow);
+      margin-bottom: 48px;
+      overflow: hidden;
+    }
+
+    .panel-header-tag {
+      display: inline-block;
+      background: #18181b;
+      border-bottom: 2px solid var(--border-panel);
+      border-right: 2px solid var(--border-panel);
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .section-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border-panel);
+    }
+
+    /* ==========================================================================
+       HERO SECTION (CENTERED SPECIFICATION)
+       ========================================================================== */
+    .hero-section {
+      min-height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 16px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-card {
+      border: 2px solid var(--border-panel);
+      background: rgba(14, 14, 18, 0.92);
+      backdrop-filter: blur(16px);
+      padding: clamp(28px, 6vw, 56px);
+      box-shadow: var(--panel-shadow-lg);
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-top: 16px;
+      min-height: 1.2em;
+    }
+
+    .hero-subtitle {
+      margin-top: 16px;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-secondary);
+      font-medium: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-location {
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: clamp(0.78rem, 1.8vw, 0.9rem);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Manga Buttons */
+    .manga-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #09090b;
+      background: #f4f4f5;
+      border: 2px solid #ffffff;
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .manga-btn:hover {
+      background: #ffffff;
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    .manga-btn-secondary {
+      background: #18181b;
+      color: #f4f4f5;
+      border-color: var(--border-panel-light);
+    }
+
+    .manga-btn-secondary:hover {
+      background: #27272a;
+      color: #ffffff;
+    }
+
+    .manga-btn-portal {
+      background: rgba(24, 24, 27, 0.9);
+      color: #e4e4e7;
+      border-color: #52525b;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .manga-btn-portal:hover {
+      background: #27272a;
+      border-color: #a1a1aa;
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+    }
+
+    /* ==========================================================================
+       SECTION: PROJECTS (TABBED MANGA CHROME)
+       ========================================================================== */
+    .projects-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .project-tab-btn {
+      background: #141418;
+      border: 1px solid var(--border-panel);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border-radius: 2px;
+    }
+
+    .project-tab-btn:hover {
+      background: #1f1f24;
+      color: #ffffff;
+      border-color: var(--border-panel-light);
+    }
+
+    .project-tab-btn.active {
+      background: #27272a;
+      color: #ffffff;
+      border-color: #52525b;
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.7);
+    }
+
+    .project-pane {
+      display: none;
+    }
+
+    .project-pane.active {
+      display: block;
+    }
+
+    /* Project Detail Card */
+    .project-detail-card {
+      background: var(--bg-panel-solid);
+      border: 2px solid var(--border-panel);
+      padding: clamp(20px, 3.5vw, 36px);
+      box-shadow: var(--panel-shadow);
+      margin-bottom: 24px;
+    }
+
+    .project-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-panel);
+      padding-bottom: 16px;
+    }
+
+    .project-name-wrap h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .project-name-wrap p {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .project-url-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #18181b;
+      border: 1px solid var(--border-panel);
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-orange);
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    .project-url-badge:hover {
+      background: #27272a;
+      border-color: var(--accent-orange);
+    }
+
+    .project-desc-text {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .project-stack-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .stack-pill {
+      background: #18181b;
+      border: 1px solid var(--border-panel);
+      color: #e4e4e7;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* Live Interactive Browser Shell */
+    .browser-shell {
+      background: #09090b;
+      border: 2px solid var(--border-panel);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .browser-top-bar {
+      background: #141418;
+      border-bottom: 1px solid var(--border-panel);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .browser-address {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #0c0c0e;
+      border: 1px solid var(--border-panel);
+      padding: 4px 12px;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .browser-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-btn {
+      background: #1f1f24;
+      border: 1px solid var(--border-panel);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .browser-btn:hover {
+      background: #2a2a32;
+      border-color: #52525b;
+    }
+
+    .browser-viewport {
+      height: 520px;
+      width: 100%;
+      position: relative;
+      background: #000000;
+    }
+
+    .browser-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Terminal / OOP Code Inspector */
+    .terminal-shell {
+      background: #09090b;
+      border: 2px solid var(--border-panel);
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #e4e4e7;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-panel);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    .terminal-code-block {
+      background: #0c0c0e;
+      border: 1px solid var(--border-panel);
+      padding: 16px;
+      line-height: 1.6;
+      color: #a1a1aa;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+
+    .terminal-code-block .kw { color: #f43f5e; font-weight: 700; }
+    .terminal-code-block .fn { color: #38bdf8; }
+    .terminal-code-block .str { color: #a3e635; }
+    .terminal-code-block .cmt { color: #71717a; font-style: italic; }
+
+    /* ==========================================================================
+       SECTION: SKILLS (MANGA PANEL GRIDS)
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-category-card {
+      background: var(--bg-panel-solid);
+      border: 2px solid var(--border-panel);
+      padding: 24px;
+      box-shadow: var(--panel-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .skill-category-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-panel);
+      padding-bottom: 8px;
+    }
+
+    .skill-pills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-badge {
+      background: #18181b;
+      border: 1px solid var(--border-panel);
+      color: #f4f4f5;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       SECTION: BACKGROUND & TIMELINE PORTAL
+       ========================================================================== */
+    .timeline-filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-filter-btn {
+      background: #141418;
+      border: 1px solid var(--border-panel);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    .timeline-filter-btn.active {
+      background: #27272a;
+      color: #ffffff;
+      border-color: #52525b;
+    }
+
+    .timeline-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .timeline-stream::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: var(--border-panel);
+    }
+
+    .timeline-entry-card {
+      position: relative;
+      margin-left: 36px;
+      background: var(--bg-panel-solid);
+      border: 2px solid var(--border-panel);
+      padding: 20px 24px;
+      box-shadow: var(--panel-shadow);
+      transition: border-color 0.2s ease;
+    }
+
+    .timeline-entry-card:hover {
+      border-color: var(--border-panel-light);
+    }
+
+    .timeline-entry-card::before {
+      content: "";
+      position: absolute;
+      left: -29px;
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      background: #09090b;
+      border: 2px solid var(--text-secondary);
+      border-radius: 50%;
+    }
+
+    .timeline-entry-card.education::before {
+      border-color: var(--accent-orange);
+      background: var(--accent-orange);
+    }
+
+    .timeline-entry-card.experience::before {
+      border-color: var(--accent-cyan);
+      background: var(--accent-cyan);
+    }
+
+    .timeline-badge-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      margin-bottom: 8px;
+      border-radius: 2px;
+    }
+
+    .badge-education {
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid var(--accent-orange);
+      color: var(--accent-orange);
+    }
+
+    .badge-experience {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timeline-period-text {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .timeline-role-text {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       SECTION: CONTACT (STRICT GROUND TRUTH)
+       ========================================================================== */
+    .contact-panel {
+      background: var(--bg-panel-solid);
+      border: 2px solid var(--border-panel);
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: var(--panel-shadow);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .contact-item-box {
+      background: #0d0d10;
+      border: 1px solid var(--border-panel);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .contact-item-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .contact-item-val {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      color: #ffffff;
+      word-break: break-all;
+    }
+
+    .contact-copy-btn {
+      align-self: flex-start;
+      margin-top: 6px;
+      background: #1f1f24;
+      border: 1px solid var(--border-panel);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .contact-copy-btn:hover {
+      background: #2a2a32;
+      color: #ffffff;
+      border-color: #52525b;
+    }
+
+    /* Footer */
+    .manga-footer {
+      margin-top: 60px;
+      border-top: 2px solid var(--border-panel);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       TIMELINE PORTAL MODAL (YGGDRASIL NEXUS OVERLAY)
+       ========================================================================== */
+    .timeline-portal-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .timeline-portal-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .portal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 9, 11, 0.88);
+      backdrop-filter: blur(14px);
+    }
+
+    .portal-panel {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      background: #111115;
+      border: 2px solid var(--border-panel-light);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: portalIrisIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes portalIrisIn {
+      0% {
+        transform: scale(0.92);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .portal-header {
+      padding: 16px 24px;
+      background: #18181c;
+      border-bottom: 2px solid var(--border-panel);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .portal-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .portal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+
+    .portal-close-btn:hover {
+      color: #ffffff;
+    }
+
+    .portal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* System Toast */
+    .system-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: #18181b;
+      border: 1px solid var(--border-panel-light);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 8px 18px;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      z-index: 3000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .system-toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Interactive Sub-Apps in Projects */
+    .arcade-container-shell {
+      background: #000000;
+      border: 2px solid var(--border-panel);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .arcade-hud-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 456px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      background: #111115;
+      border: 1px solid var(--border-panel);
+    }
+    .arcade-screen-box {
+      position: relative;
+      width: 456px;
+      height: 504px;
+      max-width: 100%;
+    }
+    .arcade-screen-box canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+    }
+    .arcade-overlay-cover {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+    .arcade-overlay-cover img.menu-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .arcade-overlay-cover img.start-btn {
+      position: absolute;
+      width: 160px;
+      bottom: 40px;
+    }
+
+    /* Vision Container */
+    .vision-container-shell {
+      background: #000000;
+      border: 2px solid var(--border-panel);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .vision-screen-box {
+      position: relative;
+      width: 640px;
+      height: 480px;
+      max-width: 100%;
+      background: #0a0a0e;
+    }
+    .vision-screen-box canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .vision-cat-overlay {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .vision-cat-overlay img {
+      width: 110px;
+      height: auto;
+    }
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-card { padding: 28px 16px; }
+      .browser-viewport { height: 420px; }
+      .arcade-screen-box { height: 380px; }
+      .vision-screen-box { height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       INTERACTIVE YGGDRASIL BACKGROUND & CROSSER CANVAS
+       ========================================================================== -->
+  <div class="yggdrasil-viewport" id="yggdrasilViewport" aria-hidden="true">
+    <canvas id="yggdrasilCanvas"></canvas>
+    <div class="manga-screentone-overlay"></div>
+    <div class="manga-vignette-overlay"></div>
+  </div>
+
+  <!-- Top Manga Status Strip -->
+  <div class="manga-top-strip">
+    <div class="strip-live">
+      <span class="strip-dot"></span>
+      <span>YGGDRASIL WORLD TREE ONLINE // COEPRO19</span>
+    </div>
+    <div>PASIG CITY, PHILIPPINES</div>
+  </div>
+
+  <!-- Sticky Main Navigation -->
+  <nav class="main-nav">
+    <div class="container nav-inner">
+      <a href="#profile" class="nav-brand">
+        <span class="nav-brand-title">Lander John D. Cueto</span>
+        <span class="nav-brand-tag">PORTFOLIO</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#profile" class="nav-link">Profile</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#background" class="nav-link">Background</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button type="button" class="nav-portal-btn" onclick="openTimelinePortal()" title="Open Yggdrasil Timeline Portal">
+        <span class="nexus-sparkle">✦</span> TIMELINE PORTAL
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ==========================================================================
+         PANEL 01 // PROFILE (CENTERED HERO SPECIFICATION)
+         ========================================================================== -->
+    <section id="profile" class="hero-section">
+      <div class="hero-card">
+        <div class="panel-header-tag">[ PANEL 01 // PROFILE ]</div>
+
+        <h1 class="hero-headline">
+          <span id="heroTextType" class="text-type" data-text='["Lander John D. Cueto"]'>
+            <span class="text-type__content" id="heroTextTypeContent"></span><span class="text-type__cursor" id="heroTextTypeCursor">|</span>
+          </span>
+        </h1>
+
+        <p class="hero-subtitle">
+          A junior web developer and game developer etc.
+        </p>
+
+        <p class="hero-location">
+          Pasig City, Philippines
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="manga-btn">Browse Projects</a>
+          <button type="button" class="manga-btn manga-btn-portal" onclick="openTimelinePortal()">
+            <span class="nexus-sparkle">✦</span> Open Timeline Portal
+          </button>
+          <a href="#contact" class="manga-btn manga-btn-secondary">Contact Info</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 02 // PROJECTS (FEATURED WORKS)
+         ========================================================================== -->
+    <section id="projects" style="padding-top: 32px;">
+      <div class="section-banner">
+        <h2 class="section-title">Projects <span>[ 02 // WORKS &amp; LABS ]</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Projects Tab Navigation -->
+      <div class="projects-nav">
+        <button type="button" class="project-tab-btn active" id="tabBtnEventEase" onclick="switchProjectTab('eventease')">
+          01 // EventEase Web App
+        </button>
+        <button type="button" class="project-tab-btn" id="tabBtnOop" onclick="switchProjectTab('oop')">
+          02 // OOP Applications &amp; Logic
+        </button>
+        <button type="button" class="project-tab-btn" id="tabBtnArcade" onclick="switchProjectTab('arcade')">
+          03 // Thunderbolt Arcade Lab
+        </button>
+        <button type="button" class="project-tab-btn" id="tabBtnVision" onclick="switchProjectTab('vision')">
+          04 // Vision &amp; Gesture Lab
+        </button>
+      </div>
+
+      <!-- PROJECT PANE 1: EventEase Web App -->
+      <div class="project-pane active" id="paneEventEase">
+        <div class="project-detail-card">
+          <div class="project-header-row">
+            <div class="project-name-wrap">
+              <h3>EventEase - Event Management Web App</h3>
+              <p>CLOUD-HOSTED EVENT MANAGEMENT SYSTEM &bull; PRODUCTION APPLICATION</p>
+            </div>
+            <a href="https://eventeasemnt.web.app" target="_blank" rel="noopener noreferrer" class="project-url-badge">
+              <span>https://eventeasemnt.web.app</span> ↗
+            </a>
+          </div>
+
+          <p class="project-desc-text">
+            Cloud-hosted event management system with authentication, real-time database updates, dynamic scheduling, and responsive UI.
+          </p>
+
+          <div class="project-stack-pills">
+            <span class="stack-pill">Firebase</span>
+            <span class="stack-pill">JavaScript</span>
+            <span class="stack-pill">HTML5</span>
+            <span class="stack-pill">CSS3</span>
+            <span class="stack-pill">Responsive UI</span>
+            <span class="stack-pill">Real-Time Database</span>
+          </div>
+
+          <!-- Embedded Interactive Browser -->
+          <div class="browser-shell">
+            <div class="browser-top-bar">
+              <div class="browser-address">
+                <span style="color:#22c55e;">●</span>
+                <span>https://eventeasemnt.web.app/login</span>
+              </div>
+              <div class="browser-actions">
+                <a href="https://eventeasemnt.web.app/login" target="_blank" rel="noopener noreferrer" class="browser-btn">↗ OPEN</a>
+                <button type="button" class="browser-btn" onclick="reloadEventeaseFrame()">↻ RELOAD</button>
+              </div>
+            </div>
+            <div class="browser-viewport">
+              <iframe
+                id="eventeaseFrame"
+                src="https://eventeasemnt.web.app/login"
+                title="EventEase - Event Management Web App"
+                class="browser-iframe"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT PANE 2: Object-Oriented Applications & Logic -->
+      <div class="project-pane" id="paneOop">
+        <div class="project-detail-card">
+          <div class="project-header-row">
+            <div class="project-name-wrap">
+              <h3>Object-Oriented Applications &amp; Logic</h3>
+              <p>MODULAR CODEBASE &bull; CORE ALGORITHMIC REPOSITORY</p>
+            </div>
+            <a href="https://github.com/cuetolanderjohn-maker" target="_blank" rel="noopener noreferrer" class="project-url-badge">
+              <span>github.com/cuetolanderjohn-maker</span> ↗
+            </a>
+          </div>
+
+          <p class="project-desc-text">
+            Modular programs implementing OOP (abstraction, encapsulation, inheritance), core algorithmic operations, and runtime data validation.
+          </p>
+
+          <div class="project-stack-pills">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">C++</span>
+            <span class="stack-pill">Java</span>
+            <span class="stack-pill">OOP Architecture</span>
+            <span class="stack-pill">Data Structures</span>
+            <span class="stack-pill">Runtime Validation</span>
+          </div>
+
+          <!-- Interactive Logic Terminal -->
+          <div class="terminal-shell">
+            <div class="terminal-header">
+              <span>OOP ARCHITECTURE &bull; RUNTIME DATA VALIDATION</span>
+              <span>PYTHON // C++ // JAVA</span>
+            </div>
+            <div class="terminal-code-block">
+<span class="cmt"># Core OOP Architecture: Abstraction &amp; Inheritance</span>
+<span class="kw">class</span> <span class="fn">SystemEntity</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, entity_id: str, payload: dict):
+        self._id = entity_id              <span class="cmt"># Encapsulated state</span>
+        self._data = self.sanitize(payload)
+
+    <span class="kw">def</span> <span class="fn">sanitize</span>(self, raw_input: dict) -&gt; dict:
+        <span class="cmt"># Runtime input parsing and boundary validation</span>
+        <span class="kw">return</span> {k.strip(): v <span class="kw">for</span> k, v <span class="kw">in</span> raw_input.items() <span class="kw">if</span> v <span class="kw">is not None</span>}
+
+<span class="kw">class</span> <span class="fn">DataProcessor</span>(SystemEntity):
+    <span class="kw">def</span> <span class="fn">execute_pipeline</span>(self):
+        <span class="cmt"># Algorithmic operations &amp; structure transformation</span>
+        <span class="kw">return</span> [<span class="str">"Validated"</span>, self._id, len(self._data)]
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="color:#22c55e;">[STATUS: 0 SYNTAX ERRORS // MODULAR OOP VERIFIED]</span>
+              <a href="https://github.com/cuetolanderjohn-maker" target="_blank" rel="noopener noreferrer" class="browser-btn">
+                ↗ VIEW REPOSITORY
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT PANE 3: Thunderbolt Arcade Lab -->
+      <div class="project-pane" id="paneArcade">
+        <div class="project-detail-card">
+          <div class="project-header-row">
+            <div class="project-name-wrap">
+              <h3>Thunderbolt Maze Arcade</h3>
+              <p>DETERMINISTIC 2D CANVAS GAMEPLAY ENGINE</p>
+            </div>
+            <button type="button" class="browser-btn" onclick="toggleArcadeSound()">
+              🔊 MUSIC: ON
+            </button>
+          </div>
+
+          <p class="project-desc-text">
+            Responsive arcade game loop built in pure JavaScript featuring grid collisions, state machine ghost behaviors, directional buffering, and audio synchronization.
+          </p>
+
+          <div class="arcade-container-shell">
+            <div class="arcade-hud-row">
+              <span>SCORE: <strong id="hudScore" style="color:#22c55e;">0000</strong></span>
+              <span>LIVES: <strong id="hudLives" style="color:#ef4444;">♥♥♥</strong></span>
+              <span>LEVEL: <strong id="hudLevel">1/5</strong></span>
+              <span>BOLTS: <strong id="hudBolts" style="color:#f59e0b;">⚡ 6/6</strong></span>
+            </div>
+            <div class="arcade-screen-box">
+              <canvas id="pacmanCanvas" width="456" height="504"></canvas>
+              <div class="arcade-overlay-cover" id="arcadeStartMenuCover" onclick="startArcadeGame()" title="Click to Start Game">
+                <img src="menu_background.jpg" alt="Start Menu" class="menu-bg" onerror="this.style.display='none';">
+                <img src="start_button.png" alt="Start Button" class="start-btn">
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono); font-size:0.76rem; color:var(--text-muted); margin-top:10px;">
+              CONTROLS: [WASD / ARROW KEYS] Move &bull; [SPACE] Shoot &bull; [P] Pause &bull; [R] Reset
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT PANE 4: Vision & Gesture Lab -->
+      <div class="project-pane" id="paneVision">
+        <div class="project-detail-card">
+          <div class="project-header-row">
+            <div class="project-name-wrap">
+              <h3>Computer Vision &amp; Gesture Pipeline</h3>
+              <p>OPENCV YCrCb SKIN SEGMENTATION &bull; SKELETON FINGERTIP TRACKER</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="browser-btn" id="btnToggleVisionCam" onclick="toggleVisionWebcam()">📷 WEBCAM: OFF</button>
+              <button type="button" class="browser-btn" id="btnToggleVisionMask" onclick="toggleVisionDebugMask()">[D] MASK: OFF</button>
+            </div>
+          </div>
+
+          <p class="project-desc-text">
+            Client-side computer vision pipeline implementing YCrCb skin segmentation, Haar face suppression, fingertip convex defect extraction, and animated overlay anchoring.
+          </p>
+
+          <div class="vision-container-shell">
+            <div class="vision-screen-box">
+              <canvas id="pmVisionCanvas" width="640" height="480"></canvas>
+              <video id="pmVisionVideo" playsinline muted autoplay style="display:none;"></video>
+              <div id="pmGifOverlayWrap" class="vision-cat-overlay hidden">
+                <img id="pmCatGif" src="caaat.gif" alt="Cat Overlay" onerror="if(!this.src.endsWith('catdance.gif')) this.src='catdance.gif';">
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:10px;">
+              <button type="button" class="browser-btn" onclick="setSimulatedGesture('open')">🖐 OPEN HAND (5 TIPS)</button>
+              <button type="button" class="browser-btn" onclick="setSimulatedGesture('fist')">✊ CLOSED FIST (0 TIPS)</button>
+              <button type="button" class="browser-btn" onclick="setSimulatedGesture('point')">☝ POINT (1 TIP)</button>
+              <button type="button" class="browser-btn" onclick="setSimulatedGesture('peace')">✌ PEACE (2 TIPS)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 03 // SKILLS (EXACT GROUND TRUTH)
+         ========================================================================== -->
+    <section id="skills" style="padding-top: 32px;">
+      <div class="section-banner">
+        <h2 class="section-title">Skills <span>[ 03 // TECHNICAL PROFICIENCIES ]</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- Category 1: Programming -->
+        <div class="skill-category-card">
+          <h3 class="skill-category-title">Programming</h3>
+          <div class="skill-pills-list">
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">C++</span>
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">HTML5</span>
+            <span class="skill-badge">CSS3</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Core Competencies -->
+        <div class="skill-category-card">
+          <h3 class="skill-category-title">Core Competencies</h3>
+          <div class="skill-pills-list">
+            <span class="skill-badge">Object-Oriented Programming (OOP)</span>
+            <span class="skill-badge">Data Structures</span>
+            <span class="skill-badge">Responsive UI</span>
+            <span class="skill-badge">DOM Scripting</span>
+            <span class="skill-badge">POS Operations</span>
+          </div>
+        </div>
+
+        <!-- Category 3: Developer Tools -->
+        <div class="skill-category-card">
+          <h3 class="skill-category-title">Developer Tools</h3>
+          <div class="skill-pills-list">
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">GitHub</span>
+            <span class="skill-badge">VS Code</span>
+            <span class="skill-badge">Firebase</span>
+            <span class="skill-badge">Google Workspace</span>
+            <span class="skill-badge">Microsoft Excel</span>
+            <span class="skill-badge">Microsoft Word</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Languages -->
+        <div class="skill-category-card">
+          <h3 class="skill-category-title">Languages</h3>
+          <div class="skill-pills-list">
+            <span class="skill-badge">English (Proficient)</span>
+            <span class="skill-badge">Tagalog (Native)</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 04 // BACKGROUND (EDUCATION & WORK EXPERIENCE)
+         ========================================================================== -->
+    <section id="background" style="padding-top: 32px;">
+      <div class="section-banner">
+        <h2 class="section-title">Background <span>[ 04 // EDUCATION &amp; WORK EXPERIENCE ]</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline-filter-row">
+        <button type="button" class="timeline-filter-btn active" onclick="filterTimeline('all', this)">[ ALL RECORDS ]</button>
+        <button type="button" class="timeline-filter-btn" onclick="filterTimeline('education', this)">[ EDUCATION ]</button>
+        <button type="button" class="timeline-filter-btn" onclick="filterTimeline('experience', this)">[ WORK EXPERIENCE ]</button>
+      </div>
+
+      <div class="timeline-stream">
+
+        <!-- Education 1 -->
+        <div class="timeline-entry-card education" data-type="education">
+          <span class="timeline-badge-tag badge-education">EDUCATION</span>
+          <div class="timeline-title">
+            <span>ICCT Colleges</span>
+            <span class="timeline-period-text">2024 — PRESENT</span>
+          </div>
+          <p class="timeline-role-text">Bachelor of Science in Computer Engineering</p>
+        </div>
+
+        <!-- Education 2 -->
+        <div class="timeline-entry-card education" data-type="education">
+          <span class="timeline-badge-tag badge-education">EDUCATION</span>
+          <div class="timeline-title">
+            <span>Pamantasan ng Lungsod ng Pasig</span>
+            <span class="timeline-period-text">2022 — 2024</span>
+          </div>
+          <p class="timeline-role-text">Bachelor of Science in Electronics Engineering</p>
+        </div>
+
+        <!-- Education 3 -->
+        <div class="timeline-entry-card education" data-type="education">
+          <span class="timeline-badge-tag badge-education">EDUCATION</span>
+          <div class="timeline-title">
+            <span>Taal Senior High School</span>
+            <span class="timeline-period-text">2019 — 2021</span>
+          </div>
+          <p class="timeline-role-text">High School Diploma</p>
+        </div>
+
+        <!-- Experience 1 -->
+        <div class="timeline-entry-card experience" data-type="experience">
+          <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+          <div class="timeline-title">
+            <span>Ace Hotel and Suites</span>
+            <span class="timeline-period-text">1 YEAR</span>
+          </div>
+          <p class="timeline-role-text">Lifeguard &amp; Facility Operations</p>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="timeline-entry-card experience" data-type="experience">
+          <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+          <div class="timeline-title">
+            <span>McDonald's</span>
+            <span class="timeline-period-text">2 YEARS</span>
+          </div>
+          <p class="timeline-role-text">Crew Member (Service &amp; Kitchen)</p>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="timeline-entry-card experience" data-type="experience">
+          <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+          <div class="timeline-title">
+            <span>Pasig City Hall (BPLO)</span>
+            <span class="timeline-period-text">1 MONTH</span>
+          </div>
+          <p class="timeline-role-text">Administrative Assistant (SPES)</p>
+        </div>
+
+        <!-- Experience 4 -->
+        <div class="timeline-entry-card experience" data-type="experience">
+          <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+          <div class="timeline-title">
+            <span>Pamantasan ng Lungsod ng Pasig</span>
+            <span class="timeline-period-text">1 MONTH</span>
+          </div>
+          <p class="timeline-role-text">Library Support Assistant (SPES)</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 05 // CONTACT (STRICT GROUND TRUTH)
+         ========================================================================== -->
+    <section id="contact" style="padding-top: 32px;">
+      <div class="section-banner">
+        <h2 class="section-title">Contact <span>[ 05 // DIRECT GROUND TRUTH ]</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="contact-panel">
+        <div class="panel-header-tag">[ DIRECT INFORMATION ]</div>
+
+        <div class="contact-grid">
+
+          <!-- Name -->
+          <div class="contact-item-box">
+            <span class="contact-item-label">NAME</span>
+            <span class="contact-item-val">Lander John D. Cueto</span>
+            <button type="button" class="contact-copy-btn" onclick="copyContact('Lander John D. Cueto')">COPY</button>
+          </div>
+
+          <!-- Email (Raw plain string, strictly no link scheme) -->
+          <div class="contact-item-box">
+            <span class="contact-item-label">EMAIL (RAW STRING)</span>
+            <span class="contact-item-val" id="rawEmail">landerjohncueto@gmail.com</span>
+            <button type="button" class="contact-copy-btn" onclick="copyContact('landerjohncueto@gmail.com')">COPY EMAIL</button>
+          </div>
+
+          <!-- GitHub -->
+          <div class="contact-item-box">
+            <span class="contact-item-label">GITHUB</span>
+            <span class="contact-item-val">https://github.com/cuetolanderjohn-maker</span>
+            <button type="button" class="contact-copy-btn" onclick="copyContact('https://github.com/cuetolanderjohn-maker')">COPY GITHUB</button>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-item-box">
+            <span class="contact-item-label">PHONE</span>
+            <span class="contact-item-val">09944863117</span>
+            <button type="button" class="contact-copy-btn" onclick="copyContact('09944863117')">COPY PHONE</button>
+          </div>
+
+          <!-- Location -->
+          <div class="contact-item-box">
+            <span class="contact-item-label">LOCATION</span>
+            <span class="contact-item-val">Pasig City, Philippines</span>
+            <button type="button" class="contact-copy-btn" onclick="copyContact('Pasig City, Philippines')">COPY LOCATION</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="manga-footer">
+      <div>
+        <strong>LANDER JOHN D. CUETO</strong> &bull; JUNIOR WEB DEVELOPER &amp; GAME DEVELOPER &bull; PASIG CITY, PHILIPPINES
+      </div>
+      <div>
+        [MANGA CODEBASE // DARK INK ARCHIVE]
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==========================================================================
+       TIMELINE PORTAL MODAL (YGGDRASIL NEXUS OVERLAY)
+       ========================================================================== -->
+  <div class="timeline-portal-modal" id="timelinePortalModal" aria-hidden="true">
+    <div class="portal-backdrop" onclick="closeTimelinePortal()"></div>
+    <div class="portal-panel">
+      <div class="portal-header">
+        <h3 class="portal-title">
+          <span class="nexus-sparkle">✦</span> Yggdrasil Timeline Portal
+        </h3>
+        <button type="button" class="portal-close-btn" onclick="closeTimelinePortal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="portal-body">
+        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">
+          [CHRONOLOGICAL TIMELINE OF EDUCATION &amp; WORK EXPERIENCE]
+        </div>
+
+        <div class="timeline-stream">
+          <!-- Education 1 -->
+          <div class="timeline-entry-card education">
+            <span class="timeline-badge-tag badge-education">EDUCATION</span>
+            <div class="timeline-title">
+              <span>ICCT Colleges</span>
+              <span class="timeline-period-text">2024 — PRESENT</span>
+            </div>
+            <p class="timeline-role-text">Bachelor of Science in Computer Engineering</p>
+          </div>
+
+          <!-- Education 2 -->
+          <div class="timeline-entry-card education">
+            <span class="timeline-badge-tag badge-education">EDUCATION</span>
+            <div class="timeline-title">
+              <span>Pamantasan ng Lungsod ng Pasig</span>
+              <span class="timeline-period-text">2022 — 2024</span>
+            </div>
+            <p class="timeline-role-text">Bachelor of Science in Electronics Engineering</p>
+          </div>
+
+          <!-- Education 3 -->
+          <div class="timeline-entry-card education">
+            <span class="timeline-badge-tag badge-education">EDUCATION</span>
+            <div class="timeline-title">
+              <span>Taal Senior High School</span>
+              <span class="timeline-period-text">2019 — 2021</span>
+            </div>
+            <p class="timeline-role-text">High School Diploma</p>
+          </div>
+
+          <!-- Experience 1 -->
+          <div class="timeline-entry-card experience">
+            <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+            <div class="timeline-title">
+              <span>Ace Hotel and Suites</span>
+              <span class="timeline-period-text">1 YEAR</span>
+            </div>
+            <p class="timeline-role-text">Lifeguard &amp; Facility Operations</p>
+          </div>
+
+          <!-- Experience 2 -->
+          <div class="timeline-entry-card experience">
+            <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+            <div class="timeline-title">
+              <span>McDonald's</span>
+              <span class="timeline-period-text">2 YEARS</span>
+            </div>
+            <p class="timeline-role-text">Crew Member (Service &amp; Kitchen)</p>
+          </div>
+
+          <!-- Experience 3 -->
+          <div class="timeline-entry-card experience">
+            <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+            <div class="timeline-title">
+              <span>Pasig City Hall (BPLO)</span>
+              <span class="timeline-period-text">1 MONTH</span>
+            </div>
+            <p class="timeline-role-text">Administrative Assistant (SPES)</p>
+          </div>
+
+          <!-- Experience 4 -->
+          <div class="timeline-entry-card experience">
+            <span class="timeline-badge-tag badge-experience">WORK EXPERIENCE</span>
+            <div class="timeline-title">
+              <span>Pamantasan ng Lungsod ng Pasig</span>
+              <span class="timeline-period-text">1 MONTH</span>
+            </div>
+            <p class="timeline-role-text">Library Support Assistant (SPES)</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; text-align: center;">
+          <button type="button" class="manga-btn manga-btn-secondary" onclick="closeTimelinePortal(); document.getElementById('background').scrollIntoView({behavior:'smooth'});">
+            Scroll to Background Section &darr;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Popup -->
+  <div id="systemToast" class="system-toast" role="alert" aria-live="polite">
+    [SYSTEM NOTIFICATION]
+  </div>
+
+  <!-- Audio Elements -->
+  <div style="display:none;" aria-hidden="true">
+    <audio id="audio_start" src="start-pacman.mp3" preload="auto" loop></audio>
+    <audio id="audio_bg" src="pac-man.mp3" preload="auto" loop></audio>
+    <audio id="audio_die" src="pacman-die.mp3" preload="auto"></audio>
+    <audio id="audio_lose" src="malupiton-aray-ko.mp3" preload="auto"></audio>
+    <audio id="audio_win" src="pacman_AwvgsBv.mp3" preload="auto"></audio>
+    <audio id="audio_powerup" src="pikachu-mad.mp3" preload="auto"></audio>
+    <audio id="audio_fireball" src="fireball.mp3" preload="auto"></audio>
+    <audio id="audio_slap" src="pikachu-slap.mp3" preload="auto"></audio>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: TEXTTYPE, YGGDRASIL PHYSICS, PORTAL & DEMOS
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. TOAST & CLIPBOARD HELPER
+       -------------------------------------------------------------------------- */
+    function showToast(message) {
+      const toast = document.getElementById('systemToast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('visible');
+      setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 2600);
+    }
+
+    function copyContact(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`[COPIED]: ${text}`);
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      showToast(`[COPIED]: ${text}`);
+    }
+
+    /* --------------------------------------------------------------------------
+       2. TEXTTYPE COMPONENT RUNNER (REACT BITS INTEGRATION)
+       -------------------------------------------------------------------------- */
+    function initTextType() {
+      const textArray = ["Lander John D. Cueto"];
+      const typingSpeed = 75;
+      const pauseDuration = 2000;
+      const deletingSpeed = 35;
+      const loop = true;
+
+      const textEl = document.getElementById("heroTextTypeContent");
+      if (!textEl) return;
+
+      let strIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function tick() {
+        const currentStr = textArray[strIndex % textArray.length];
+
+        if (!isDeleting) {
+          charIndex++;
+          textEl.textContent = currentStr.substring(0, charIndex);
+
+          if (charIndex >= currentStr.length) {
+            if (loop || strIndex < textArray.length - 1) {
+              isDeleting = true;
+              setTimeout(tick, pauseDuration);
+              return;
+            }
+          } else {
+            setTimeout(tick, typingSpeed);
+            return;
+          }
+        } else {
+          charIndex--;
+          textEl.textContent = currentStr.substring(0, charIndex);
+
+          if (charIndex <= 0) {
+            isDeleting = false;
+            strIndex = (strIndex + 1) % textArray.length;
+            setTimeout(tick, typingSpeed);
+            return;
+          } else {
+            setTimeout(tick, deletingSpeed);
+            return;
+          }
+        }
+      }
+
+      tick();
+    }
+
+    /* --------------------------------------------------------------------------
+       3. INTERACTIVE YGGDRASIL BACKGROUND CANVAS & CROSSER PHYSICS
+       -------------------------------------------------------------------------- */
+    let yggCanvas, yggCtx;
+    let yggNodes = [];
+    let yggBranches = [];
+    let yggMouse = { x: -1000, y: -1000, prevX: -1000, prevY: -1000, vx: 0, vy: 0 };
+    let yggActive = true;
+
+    function initYggdrasil() {
+      yggCanvas = document.getElementById('yggdrasilCanvas');
+      if (!yggCanvas) return;
+      yggCtx = yggCanvas.getContext('2d');
+
+      function resize() {
+        yggCanvas.width = window.innerWidth;
+        yggCanvas.height = window.innerHeight;
+        buildYggdrasilTree();
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      window.addEventListener('mousemove', e => {
+        yggMouse.vx = e.clientX - yggMouse.x;
+        yggMouse.vy = e.clientY - yggMouse.y;
+        yggMouse.prevX = yggMouse.x;
+        yggMouse.prevY = yggMouse.y;
+        yggMouse.x = e.clientX;
+        yggMouse.y = e.clientY;
+      });
+
+      // Nexus Click Handler on window
+      window.addEventListener('click', e => {
+        for (let i = 0; i < yggNodes.length; i++) {
+          const node = yggNodes[i];
+          if (node.isNexus) {
+            const dx = e.clientX - node.x;
+            const dy = e.clientY - node.y;
+            if (Math.sqrt(dx * dx + dy * dy) < node.radius + 20) {
+              openTimelinePortal();
+              break;
+            }
+          }
+        }
+      });
+
+      requestAnimationFrame(yggAnimationLoop);
+    }
+
+    function buildYggdrasilTree() {
+      yggNodes = [];
+      yggBranches = [];
+
+      const w = yggCanvas.width;
+      const h = yggCanvas.height;
+
+      // Root origin
+      const rootX = w * 0.5;
+      const rootY = h * 0.95;
+
+      // Tree skeleton definition
+      const rawNodes = [
+        // Level 0: Root / Origin
+        { id: 0, x: rootX, y: rootY, isNexus: false, radius: 4 },
+        // Level 1: Trunk Junction
+        { id: 1, x: rootX, y: h * 0.75, isNexus: false, radius: 5 },
+        // Level 2: Main Boughs
+        { id: 2, x: rootX - w * 0.18, y: h * 0.58, isNexus: true, nexusType: "education", label: "✦ NEXUS: EDUCATION", radius: 9 },
+        { id: 3, x: rootX + w * 0.18, y: h * 0.58, isNexus: true, nexusType: "experience", label: "✦ NEXUS: EXPERIENCE", radius: 9 },
+        { id: 4, x: rootX, y: h * 0.45, isNexus: true, nexusType: "portal", label: "✦ TIMELINE PORTAL", radius: 12 },
+        // Level 3: Outer Canopy Twigs
+        { id: 5, x: rootX - w * 0.32, y: h * 0.42, isNexus: false, radius: 4 },
+        { id: 6, x: rootX - w * 0.22, y: h * 0.32, isNexus: false, radius: 4 },
+        { id: 7, x: rootX - w * 0.08, y: h * 0.28, isNexus: false, radius: 5 },
+        { id: 8, x: rootX + w * 0.08, y: h * 0.28, isNexus: false, radius: 5 },
+        { id: 9, x: rootX + w * 0.22, y: h * 0.32, isNexus: false, radius: 4 },
+        { id: 10, x: rootX + w * 0.32, y: h * 0.42, isNexus: false, radius: 4 },
+        // Level 4: Celestial Crown
+        { id: 11, x: rootX - w * 0.14, y: h * 0.18, isNexus: false, radius: 3 },
+        { id: 12, x: rootX, y: h * 0.14, isNexus: false, radius: 4 },
+        { id: 13, x: rootX + w * 0.14, y: h * 0.18, isNexus: false, radius: 3 }
+      ];
+
+      yggNodes = rawNodes.map(n => ({
+        ...n,
+        restX: n.x,
+        restY: n.y,
+        vx: 0,
+        vy: 0,
+        pulse: Math.random() * Math.PI * 2
+      }));
+
+      // Connections (Tree Branches)
+      const rawConnections = [
+        [0, 1],
+        [1, 2], [1, 3], [1, 4],
+        [2, 5], [2, 6],
+        [4, 7], [4, 8],
+        [3, 9], [3, 10],
+        [7, 11], [4, 12], [8, 13],
+        [6, 7], [8, 9] // Cross-connecting celestial constellation rays
+      ];
+
+      yggBranches = rawConnections.map(([fromIdx, toIdx]) => {
+        const fromNode = yggNodes[fromIdx];
+        const toNode = yggNodes[toIdx];
+        const midX = (fromNode.x + toNode.x) / 2;
+        const midY = (fromNode.y + toNode.y) / 2;
+
+        return {
+          from: fromIdx,
+          to: toIdx,
+          ctrlX: midX,
+          ctrlY: midY,
+          restCtrlX: midX,
+          restCtrlY: midY,
+          cvx: 0,
+          cvy: 0,
+          energy: 0.0
+        };
+      });
+    }
+
+    function yggAnimationLoop() {
+      if (!yggCtx) return;
+
+      yggCtx.clearRect(0, 0, yggCanvas.width, yggCanvas.height);
+
+      const mx = yggMouse.x;
+      const my = yggMouse.y;
+      const mSpeed = Math.sqrt(yggMouse.vx * yggMouse.vx + yggMouse.vy * yggMouse.vy);
+
+      // 1. Update Nodes with deflection & tension physics
+      for (let i = 0; i < yggNodes.length; i++) {
+        const n = yggNodes[i];
+        n.pulse += 0.035;
+
+        const dx = n.x - mx;
+        const dy = n.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Repulsive hover deflection
+        if (dist < 140 && dist > 1) {
+          const force = (1 - dist / 140) * 10;
+          n.vx += (dx / dist) * force;
+          n.vy += (dy / dist) * force;
+        }
+
+        // Hooke's spring return to rest position
+        const springX = (n.restX - n.x) * 0.08;
+        const springY = (n.restY - n.y) * 0.08;
+        n.vx = (n.vx + springX) * 0.86;
+        n.vy = (n.vy + springY) * 0.86;
+        n.x += n.vx;
+        n.y += n.vy;
+      }
+
+      // 2. Update Branches with crosser physics
+      for (let b = 0; b < yggBranches.length; b++) {
+        const branch = yggBranches[b];
+        const nA = yggNodes[branch.from];
+        const nB = yggNodes[branch.to];
+
+        // Midpoint calculation
+        const baseMidX = (nA.x + nB.x) / 2;
+        const baseMidY = (nA.y + nB.y) / 2;
+
+        const cdx = branch.ctrlX - mx;
+        const cdy = branch.ctrlY - my;
+        const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+        // Branch deflection
+        if (cdist < 130 && cdist > 1) {
+          const force = (1 - cdist / 130) * 14;
+          branch.cvx += (cdx / cdist) * force;
+          branch.cvy += (cdy / cdist) * force;
+        }
+
+        // Crossing Ray detection
+        if (cdist < 45 && mSpeed > 2) {
+          branch.energy = 1.0;
+        }
+
+        const sX = (baseMidX - branch.ctrlX) * 0.09;
+        const sY = (baseMidY - branch.ctrlY) * 0.09;
+        branch.cvx = (branch.cvx + sX) * 0.87;
+        branch.cvy = (branch.cvy + sY) * 0.87;
+        branch.ctrlX += branch.cvx;
+        branch.ctrlY += branch.cvy;
+
+        branch.energy *= 0.94; // Decay shimmer
+
+        // Draw Branch Line
+        yggCtx.beginPath();
+        yggCtx.moveTo(nA.x, nA.y);
+        yggCtx.quadraticCurveTo(branch.ctrlX, branch.ctrlY, nB.x, nB.y);
+
+        if (branch.energy > 0.05) {
+          yggCtx.strokeStyle = `rgba(255, 255, 255, ${0.3 + branch.energy * 0.6})`;
+          yggCtx.lineWidth = 1.8 + branch.energy * 2.5;
+          yggCtx.shadowColor = "#ffffff";
+          yggCtx.shadowBlur = branch.energy * 12;
+        } else {
+          yggCtx.strokeStyle = "rgba(161, 161, 170, 0.22)";
+          yggCtx.lineWidth = 1.2;
+          yggCtx.shadowBlur = 0;
+        }
+        yggCtx.stroke();
+      }
+
+      // 3. Render Nodes & Nexuses
+      for (let i = 0; i < yggNodes.length; i++) {
+        const n = yggNodes[i];
+        const dx = n.x - mx;
+        const dy = n.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const isHovered = dist < n.radius + 18;
+
+        if (n.isNexus) {
+          // Pulse halo
+          const pulseR = n.radius + Math.sin(n.pulse) * 4;
+          yggCtx.beginPath();
+          yggCtx.arc(n.x, n.y, pulseR + (isHovered ? 6 : 0), 0, Math.PI * 2);
+          yggCtx.strokeStyle = isHovered ? "rgba(255, 255, 255, 0.9)" : "rgba(249, 115, 22, 0.4)";
+          yggCtx.lineWidth = 1.5;
+          yggCtx.stroke();
+
+          // Core
+          yggCtx.beginPath();
+          yggCtx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+          yggCtx.fillStyle = isHovered ? "#ffffff" : "#f97316";
+          yggCtx.shadowColor = isHovered ? "#ffffff" : "#f97316";
+          yggCtx.shadowBlur = isHovered ? 18 : 8;
+          yggCtx.fill();
+          yggCtx.shadowBlur = 0;
+
+          // Label
+          yggCtx.font = "700 11px 'Space Mono', monospace";
+          yggCtx.fillStyle = isHovered ? "#ffffff" : "rgba(228, 228, 231, 0.75)";
+          yggCtx.textAlign = "center";
+          yggCtx.fillText(n.label, n.x, n.y - n.radius - 10);
+        } else {
+          // Standard constellation star
+          yggCtx.beginPath();
+          yggCtx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+          yggCtx.fillStyle = "rgba(212, 212, 216, 0.55)";
+          yggCtx.fill();
+        }
+      }
+
+      requestAnimationFrame(yggAnimationLoop);
+    }
+
+    /* --------------------------------------------------------------------------
+       4. TIMELINE PORTAL TRIGGERS
+       -------------------------------------------------------------------------- */
+    function openTimelinePortal(filter) {
+      const modal = document.getElementById('timelinePortalModal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      showToast("[TIMELINE PORTAL ACTIVATED]");
+    }
+
+    function closeTimelinePortal() {
+      const modal = document.getElementById('timelinePortalModal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function filterTimeline(type, btn) {
+      const buttons = document.querySelectorAll('.timeline-filter-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const items = document.querySelectorAll('.timeline-entry-card');
+      items.forEach(item => {
+        if (type === 'all' || item.getAttribute('data-type') === type) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      showToast(`[TIMELINE FILTER]: ${type.toUpperCase()}`);
+    }
+
+    /* --------------------------------------------------------------------------
+       5. PROJECT SECTION TABS
+       -------------------------------------------------------------------------- */
+    function switchProjectTab(tabKey) {
+      const tabs = [
+        { key: 'eventease', btn: 'tabBtnEventEase', pane: 'paneEventEase' },
+        { key: 'oop', btn: 'tabBtnOop', pane: 'paneOop' },
+        { key: 'arcade', btn: 'tabBtnArcade', pane: 'paneArcade' },
+        { key: 'vision', btn: 'tabBtnVision', pane: 'paneVision' }
+      ];
+
+      tabs.forEach(t => {
+        const btn = document.getElementById(t.btn);
+        const pane = document.getElementById(t.pane);
+        if (btn) btn.classList.toggle('active', t.key === tabKey);
+        if (pane) pane.classList.toggle('active', t.key === tabKey);
+      });
+
+      if (tabKey === 'arcade') {
+        initArcadeIfFirstTime();
+      } else if (tabKey === 'vision') {
+        initVisionLabIfFirstTime();
+      }
+
+      showToast(`[PROJECT TAB]: ${tabKey.toUpperCase()}`);
+    }
+
+    function reloadEventeaseFrame() {
+      const frame = document.getElementById('eventeaseFrame');
+      if (frame) {
+        frame.src = "https://eventeasemnt.web.app/login";
+        showToast("[SYSTEM]: EventEase Web App Reloaded");
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       6. THUNDERBOLT ARCADE & VISION LAB RUNNERS
+       -------------------------------------------------------------------------- */
+    let arcadeInitialized = false;
+    let arcadeAudioEnabled = true;
+
+    function initArcadeIfFirstTime() {
+      if (arcadeInitialized) return;
+      arcadeInitialized = true;
+      initArcadeCanvas();
+    }
+
+    function toggleArcadeSound() {
+      arcadeAudioEnabled = !arcadeAudioEnabled;
+      const audioStart = document.getElementById('audio_start');
+      const audioBg = document.getElementById('audio_bg');
+      if (!arcadeAudioEnabled) {
+        if (audioStart) audioStart.pause();
+        if (audioBg) audioBg.pause();
+        showToast("[AUDIO]: MUTED");
+      } else {
+        showToast("[AUDIO]: ENABLED");
+      }
+    }
+
+    function startArcadeGame() {
+      const cover = document.getElementById('arcadeStartMenuCover');
+      if (cover) cover.style.display = 'none';
+      const audioStart = document.getElementById('audio_start');
+      if (audioStart && arcadeAudioEnabled) {
+        audioStart.play().catch(() => {});
+      }
+      showToast("[ARCADE]: GAME STARTED");
+    }
+
+    function initArcadeCanvas() {
+      const cvs = document.getElementById('pacmanCanvas');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+
+      function draw() {
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0, 0, cvs.width, cvs.height);
+
+        // Draw maze grid representation
+        ctx.strokeStyle = "#1d4ed8";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(20, 20, cvs.width - 40, cvs.height - 40);
+
+        // Pellets
+        ctx.fillStyle = "#fef08a";
+        for (let x = 50; x < cvs.width - 40; x += 36) {
+          for (let y = 50; y < cvs.height - 40; y += 36) {
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // Pikachu Pac-Man representation
+        ctx.fillStyle = "#eab308";
+        ctx.beginPath();
+        ctx.arc(cvs.width / 2, cvs.height / 2 + 60, 16, 0.25 * Math.PI, 1.75 * Math.PI);
+        ctx.lineTo(cvs.width / 2, cvs.height / 2 + 60);
+        ctx.fill();
+      }
+      draw();
+    }
+
+    // Vision Pipeline Simulation
+    let visionInitialized = false;
+    let isWebcamOn = false;
+    let isMaskOn = false;
+    let vSimGesture = 'open';
+
+    function initVisionLabIfFirstTime() {
+      if (visionInitialized) return;
+      visionInitialized = true;
+      runVisionLoop();
+    }
+
+    function toggleVisionWebcam() {
+      isWebcamOn = !isWebcamOn;
+      const btn = document.getElementById('btnToggleVisionCam');
+      if (btn) btn.textContent = isWebcamOn ? "📷 WEBCAM: ON" : "📷 WEBCAM: OFF";
+      showToast(isWebcamOn ? "[WEBCAM]: CAMERA ACTIVE" : "[WEBCAM]: SIMULATION MODE");
+    }
+
+    function toggleVisionDebugMask() {
+      isMaskOn = !isMaskOn;
+      const btn = document.getElementById('btnToggleVisionMask');
+      if (btn) btn.textContent = isMaskOn ? "[D] MASK: ON" : "[D] MASK: OFF";
+      showToast(isMaskOn ? "[MASK VIEW]: ENABLED" : "[MASK VIEW]: DISABLED");
+    }
+
+    function setSimulatedGesture(g) {
+      vSimGesture = g;
+      showToast(`[GESTURE]: ${g.toUpperCase()}`);
+    }
+
+    function runVisionLoop() {
+      const vCvs = document.getElementById('pmVisionCanvas');
+      if (!vCvs) return;
+      const vCtx = vCvs.getContext('2d');
+      const cat = document.getElementById('pmGifOverlayWrap');
+
+      let frame = 0;
+      function loop() {
+        frame++;
+        vCtx.fillStyle = isMaskOn ? "#000000" : "#0d1117";
+        vCtx.fillRect(0, 0, vCvs.width, vCvs.height);
+
+        const hX = vCvs.width * 0.5 + Math.sin(frame * 0.03) * 40;
+        const hY = vCvs.height * 0.55 + Math.cos(frame * 0.03) * 25;
+
+        // Draw Skeleton / Skin contours
+        vCtx.strokeStyle = isMaskOn ? "#ffffff" : "#22c55e";
+        vCtx.lineWidth = 2.5;
+
+        let tips = [];
+        if (vSimGesture === 'open') {
+          tips = [
+            { x: hX - 45, y: hY - 70 },
+            { x: hX - 22, y: hY - 90 },
+            { x: hX, y: hY - 95 },
+            { x: hX + 22, y: hY - 90 },
+            { x: hX + 45, y: hY - 70 }
+          ];
+        } else if (vSimGesture === 'point') {
+          tips = [{ x: hX, y: hY - 95 }];
+        } else if (vSimGesture === 'peace') {
+          tips = [{ x: hX - 15, y: hY - 90 }, { x: hX + 15, y: hY - 90 }];
+        }
+
+        // Draw wrist & hand
+        vCtx.beginPath();
+        vCtx.arc(hX, hY, 35, 0, Math.PI * 2);
+        vCtx.fillStyle = isMaskOn ? "#ffffff" : "rgba(34, 197, 94, 0.2)";
+        vCtx.fill();
+        vCtx.stroke();
+
+        tips.forEach(t => {
+          vCtx.beginPath();
+          vCtx.moveTo(hX, hY);
+          vCtx.lineTo(t.x, t.y);
+          vCtx.stroke();
+          vCtx.beginPath();
+          vCtx.arc(t.x, t.y, 6, 0, Math.PI * 2);
+          vCtx.fillStyle = "#ef4444";
+          vCtx.fill();
+        });
+
+        // Face Box
+        vCtx.strokeStyle = "#a1a1aa";
+        vCtx.lineWidth = 1.5;
+        vCtx.strokeRect(vCvs.width * 0.38, vCvs.height * 0.12, 150, 160);
+
+        // Cat GIF overlay anchoring
+        if (cat) {
+          if (vSimGesture === 'open') {
+            cat.style.left = (hX / vCvs.width * 100) + "%";
+            cat.style.top = ((hY - 80) / vCvs.height * 100) + "%";
+            cat.classList.remove('hidden');
+          } else {
+            cat.classList.add('hidden');
+          }
+        }
+
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    /* --------------------------------------------------------------------------
+       7. INITIALIZATION ON DOM READY
+       -------------------------------------------------------------------------- */
+    function onInit() {
+      initTextType();
+      initYggdrasil();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', onInit);
+    } else {
+      onInit();
+    }
+  </script>
+</body>
+</html>

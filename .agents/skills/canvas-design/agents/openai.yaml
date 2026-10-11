@@ -1,0 +1,4 @@
+interface:
+  display_name: "Canvas Design"
+  short_description: "Design websites, web apps, mobile and desktop interfaces"
+  default_prompt: "Use $canvas-design to develop my interface brief, resolve important unknowns, and create a tailored master prompt or working website, web app, mobile app, or desktop app in my chosen stack."

@@ -1,0 +1,26 @@
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+  color: #e4e4e7;
+  font-weight: 300;
+  animation: textTypeBlink 0.8s infinite;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
+@keyframes textTypeBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
