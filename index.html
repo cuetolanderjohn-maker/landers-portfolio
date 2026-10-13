@@ -1643,7 +1643,11 @@
       image-rendering: pixelated;
     }
 
-    #pacmanCanvas {
+    #pacmanCanvas,
+    #stormCanvas,
+    #cometCanvas,
+    #snakeCanvas,
+    .arcade-screen-frame canvas {
       width: 100%;
       max-width: 456px;
       height: auto;
@@ -1651,6 +1655,113 @@
       display: block;
       margin: 0 auto;
       image-rendering: pixelated;
+    }
+
+    /* Game-Themed Cyber Retro Covers */
+    .retro-cover-storm,
+    .retro-cover-comet,
+    .retro-cover-snake {
+      background: radial-gradient(circle at 50% 35%, #0f172a 0%, #030712 100%);
+      padding: 20px;
+      text-align: center;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .retro-cover-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      font-weight: 800;
+      background: rgba(239, 35, 60, 0.12);
+      border: 1px solid rgba(239, 35, 60, 0.35);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .retro-cover-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+      line-height: 1.1;
+      margin: 4px 0 2px;
+    }
+
+    .retro-cover-sub {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #94a3b8;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .retro-cover-art-box {
+      width: 100px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2px 0 6px;
+      filter: drop-shadow(0 0 10px rgba(239, 35, 60, 0.4));
+    }
+
+    .retro-cover-start-btn {
+      background: linear-gradient(135deg, #ef233c, #b91c1c);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 14px rgba(239, 35, 60, 0.45);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 9px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .retro-cover-start-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(239, 35, 60, 0.7);
+    }
+
+    .retro-cover-hint {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: #64748b;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .action-btn-cyan {
+      background-color: #0284c7 !important;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4) !important;
+    }
+    .action-btn-cyan:hover {
+      background-color: #0369a1 !important;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.6) !important;
+    }
+
+    .action-btn-emerald {
+      background-color: #059669 !important;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4) !important;
+    }
+    .action-btn-emerald:hover {
+      background-color: #047857 !important;
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.6) !important;
     }
 
     .python-code-box {
@@ -2679,7 +2790,7 @@
           <div class="class-header-bar">
             <div class="class-title-wrap">
               <span class="class-name">UI/UX Junior Developer</span>
-              <span class="class-tier">CLASS 01</span>
+              <span class="class-tier">INTERFACE LAB</span>
             </div>
             <!-- Interactive Section Tabs -->
             <div class="gamedev-tab-nav" role="tablist">
@@ -2769,7 +2880,7 @@
           <div class="class-header-bar">
             <div class="class-title-wrap">
               <span class="class-name">Game Developer</span>
-              <span class="class-tier">CLASS 02</span>
+              <span class="class-tier">Thunderbolt Maze</span>
             </div>
             <!-- Interactive Section Tabs -->
             <div class="gamedev-tab-nav" role="tablist">
@@ -2943,12 +3054,490 @@
 
         </article>
 
-        <!-- CLASS 3: Project Management -->
+        <!-- CLASS: Game Development - Thunderstorm Survival -->
+        <article class="class-card gamedev-card" id="gamedev-card-storm">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Game Developer</span>
+              <span class="class-tier">Thunderstorm Survival</span>
+            </div>
+            <!-- Interactive Section Tabs -->
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabStormPlay" onclick="switchStormTab('play')">
+                <span class="pulse-spark">⚡</span> Storm Evasion
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabStormSpecs" onclick="switchStormTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: PLAYABLE THUNDERSTORM GAME -->
+          <div class="class-body gamedev-tab-pane active" id="stormPanePlay">
+            <div class="arcade-shell">
+              <!-- Arcade Header & Controls Toolbar -->
+              <div class="arcade-top-bar">
+                <div class="arcade-title-box">
+                  <span class="arcade-badge">ARCADE ENGINE</span>
+                  <h4 class="arcade-title">THUNDERSTORM SURVIVAL</h4>
+                </div>
+                <div class="arcade-actions">
+                  <button type="button" class="arcade-tool-btn" id="btnToggleStormSound" onclick="toggleStormSound()" title="Toggle Sound">🔊 SOUND: ON</button>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleStormExpand" onclick="toggleStormExpand()" title="Expand / Compact View">⛶ EXPAND</button>
+                </div>
+              </div>
+
+              <!-- Audio Status Indicator -->
+              <div class="arcade-music-indicator" id="stormMusicIndicator" onclick="toggleStormSound()" title="Click to Toggle Game Sound FX">
+                <span class="music-icon" id="stormStatusIcon">⚡</span>
+                <span class="music-text" id="stormStatusText">AUDIO: SYNTH SFX [ACTIVE]</span>
+              </div>
+
+              <!-- Live HUD Bar -->
+              <div class="arcade-hud">
+                <div class="hud-item"><span class="hud-label">SCORE</span><span class="hud-val" id="stormHudScore">0000</span></div>
+                <div class="hud-item"><span class="hud-label">LIVES</span><span class="hud-val text-red" id="stormHudLives">♥♥♥</span></div>
+                <div class="hud-item"><span class="hud-label">SURVIVED</span><span class="hud-val" id="stormHudTime">00:00</span></div>
+                <div class="hud-item"><span class="hud-label">DASH</span><span class="hud-val text-yellow" id="stormHudDash">READY</span></div>
+                <div class="hud-item"><span class="hud-label">COMBO</span><span class="hud-val" id="stormHudCombo">x1</span></div>
+              </div>
+
+              <!-- Screen Frame with Canvas & Overlays -->
+              <div class="arcade-screen-frame" id="stormScreenFrame">
+                <canvas id="stormCanvas" width="456" height="504"></canvas>
+
+                <!-- Start Cover -->
+                <div class="arcade-start-menu-cover retro-cover-storm" id="stormStartMenuCover" onclick="startStormGame()" title="Click to Start Thunderstorm Survival">
+                  <span class="retro-cover-badge">SURVIVAL PROTOCOL</span>
+                  <h3 class="retro-cover-title">⚡ THUNDERSTORM</h3>
+                  <p class="retro-cover-sub">DODGE LIGHTNING // GRAZE &amp; NEAR-MISS COMBOS</p>
+                  <div class="retro-cover-art-box">
+                    <svg viewBox="0 0 100 80" width="90" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10 25 Q30 10 50 25 Q70 10 90 25 Q95 38 75 42 Q50 45 25 42 Q5 38 10 25 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                      <path d="M52 35 L40 52 L50 52 L36 75 L62 48 L50 48 Z" fill="#facc15" stroke="#fef08a" stroke-width="1.5"/>
+                      <circle cx="28" cy="62" r="5" fill="#f8fafc"/>
+                      <line x1="28" y1="67" x2="28" y2="76" stroke="#f8fafc" stroke-width="2"/>
+                      <line x1="28" y1="76" x2="22" y2="80" stroke="#f8fafc" stroke-width="2"/>
+                      <line x1="28" y1="76" x2="34" y2="80" stroke="#f8fafc" stroke-width="2"/>
+                      <line x1="28" y1="70" x2="20" y2="68" stroke="#f8fafc" stroke-width="2"/>
+                      <line x1="28" y1="70" x2="36" y2="72" stroke="#f8fafc" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <button type="button" class="retro-cover-start-btn">
+                    <span class="pulse-spark">▶</span> INITIALIZE SURVIVAL
+                  </button>
+                  <span class="retro-cover-hint">[ CLICK OR PRESS ENTER TO PLAY ]</span>
+                </div>
+
+                <!-- Overlay: Pause -->
+                <div class="arcade-screen-overlay hidden" id="overlayStormPause">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[STORM HOLD]</span>
+                    <h3 class="modal-title">MISSION PAUSED</h3>
+                    <div class="cta-row modal-cta-row">
+                      <button type="button" class="comic-btn modal-btn" onclick="toggleStormPause()">RESUME</button>
+                      <button type="button" class="comic-btn comic-btn-secondary modal-btn" onclick="resetStormGame()">RESTART</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Overlay: Game Over -->
+                <div class="arcade-screen-overlay hidden" id="overlayStormGameOver">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[CIRCUIT OVERLOAD]</span>
+                    <h3 class="modal-title text-red">DISCHARGED</h3>
+                    <p class="modal-desc" id="stormGameOverScoreText">Survived: 0s | Score: 0</p>
+                    <button type="button" class="comic-btn modal-btn" onclick="resetStormGame()">TRY AGAIN</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Controls -->
+              <div class="arcade-control-deck">
+                <div class="dpad-grid">
+                  <button type="button" class="dpad-btn up" onpointerdown="handleStormDpad('UP', true)" onpointerup="handleStormDpad('UP', false)" aria-label="Jump">▲</button>
+                  <button type="button" class="dpad-btn left" onpointerdown="handleStormDpad('LEFT', true)" onpointerup="handleStormDpad('LEFT', false)" aria-label="Left">◀</button>
+                  <button type="button" class="dpad-btn down" onpointerdown="handleStormDpad('DOWN', true)" onpointerup="handleStormDpad('DOWN', false)" aria-label="Duck">▼</button>
+                  <button type="button" class="dpad-btn right" onpointerdown="handleStormDpad('RIGHT', true)" onpointerup="handleStormDpad('RIGHT', false)" aria-label="Right">▶</button>
+                </div>
+                <div class="action-btn-col">
+                  <button type="button" class="arcade-action-btn action-btn-cyan" onclick="handleStormDash()">
+                    <span class="btn-icon">⚡</span>
+                    <span class="btn-label">LIGHTNING DASH</span>
+                  </button>
+                  <div class="sub-action-row">
+                    <button type="button" class="arcade-sub-btn" onclick="toggleStormPause()">PAUSE</button>
+                    <button type="button" class="arcade-sub-btn" onclick="resetStormGame()">RESET</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keyboard Shortcuts -->
+              <div class="arcade-shortcut-bar">
+                <span>[A / D / ARROWS] Run</span> &bull; 
+                <span>[SPACE / SHIFT] Dash</span> &bull; 
+                <span>[P] Pause</span> &bull; 
+                <span>[R] Reset</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: SPECS -->
+          <div class="class-body gamedev-tab-pane" id="stormPaneSpecs">
+            <div>
+              <h3 class="class-role-title">The Reflex Architect</h3>
+              <p class="class-desc">
+                Specializes in tight evasive timing windows, procedural threat telegraphing, graze hitbox mathematics, and high-adrenaline reflex systems.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Combat Toolkit:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">HTML5 Canvas</span>
+                  <span class="pill-tag">Hitbox Graze Physics</span>
+                  <span class="pill-tag">Procedural Lightning</span>
+                  <span class="pill-tag">Web Audio Synth</span>
+                  <span class="pill-tag">Particle Synthesis</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Core Disciplines:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Timing Windows</span>
+                  <span class="pill-tag">Telegraph Cues</span>
+                  <span class="pill-tag">Multiplier Economics</span>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Danger is a resource. Dancing on the razor's edge of a lightning strike turns evasion into high-scoring mastery."
+            </p>
+          </div>
+        </article>
+
+        <!-- CLASS: Game Development - Comet Survival -->
+        <article class="class-card gamedev-card" id="gamedev-card-comet">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Game Developer</span>
+              <span class="class-tier">Comet Survival</span>
+            </div>
+            <!-- Interactive Section Tabs -->
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabCometPlay" onclick="switchCometTab('play')">
+                <span class="pulse-spark">🚀</span> Asteroid Interceptor
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabCometSpecs" onclick="switchCometTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: PLAYABLE COMET GAME -->
+          <div class="class-body gamedev-tab-pane active" id="cometPanePlay">
+            <div class="arcade-shell">
+              <!-- Arcade Header & Controls Toolbar -->
+              <div class="arcade-top-bar">
+                <div class="arcade-title-box">
+                  <span class="arcade-badge">ARCADE ENGINE</span>
+                  <h4 class="arcade-title">COMET SURVIVAL</h4>
+                </div>
+                <div class="arcade-actions">
+                  <button type="button" class="arcade-tool-btn" id="btnToggleCometSound" onclick="toggleCometSound()" title="Toggle Sound">🔊 SOUND: ON</button>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleCometExpand" onclick="toggleCometExpand()" title="Expand / Compact View">⛶ EXPAND</button>
+                </div>
+              </div>
+
+              <!-- Audio Status Indicator -->
+              <div class="arcade-music-indicator" id="cometMusicIndicator" onclick="toggleCometSound()" title="Click to Toggle Game Sound FX">
+                <span class="music-icon" id="cometStatusIcon">🚀</span>
+                <span class="music-text" id="cometStatusText">AUDIO: SYNTH SFX [ACTIVE]</span>
+              </div>
+
+              <!-- Live HUD Bar -->
+              <div class="arcade-hud">
+                <div class="hud-item"><span class="hud-label">SCORE</span><span class="hud-val" id="cometHudScore">0000</span></div>
+                <div class="hud-item"><span class="hud-label">SHIELD</span><span class="hud-val text-red" id="cometHudHull">♥♥♥</span></div>
+                <div class="hud-item"><span class="hud-label">WAVE</span><span class="hud-val" id="cometHudWave">01</span></div>
+                <div class="hud-item"><span class="hud-label">KILLS</span><span class="hud-val text-yellow" id="cometHudKills">0</span></div>
+                <div class="hud-item"><span class="hud-label">STATUS</span><span class="hud-val" id="cometHudStatus">CLEAR</span></div>
+              </div>
+
+              <!-- Screen Frame with Canvas & Overlays -->
+              <div class="arcade-screen-frame" id="cometScreenFrame">
+                <canvas id="cometCanvas" width="456" height="504"></canvas>
+
+                <!-- Start Cover -->
+                <div class="arcade-start-menu-cover retro-cover-comet" id="cometStartMenuCover" onclick="startCometGame()" title="Click to Start Comet Survival">
+                  <span class="retro-cover-badge">DEFENSE PROTOCOL</span>
+                  <h3 class="retro-cover-title">🚀 COMET SURVIVAL</h3>
+                  <p class="retro-cover-sub">SPACE SHOOTER // COMET FRAGMENTATION</p>
+                  <div class="retro-cover-art-box">
+                    <svg viewBox="0 0 100 80" width="90" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <polygon points="50,15 62,55 50,48 38,55" fill="#ef233c" stroke="#ffffff" stroke-width="1.5"/>
+                      <polygon points="50,48 54,62 50,58 46,62" fill="#38bdf8"/>
+                      <circle cx="25" cy="22" r="10" fill="#334155" stroke="#f97316" stroke-width="2"/>
+                      <circle cx="78" cy="30" r="14" fill="#1e293b" stroke="#e11d48" stroke-width="2"/>
+                      <line x1="45" y1="20" x2="45" y2="8" stroke="#38bdf8" stroke-width="2"/>
+                      <line x1="55" y1="20" x2="55" y2="8" stroke="#38bdf8" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <button type="button" class="retro-cover-start-btn">
+                    <span class="pulse-spark">▶</span> LAUNCH INTERCEPTOR
+                  </button>
+                  <span class="retro-cover-hint">[ CLICK OR PRESS ENTER TO PLAY ]</span>
+                </div>
+
+                <!-- Overlay: Pause -->
+                <div class="arcade-screen-overlay hidden" id="overlayCometPause">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[ORBIT HOLD]</span>
+                    <h3 class="modal-title">MISSION PAUSED</h3>
+                    <div class="cta-row modal-cta-row">
+                      <button type="button" class="comic-btn modal-btn" onclick="toggleCometPause()">RESUME</button>
+                      <button type="button" class="comic-btn comic-btn-secondary modal-btn" onclick="resetCometGame()">RESTART</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Overlay: Game Over -->
+                <div class="arcade-screen-overlay hidden" id="overlayCometGameOver">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[HULL BREACH]</span>
+                    <h3 class="modal-title text-red">DESTROYED</h3>
+                    <p class="modal-desc" id="cometGameOverScoreText">Score: 0 | Asteroids Vaporized: 0</p>
+                    <button type="button" class="comic-btn modal-btn" onclick="resetCometGame()">TRY AGAIN</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Controls -->
+              <div class="arcade-control-deck">
+                <div class="dpad-grid">
+                  <button type="button" class="dpad-btn up" onpointerdown="handleCometDpad('UP', true)" onpointerup="handleCometDpad('UP', false)" aria-label="Up">▲</button>
+                  <button type="button" class="dpad-btn left" onpointerdown="handleCometDpad('LEFT', true)" onpointerup="handleCometDpad('LEFT', false)" aria-label="Left">◀</button>
+                  <button type="button" class="dpad-btn down" onpointerdown="handleCometDpad('DOWN', true)" onpointerup="handleCometDpad('DOWN', false)" aria-label="Down">▼</button>
+                  <button type="button" class="dpad-btn right" onpointerdown="handleCometDpad('RIGHT', true)" onpointerup="handleCometDpad('RIGHT', false)" aria-label="Right">▶</button>
+                </div>
+                <div class="action-btn-col">
+                  <button type="button" class="arcade-action-btn" onclick="handleCometFire()">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-label">PLASMA BLASTER</span>
+                  </button>
+                  <div class="sub-action-row">
+                    <button type="button" class="arcade-sub-btn" onclick="toggleCometPause()">PAUSE</button>
+                    <button type="button" class="arcade-sub-btn" onclick="resetCometGame()">RESET</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keyboard Shortcuts -->
+              <div class="arcade-shortcut-bar">
+                <span>[WASD / ARROWS] Fly</span> &bull; 
+                <span>[SPACE] Fire Laser</span> &bull; 
+                <span>[P] Pause</span> &bull; 
+                <span>[R] Reset</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: SPECS -->
+          <div class="class-body gamedev-tab-pane" id="cometPaneSpecs">
+            <div>
+              <h3 class="class-role-title">The Ballistics Engineer</h3>
+              <p class="class-desc">
+                Specializes in projectile ballistics, object pooling, procedural fragmentation hierarchies, screen-shake dynamics, and spatial survival loops.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Combat Toolkit:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">HTML5 2D Context</span>
+                  <span class="pill-tag">Object Pooling</span>
+                  <span class="pill-tag">Vector Mathematics</span>
+                  <span class="pill-tag">Kinetic Shrapnel</span>
+                  <span class="pill-tag">Screen Shake</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Core Disciplines:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Ballistic Trajectories</span>
+                  <span class="pill-tag">Particle Emitters</span>
+                  <span class="pill-tag">Hull Integrity State</span>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Every shot fired must carry kinetic weight. Blasting an asteroid into fragments creates immediate tactical pressure."
+            </p>
+          </div>
+        </article>
+
+        <!-- CLASS: Game Development - AI Snake & Dijkstra Visualizer -->
+        <article class="class-card gamedev-card" id="gamedev-card-snake">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Game Developer</span>
+              <span class="class-tier">AI Snake &amp; Dijkstra</span>
+            </div>
+            <!-- Interactive Section Tabs -->
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabSnakePlay" onclick="switchSnakeTab('play')">
+                <span class="pulse-spark">🤖</span> AI Matrix Snake
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabSnakeSpecs" onclick="switchSnakeTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: PLAYABLE SNAKE GAME -->
+          <div class="class-body gamedev-tab-pane active" id="snakePanePlay">
+            <div class="arcade-shell">
+              <!-- Arcade Header & Controls Toolbar -->
+              <div class="arcade-top-bar">
+                <div class="arcade-title-box">
+                  <span class="arcade-badge">ARCADE ENGINE</span>
+                  <h4 class="arcade-title">AI SNAKE &amp; DIJKSTRA</h4>
+                </div>
+                <div class="arcade-actions">
+                  <button type="button" class="arcade-tool-btn" id="btnToggleSnakeSound" onclick="toggleSnakeSound()" title="Toggle Sound">🔊 SOUND: ON</button>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleSnakeExpand" onclick="toggleSnakeExpand()" title="Expand / Compact View">⛶ EXPAND</button>
+                </div>
+              </div>
+
+              <!-- Audio Status Indicator -->
+              <div class="arcade-music-indicator" id="snakeMusicIndicator" onclick="toggleSnakeSound()" title="Click to Toggle Game Sound FX">
+                <span class="music-icon" id="snakeStatusIcon">🤖</span>
+                <span class="music-text" id="snakeStatusText">AUDIO: SYNTH SFX [ACTIVE]</span>
+              </div>
+
+              <!-- Live HUD Bar -->
+              <div class="arcade-hud">
+                <div class="hud-item"><span class="hud-label">SCORE</span><span class="hud-val" id="snakeHudScore">0000</span></div>
+                <div class="hud-item"><span class="hud-label">LENGTH</span><span class="hud-val text-yellow" id="snakeHudLength">3</span></div>
+                <div class="hud-item"><span class="hud-label">MODE</span><span class="hud-val" id="snakeHudMode">MANUAL</span></div>
+                <div class="hud-item"><span class="hud-label">NODES</span><span class="hud-val" id="snakeHudPath">--</span></div>
+                <div class="hud-item"><span class="hud-label">ALGO</span><span class="hud-val text-cyan" id="snakeHudAlgo">DIJKSTRA</span></div>
+              </div>
+
+              <!-- Screen Frame with Canvas & Overlays -->
+              <div class="arcade-screen-frame" id="snakeScreenFrame">
+                <canvas id="snakeCanvas" width="456" height="504"></canvas>
+
+                <!-- Start Cover -->
+                <div class="arcade-start-menu-cover retro-cover-snake" id="snakeStartMenuCover" onclick="startSnakeGame()" title="Click to Start AI Snake">
+                  <span class="retro-cover-badge">ALGORITHM PROTOCOL</span>
+                  <h3 class="retro-cover-title">🤖 AI SNAKE</h3>
+                  <p class="retro-cover-sub">RETRO SNAKE // LIVE DIJKSTRA SHORTEST PATH</p>
+                  <div class="retro-cover-art-box">
+                    <svg viewBox="0 0 100 80" width="90" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="10" y="10" width="80" height="60" rx="4" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="3 3"/>
+                      <circle cx="25" cy="40" r="6" fill="#10b981"/>
+                      <circle cx="37" cy="40" r="6" fill="#059669"/>
+                      <circle cx="49" cy="40" r="6" fill="#047857"/>
+                      <circle cx="49" cy="28" r="6" fill="#065f46"/>
+                      <circle cx="61" cy="28" r="7" fill="#34d399" stroke="#ffffff" stroke-width="1.5"/>
+                      <circle cx="75" cy="52" r="5" fill="#ef233c" stroke="#facc15" stroke-width="1.5"/>
+                      <path d="M61 28 L75 28 L75 52" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+                    </svg>
+                  </div>
+                  <button type="button" class="retro-cover-start-btn">
+                    <span class="pulse-spark">▶</span> START SIMULATION
+                  </button>
+                  <span class="retro-cover-hint">[ CLICK OR PRESS ENTER TO PLAY ]</span>
+                </div>
+
+                <!-- Overlay: Pause -->
+                <div class="arcade-screen-overlay hidden" id="overlaySnakePause">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[HEURISTIC PAUSE]</span>
+                    <h3 class="modal-title">GAME PAUSED</h3>
+                    <div class="cta-row modal-cta-row">
+                      <button type="button" class="comic-btn modal-btn" onclick="toggleSnakePause()">RESUME</button>
+                      <button type="button" class="comic-btn comic-btn-secondary modal-btn" onclick="resetSnakeGame()">RESTART</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Overlay: Game Over -->
+                <div class="arcade-screen-overlay hidden" id="overlaySnakeGameOver">
+                  <div class="comic-modal-box">
+                    <span class="modal-tag">[COLLISION DETECTED]</span>
+                    <h3 class="modal-title text-red">GAME OVER</h3>
+                    <p class="modal-desc" id="snakeGameOverScoreText">Score: 0 | Snake Length: 3</p>
+                    <button type="button" class="comic-btn modal-btn" onclick="resetSnakeGame()">TRY AGAIN</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Controls -->
+              <div class="arcade-control-deck">
+                <div class="dpad-grid">
+                  <button type="button" class="dpad-btn up" onclick="handleSnakeDpad('UP')" aria-label="Up">▲</button>
+                  <button type="button" class="dpad-btn left" onclick="handleSnakeDpad('LEFT')" aria-label="Left">◀</button>
+                  <button type="button" class="dpad-btn down" onclick="handleSnakeDpad('DOWN')" aria-label="Down">▼</button>
+                  <button type="button" class="dpad-btn right" onclick="handleSnakeDpad('RIGHT')" aria-label="Right">▶</button>
+                </div>
+                <div class="action-btn-col">
+                  <button type="button" class="arcade-action-btn action-btn-emerald" id="btnToggleSnakeAI" onclick="toggleSnakeAIMode()">
+                    <span class="btn-icon">🤖</span>
+                    <span class="btn-label" id="btnSnakeAILabel">AI DIJKSTRA: OFF</span>
+                  </button>
+                  <div class="sub-action-row">
+                    <button type="button" class="arcade-sub-btn" onclick="toggleSnakePause()">PAUSE</button>
+                    <button type="button" class="arcade-sub-btn" onclick="resetSnakeGame()">RESET</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keyboard Shortcuts -->
+              <div class="arcade-shortcut-bar">
+                <span>[WASD / ARROWS] Steer</span> &bull; 
+                <span>[SPACE] Toggle AI Autopilot</span> &bull; 
+                <span>[P] Pause</span> &bull; 
+                <span>[R] Reset</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: SPECS -->
+          <div class="class-body gamedev-tab-pane" id="snakePaneSpecs">
+            <div>
+              <h3 class="class-role-title">The Heuristic Tactician</h3>
+              <p class="class-desc">
+                Focuses on graph search algorithms, real-time pathfinding visualization, grid constraint solvers, and interactive algorithmic education.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Combat Toolkit:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Graph Theory</span>
+                  <span class="pill-tag">Dijkstra Search</span>
+                  <span class="pill-tag">BFS Wavefronts</span>
+                  <span class="pill-tag">Grid Array Mapping</span>
+                  <span class="pill-tag">Visual Heuristics</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Core Disciplines:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Shortest Path Optimization</span>
+                  <span class="pill-tag">Real-Time Wavefront Vis</span>
+                  <span class="pill-tag">Algorithmic Autopilot</span>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Algorithms shouldn't be black boxes. Watching Dijkstra explore the search graph in real-time demystifies pathfinding."
+            </p>
+          </div>
+        </article>
+
+        <!-- CLASS: Project Management -->
         <article class="class-card pm-card" id="pm-card">
           <div class="class-header-bar">
             <div class="class-title-wrap">
               <span class="class-name">Project Manager</span>
-              <span class="class-tier">CLASS 03</span>
+              <span class="class-tier">OPERATIONS</span>
             </div>
             <!-- Interactive Section Tabs -->
             <div class="gamedev-tab-nav" role="tablist">
@@ -3682,10 +4271,43 @@
     }
 
     // ==========================================================================
-    // GAME DEVELOPER SECTION TABS & VIEW EXPANSION
+    // GAME DEVELOPER SECTION TABS & VIEW EXPANSION (ALL 4 ARCADES)
     // ==========================================================================
+    let activeArcade = 'pacman';
     let gamedevCurrentTab = 'play';
     let arcadeIsExpanded = false;
+
+    function pauseAllArcadeGames(exceptGame) {
+      if (exceptGame !== 'pacman' && window.game) {
+        if (window.game.started && !window.game.paused && !window.game.game_over && !window.game.level_complete) {
+          window.game.toggle_pause();
+        } else {
+          window.game._pause_audio();
+          window.game._stop_menu_sound();
+        }
+      }
+      if (exceptGame !== 'storm' && window.stormGame) {
+        if (window.stormGame.started && !window.stormGame.paused && !window.stormGame.gameOver) {
+          window.stormGame.pause();
+        }
+      }
+      if (exceptGame !== 'comet' && window.cometGame) {
+        if (window.cometGame.started && !window.cometGame.paused && !window.cometGame.gameOver) {
+          window.cometGame.pause();
+        }
+      }
+      if (exceptGame !== 'snake' && window.snakeGame) {
+        if (window.snakeGame.started && !window.snakeGame.paused && !window.snakeGame.gameOver) {
+          window.snakeGame.pause();
+        }
+      }
+      pauseSiteBgm();
+    }
+
+    function setActiveArcade(gameKey) {
+      activeArcade = gameKey;
+      pauseAllArcadeGames(gameKey);
+    }
 
     function switchGamedevTab(tabName) {
       gamedevCurrentTab = tabName;
@@ -3700,7 +4322,7 @@
       if (panePlay) panePlay.classList.toggle('active', tabName === 'play');
 
       if (tabName === 'specs') {
-        showToast("[TAB]: Game Developer Specs Loaded");
+        showToast("[TAB]: Thunderbolt Specs Loaded");
         if (game) {
           game._pause_audio();
           game._stop_menu_sound();
@@ -3708,6 +4330,7 @@
         resumeSiteBgm();
       } else {
         showToast("[TAB]: Thunderbolt Arcade Active");
+        setActiveArcade('pacman');
         initArcadeIfFirstTime();
         if (game && game.started && !game.paused && !game.game_over && !game.level_complete) {
           pauseSiteBgm();
@@ -3728,6 +4351,150 @@
         btn.textContent = arcadeIsExpanded ? "⛶ COMPACT" : "⛶ EXPAND";
       }
       showToast(arcadeIsExpanded ? "[VIEW]: Arcade Maximized" : "[VIEW]: Arcade Compacted");
+    }
+
+    // Thunderstorm Survival Controls & Tabs
+    let stormCurrentTab = 'play';
+    let stormIsExpanded = false;
+    let stormSoundEnabled = true;
+
+    function switchStormTab(tabName) {
+      stormCurrentTab = tabName;
+      const btnSpecs = document.getElementById('btnTabStormSpecs');
+      const btnPlay = document.getElementById('btnTabStormPlay');
+      const paneSpecs = document.getElementById('stormPaneSpecs');
+      const panePlay = document.getElementById('stormPanePlay');
+
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (btnPlay) btnPlay.classList.toggle('active', tabName === 'play');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+      if (panePlay) panePlay.classList.toggle('active', tabName === 'play');
+
+      if (tabName === 'specs') {
+        showToast("[TAB]: Storm Specs Loaded");
+        if (window.stormGame && window.stormGame.started && !window.stormGame.paused) {
+          window.stormGame.pause();
+        }
+      } else {
+        showToast("[TAB]: Storm Evasion Active");
+        setActiveArcade('storm');
+        initStormIfFirstTime();
+      }
+    }
+
+    function toggleStormExpand() {
+      stormIsExpanded = !stormIsExpanded;
+      const card = document.getElementById('gamedev-card-storm');
+      const btn = document.getElementById('btnToggleStormExpand');
+      if (card) card.classList.toggle('expanded', stormIsExpanded);
+      if (btn) btn.textContent = stormIsExpanded ? "⛶ COMPACT" : "⛶ EXPAND";
+      showToast(stormIsExpanded ? "[VIEW]: Storm Arcade Maximized" : "[VIEW]: Storm Arcade Compacted");
+    }
+
+    function toggleStormSound() {
+      stormSoundEnabled = !stormSoundEnabled;
+      const btn = document.getElementById('btnToggleStormSound');
+      const txt = document.getElementById('stormStatusText');
+      if (btn) btn.textContent = stormSoundEnabled ? "🔊 SOUND: ON" : "🔇 SOUND: OFF";
+      if (txt) txt.textContent = stormSoundEnabled ? "AUDIO: SYNTH SFX [ACTIVE]" : "AUDIO: MUTED";
+      if (window.stormGame) window.stormGame.soundEnabled = stormSoundEnabled;
+      showToast(stormSoundEnabled ? "[AUDIO]: Storm Sound Enabled" : "[AUDIO]: Storm Muted");
+    }
+
+    // Comet Survival Controls & Tabs
+    let cometCurrentTab = 'play';
+    let cometIsExpanded = false;
+    let cometSoundEnabled = true;
+
+    function switchCometTab(tabName) {
+      cometCurrentTab = tabName;
+      const btnSpecs = document.getElementById('btnTabCometSpecs');
+      const btnPlay = document.getElementById('btnTabCometPlay');
+      const paneSpecs = document.getElementById('cometPaneSpecs');
+      const panePlay = document.getElementById('cometPanePlay');
+
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (btnPlay) btnPlay.classList.toggle('active', tabName === 'play');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+      if (panePlay) panePlay.classList.toggle('active', tabName === 'play');
+
+      if (tabName === 'specs') {
+        showToast("[TAB]: Comet Specs Loaded");
+        if (window.cometGame && window.cometGame.started && !window.cometGame.paused) {
+          window.cometGame.pause();
+        }
+      } else {
+        showToast("[TAB]: Comet Interceptor Active");
+        setActiveArcade('comet');
+        initCometIfFirstTime();
+      }
+    }
+
+    function toggleCometExpand() {
+      cometIsExpanded = !cometIsExpanded;
+      const card = document.getElementById('gamedev-card-comet');
+      const btn = document.getElementById('btnToggleCometExpand');
+      if (card) card.classList.toggle('expanded', cometIsExpanded);
+      if (btn) btn.textContent = cometIsExpanded ? "⛶ COMPACT" : "⛶ EXPAND";
+      showToast(cometIsExpanded ? "[VIEW]: Comet Arcade Maximized" : "[VIEW]: Comet Arcade Compacted");
+    }
+
+    function toggleCometSound() {
+      cometSoundEnabled = !cometSoundEnabled;
+      const btn = document.getElementById('btnToggleCometSound');
+      const txt = document.getElementById('cometStatusText');
+      if (btn) btn.textContent = cometSoundEnabled ? "🔊 SOUND: ON" : "🔇 SOUND: OFF";
+      if (txt) txt.textContent = cometSoundEnabled ? "AUDIO: SYNTH SFX [ACTIVE]" : "AUDIO: MUTED";
+      if (window.cometGame) window.cometGame.soundEnabled = cometSoundEnabled;
+      showToast(cometSoundEnabled ? "[AUDIO]: Comet Sound Enabled" : "[AUDIO]: Comet Muted");
+    }
+
+    // AI Snake Controls & Tabs
+    let snakeCurrentTab = 'play';
+    let snakeIsExpanded = false;
+    let snakeSoundEnabled = true;
+
+    function switchSnakeTab(tabName) {
+      snakeCurrentTab = tabName;
+      const btnSpecs = document.getElementById('btnTabSnakeSpecs');
+      const btnPlay = document.getElementById('btnTabSnakePlay');
+      const paneSpecs = document.getElementById('snakePaneSpecs');
+      const panePlay = document.getElementById('snakePanePlay');
+
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (btnPlay) btnPlay.classList.toggle('active', tabName === 'play');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+      if (panePlay) panePlay.classList.toggle('active', tabName === 'play');
+
+      if (tabName === 'specs') {
+        showToast("[TAB]: AI Snake Specs Loaded");
+        if (window.snakeGame && window.snakeGame.started && !window.snakeGame.paused) {
+          window.snakeGame.pause();
+        }
+      } else {
+        showToast("[TAB]: AI Matrix Snake Active");
+        setActiveArcade('snake');
+        initSnakeIfFirstTime();
+      }
+    }
+
+    function toggleSnakeExpand() {
+      snakeIsExpanded = !snakeIsExpanded;
+      const card = document.getElementById('gamedev-card-snake');
+      const btn = document.getElementById('btnToggleSnakeExpand');
+      if (card) card.classList.toggle('expanded', snakeIsExpanded);
+      if (btn) btn.textContent = snakeIsExpanded ? "⛶ COMPACT" : "⛶ EXPAND";
+      showToast(snakeIsExpanded ? "[VIEW]: Snake Arcade Maximized" : "[VIEW]: Snake Arcade Compacted");
+    }
+
+    function toggleSnakeSound() {
+      snakeSoundEnabled = !snakeSoundEnabled;
+      const btn = document.getElementById('btnToggleSnakeSound');
+      const txt = document.getElementById('snakeStatusText');
+      if (btn) btn.textContent = snakeSoundEnabled ? "🔊 SOUND: ON" : "🔇 SOUND: OFF";
+      if (txt) txt.textContent = snakeSoundEnabled ? "AUDIO: SYNTH SFX [ACTIVE]" : "AUDIO: MUTED";
+      if (window.snakeGame) window.snakeGame.soundEnabled = snakeSoundEnabled;
+      showToast(snakeSoundEnabled ? "[AUDIO]: Snake Sound Enabled" : "[AUDIO]: Snake Muted");
     }
 
     function launchGameFromQuest() {
@@ -5845,57 +6612,1723 @@
       }
     }
 
-    // Keyboard Controller matching Pygame event loop
-    window.addEventListener('keydown', (e) => {
-      if (gamedevCurrentTab !== 'play') return;
+    // ==========================================================================
+    // PROCEDURAL AUDIO SYNTHESIZER (WEB AUDIO API)
+    // Zero external audio file requests, instantaneous 8-bit response
+    // ==========================================================================
+    class ProceduralAudioEngine {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      _init() {
+        if (!this.ctx && typeof window !== 'undefined') {
+          const AudioClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioClass) this.ctx = new AudioClass();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+      }
+      playThunder() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const filter = this.ctx.createBiquadFilter();
+          osc.type = 'sawtooth';
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(450, this.ctx.currentTime);
+          filter.frequency.exponentialRampToValueAtTime(35, this.ctx.currentTime + 0.65);
+          osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(28, this.ctx.currentTime + 0.65);
+          gain.gain.setValueAtTime(0.45, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.65);
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.65);
+        } catch(e) {}
+      }
+      playGraze() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.16);
+          gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.16);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.16);
+        } catch(e) {}
+      }
+      playDash() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(640, this.ctx.currentTime + 0.14);
+          gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.14);
+        } catch(e) {}
+      }
+      playLaser() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(920, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.15);
+        } catch(e) {}
+      }
+      playExplosion() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(160, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.32);
+          gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.32);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.32);
+        } catch(e) {}
+      }
+      playEat() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.12);
+        } catch(e) {}
+      }
+      playPing() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(740, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.18);
+        } catch(e) {}
+      }
+      playHit() {
+        if (this.muted) return;
+        this._init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(160, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + 0.28);
+          gain.gain.setValueAtTime(0.38, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.28);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.28);
+        } catch(e) {}
+      }
+    }
+    const arcadeAudioSynth = new ProceduralAudioEngine();
 
-      const key = e.key;
+    // ==========================================================================
+    // GAME 1: THUNDERSTORM SURVIVAL ENGINE
+    // Stickman lightning dodge, i-frame dash, procedural multi-fork lightning,
+    // graze hitbox multiplier economics.
+    // ==========================================================================
+    class ThunderstormGame {
+      constructor() {
+        this.canvas = document.getElementById('stormCanvas');
+        this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+        this.width = 456;
+        this.height = 504;
+        this.groundY = 460;
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.soundEnabled = true;
 
-      if (!game || !game.started) {
-        if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
-          e.preventDefault();
-          startArcadeGame();
-          return;
+        this.player = {
+          x: 228,
+          y: 460,
+          vx: 0,
+          speed: 5.2,
+          isDashing: false,
+          dashTimer: 0,
+          dashCooldown: 0,
+          facing: 1,
+          invulnerable: 0,
+          ghosts: []
+        };
+
+        this.input = { left: false, right: false };
+        this.strikes = [];
+        this.particles = [];
+        this.grazes = [];
+        this.score = 0;
+        this.lives = 3;
+        this.combo = 1;
+        this.comboTimer = 0;
+        this.wave = 1;
+        this.survivedFrames = 0;
+        this.strikeSpawnTimer = 60;
+        this.shake = 0;
+        this.skyFlash = 0;
+
+        this.boundLoop = this.loop.bind(this);
+        this.animId = null;
+      }
+
+      init() {
+        if (this.canvas) {
+          this.width = this.canvas.width;
+          this.height = this.canvas.height;
+        }
+        this.render();
+      }
+
+      start() {
+        this.started = true;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.lives = 3;
+        this.combo = 1;
+        this.comboTimer = 0;
+        this.wave = 1;
+        this.survivedFrames = 0;
+        this.strikeSpawnTimer = 70;
+        this.strikes = [];
+        this.particles = [];
+        this.grazes = [];
+        this.shake = 0;
+        this.skyFlash = 0;
+        this.player.x = this.width / 2;
+        this.player.vx = 0;
+        this.player.isDashing = false;
+        this.player.dashTimer = 0;
+        this.player.dashCooldown = 0;
+        this.player.invulnerable = 0;
+        this.player.ghosts = [];
+
+        const ovPause = document.getElementById('overlayStormPause');
+        const ovOver = document.getElementById('overlayStormGameOver');
+        const cover = document.getElementById('stormStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.add('hidden');
+
+        this.updateHUD();
+        if (!this.animId) {
+          this.animId = window.requestAnimationFrame(this.boundLoop);
         }
       }
 
-      if (key === 'ArrowUp' || key === 'w' || key === 'W') {
-        e.preventDefault();
-        handleDpadInput('UP');
-      } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
-        e.preventDefault();
-        handleDpadInput('DOWN');
-      } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
-        e.preventDefault();
-        handleDpadInput('LEFT');
-      } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
-        e.preventDefault();
-        handleDpadInput('RIGHT');
-      } else if (key === ' ' || key === 'Spacebar') {
-        e.preventDefault();
-        if (game && game.level_complete) {
-          nextArcadeLevel();
+      pause() {
+        if (!this.started || this.gameOver) return;
+        this.paused = !this.paused;
+        const ovPause = document.getElementById('overlayStormPause');
+        if (ovPause) ovPause.classList.toggle('hidden', !this.paused);
+        this.updateHUD();
+      }
+
+      reset() {
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.lives = 3;
+        this.combo = 1;
+        this.strikes = [];
+        this.particles = [];
+        this.grazes = [];
+        this.player.x = this.width / 2;
+        const ovPause = document.getElementById('overlayStormPause');
+        const ovOver = document.getElementById('overlayStormGameOver');
+        const cover = document.getElementById('stormStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.remove('hidden');
+        this.updateHUD();
+        this.render();
+      }
+
+      triggerDash() {
+        if (!this.started || this.paused || this.gameOver) return;
+        if (this.player.dashCooldown <= 0 && !this.player.isDashing) {
+          this.player.isDashing = true;
+          this.player.dashTimer = 14;
+          this.player.dashCooldown = 65;
+          this.player.invulnerable = 16;
+          if (this.soundEnabled) arcadeAudioSynth.playDash();
+        }
+      }
+
+      update() {
+        if (!this.started || this.paused || this.gameOver) return;
+        this.survivedFrames++;
+
+        this.wave = 1 + Math.floor(this.survivedFrames / 600);
+
+        let moveDir = 0;
+        if (this.input.left) moveDir -= 1;
+        if (this.input.right) moveDir += 1;
+        if (moveDir !== 0) this.player.facing = moveDir;
+
+        let currentSpeed = this.player.speed;
+        if (this.player.isDashing) {
+          currentSpeed = 13.5;
+          moveDir = this.player.facing;
+          this.player.ghosts.push({
+            x: this.player.x,
+            y: this.player.y,
+            facing: this.player.facing,
+            alpha: 0.7
+          });
+        }
+
+        this.player.x += moveDir * currentSpeed;
+        if (this.player.x < 24) this.player.x = 24;
+        if (this.player.x > this.width - 24) this.player.x = this.width - 24;
+
+        if (this.player.dashTimer > 0) {
+          this.player.dashTimer--;
+          if (this.player.dashTimer === 0) this.player.isDashing = false;
+        }
+        if (this.player.dashCooldown > 0) this.player.dashCooldown--;
+        if (this.player.invulnerable > 0) this.player.invulnerable--;
+
+        for (let i = this.player.ghosts.length - 1; i >= 0; i--) {
+          this.player.ghosts[i].alpha -= 0.1;
+          if (this.player.ghosts[i].alpha <= 0) this.player.ghosts.splice(i, 1);
+        }
+
+        if (this.comboTimer > 0) {
+          this.comboTimer--;
+          if (this.comboTimer === 0) this.combo = 1;
+        }
+
+        this.strikeSpawnTimer--;
+        if (this.strikeSpawnTimer <= 0) {
+          this.spawnStrike();
+          const minDelay = Math.max(30, 75 - this.wave * 5);
+          this.strikeSpawnTimer = Math.floor(minDelay + Math.random() * 25);
+        }
+
+        for (let i = this.strikes.length - 1; i >= 0; i--) {
+          const s = this.strikes[i];
+          if (s.state === 'telegraph') {
+            s.timer--;
+            if (s.timer <= 0) {
+              s.state = 'striking';
+              s.duration = 10;
+              this.skyFlash = 0.85;
+              this.shake = 8;
+              if (this.soundEnabled) arcadeAudioSynth.playThunder();
+
+              s.boltSegments = this.generateLightningPath(s.x, 50, s.x, this.groundY);
+
+              for (let p = 0; p < 14; p++) {
+                this.particles.push({
+                  x: s.x,
+                  y: this.groundY,
+                  vx: (Math.random() - 0.5) * 8,
+                  vy: -Math.random() * 6 - 2,
+                  alpha: 1,
+                  color: '#38bdf8',
+                  life: 25
+                });
+              }
+
+              const dist = Math.abs(this.player.x - s.x);
+              const hitRadius = 18;
+              const grazeRadius = 55;
+
+              if (dist <= hitRadius && this.player.invulnerable <= 0) {
+                this.lives--;
+                this.player.invulnerable = 60;
+                this.combo = 1;
+                this.shake = 16;
+                if (this.soundEnabled) arcadeAudioSynth.playHit();
+
+                if (this.lives <= 0) {
+                  this.onGameOver();
+                }
+              } else if (dist > hitRadius && dist <= grazeRadius) {
+                const bonus = 250 * this.combo;
+                this.score += bonus;
+                this.combo = Math.min(this.combo + 1, 8);
+                this.comboTimer = 160;
+                this.grazes.push({
+                  x: this.player.x,
+                  y: this.player.y - 45,
+                  text: `GRAZE! +${bonus} x${this.combo}`,
+                  alpha: 1,
+                  vy: -1.2
+                });
+                if (this.soundEnabled) arcadeAudioSynth.playGraze();
+              }
+            }
+          } else if (s.state === 'striking') {
+            s.duration--;
+            if (s.duration <= 0) {
+              this.strikes.splice(i, 1);
+            }
+          }
+        }
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.3;
+          p.alpha -= 1 / p.life;
+          if (p.alpha <= 0) this.particles.splice(i, 1);
+        }
+
+        for (let i = this.grazes.length - 1; i >= 0; i--) {
+          const g = this.grazes[i];
+          g.y += g.vy;
+          g.alpha -= 0.025;
+          if (g.alpha <= 0) this.grazes.splice(i, 1);
+        }
+
+        this.score += 1;
+        if (this.shake > 0) this.shake *= 0.85;
+        if (this.skyFlash > 0) this.skyFlash -= 0.08;
+
+        this.updateHUD();
+      }
+
+      generateLightningPath(x1, y1, x2, y2) {
+        const points = [{ x: x1, y: y1 }];
+        const steps = 14;
+        const dy = (y2 - y1) / steps;
+        let currX = x1;
+        let currY = y1;
+
+        for (let i = 1; i < steps; i++) {
+          currY += dy;
+          currX += (Math.random() - 0.5) * 32;
+          points.push({ x: currX, y: currY });
+        }
+        points.push({ x: x2, y: y2 });
+        return points;
+      }
+
+      spawnStrike() {
+        let targetX;
+        if (Math.random() < 0.65) {
+          targetX = this.player.x + (Math.random() - 0.5) * 160;
         } else {
-          handleShootInput();
+          targetX = 40 + Math.random() * (this.width - 80);
         }
-      } else if (key === 'p' || key === 'P') {
-        e.preventDefault();
-        toggleArcadePause();
-      } else if (key === 'r' || key === 'R') {
-        e.preventDefault();
-        resetArcadeGame();
-      } else if (key === 'Enter') {
+        targetX = Math.max(30, Math.min(this.width - 30, targetX));
+
+        const warnTime = Math.max(28, 48 - this.wave * 2);
+        this.strikes.push({
+          x: targetX,
+          state: 'telegraph',
+          timer: warnTime,
+          maxTimer: warnTime,
+          duration: 0
+        });
+      }
+
+      onGameOver() {
+        this.gameOver = true;
+        const ovOver = document.getElementById('overlayStormGameOver');
+        const txt = document.getElementById('stormGameOverScoreText');
+        const secs = Math.floor(this.survivedFrames / 60);
+        if (txt) txt.textContent = `Survived: ${secs}s | Score: ${this.score} | Wave: ${this.wave}`;
+        if (ovOver) ovOver.classList.remove('hidden');
+        showToast(`[MISSION OVER]: Thunderstorm Evasion Score: ${this.score}`);
+      }
+
+      updateHUD() {
+        const elScore = document.getElementById('stormHudScore');
+        const elLives = document.getElementById('stormHudLives');
+        const elTime = document.getElementById('stormHudTime');
+        const elDash = document.getElementById('stormHudDash');
+        const elCombo = document.getElementById('stormHudCombo');
+
+        if (elScore) elScore.textContent = String(this.score).padStart(4, '0');
+        if (elLives) {
+          let hearts = '';
+          for (let i = 0; i < Math.max(0, this.lives); i++) hearts += '♥';
+          elLives.textContent = hearts || 'DEAD';
+        }
+        if (elTime) {
+          const secs = Math.floor(this.survivedFrames / 60);
+          const mins = Math.floor(secs / 60);
+          const rem = secs % 60;
+          elTime.textContent = `${String(mins).padStart(2, '0')}:${String(rem).padStart(2, '0')}`;
+        }
+        if (elDash) {
+          if (this.player.dashCooldown <= 0) {
+            elDash.textContent = 'READY';
+            elDash.style.color = '#facc15';
+          } else {
+            const pct = Math.floor((1 - this.player.dashCooldown / 65) * 100);
+            elDash.textContent = `${pct}%`;
+            elDash.style.color = '#94a3b8';
+          }
+        }
+        if (elCombo) {
+          elCombo.textContent = `x${this.combo}`;
+          elCombo.style.color = this.combo > 1 ? '#38bdf8' : '#cbd5e1';
+        }
+      }
+
+      render() {
+        if (!this.ctx) return;
+        const ctx = this.ctx;
+
+        ctx.save();
+        if (this.shake > 0.5) {
+          const ox = (Math.random() - 0.5) * this.shake;
+          const oy = (Math.random() - 0.5) * this.shake;
+          ctx.translate(ox, oy);
+        }
+
+        ctx.fillStyle = '#070a14';
+        ctx.fillRect(0, 0, this.width, this.height);
+
+        if (this.skyFlash > 0.05) {
+          ctx.fillStyle = `rgba(200, 230, 255, ${this.skyFlash * 0.4})`;
+          ctx.fillRect(0, 0, this.width, this.height);
+        }
+
+        ctx.fillStyle = '#111827';
+        ctx.beginPath();
+        ctx.arc(60, 25, 45, 0, Math.PI * 2);
+        ctx.arc(160, 20, 55, 0, Math.PI * 2);
+        ctx.arc(270, 25, 50, 0, Math.PI * 2);
+        ctx.arc(380, 20, 60, 0, Math.PI * 2);
+        ctx.arc(430, 30, 45, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, this.groundY, this.width, this.height - this.groundY);
+        ctx.strokeStyle = '#ef233c';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, this.groundY);
+        ctx.lineTo(this.width, this.groundY);
+        ctx.stroke();
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < this.width; x += 32) {
+          ctx.beginPath();
+          ctx.moveTo(x, this.groundY);
+          ctx.lineTo(x, this.height);
+          ctx.stroke();
+        }
+
+        for (const s of this.strikes) {
+          if (s.state === 'telegraph') {
+            const progress = 1 - (s.timer / s.maxTimer);
+            const alpha = 0.2 + progress * 0.5;
+
+            ctx.fillStyle = `rgba(239, 35, 60, ${alpha * 0.25})`;
+            ctx.fillRect(s.x - 12, 50, 24, this.groundY - 50);
+
+            ctx.strokeStyle = progress > 0.7 ? '#ef233c' : '#facc15';
+            ctx.lineWidth = 1.5 + progress * 2;
+            ctx.beginPath();
+            ctx.moveTo(s.x, 50);
+            ctx.lineTo(s.x, this.groundY);
+            ctx.stroke();
+
+            ctx.strokeStyle = progress > 0.7 ? '#ef233c' : '#facc15';
+            ctx.beginPath();
+            ctx.arc(s.x, this.groundY, 16 * (1 - progress * 0.4), 0, Math.PI * 2);
+            ctx.stroke();
+          } else if (s.state === 'striking' && s.boltSegments) {
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 4;
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 18;
+            ctx.beginPath();
+            ctx.moveTo(s.boltSegments[0].x, s.boltSegments[0].y);
+            for (let i = 1; i < s.boltSegments.length; i++) {
+              ctx.lineTo(s.boltSegments[i].x, s.boltSegments[i].y);
+            }
+            ctx.stroke();
+
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 7;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        }
+
+        for (const g of this.player.ghosts) {
+          this.drawStickman(ctx, g.x, g.y, g.facing, `rgba(56, 189, 248, ${g.alpha * 0.6})`);
+        }
+
+        if (this.player.invulnerable % 6 < 3) {
+          const color = this.player.isDashing ? '#38bdf8' : '#ffffff';
+          this.drawStickman(ctx, this.player.x, this.player.y, this.player.facing, color);
+        }
+
+        for (const p of this.particles) {
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
+        }
+        ctx.globalAlpha = 1;
+
+        ctx.font = '800 12px monospace';
+        ctx.textAlign = 'center';
+        for (const g of this.grazes) {
+          ctx.fillStyle = `rgba(250, 204, 21, ${g.alpha})`;
+          ctx.shadowColor = 'rgba(250, 204, 21, 0.8)';
+          ctx.shadowBlur = 6;
+          ctx.fillText(g.text, g.x, g.y);
+          ctx.shadowBlur = 0;
+        }
+
+        ctx.restore();
+      }
+
+      drawStickman(ctx, x, y, facing, color) {
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        const headRadius = 6;
+        const headY = y - 34;
+
+        ctx.beginPath();
+        ctx.arc(x, headY, headRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(x, headY + headRadius);
+        ctx.lineTo(x, y - 14);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x, y - 14);
+        ctx.lineTo(x - 8 * facing, y);
+        ctx.moveTo(x, y - 14);
+        ctx.lineTo(x + 8 * facing, y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x, y - 24);
+        ctx.lineTo(x + 10 * facing, y - 18);
+        ctx.moveTo(x, y - 24);
+        ctx.lineTo(x - 8 * facing, y - 18);
+        ctx.stroke();
+      }
+
+      loop() {
+        this.update();
+        this.render();
+        this.animId = window.requestAnimationFrame(this.boundLoop);
+      }
+    }
+
+    // ==========================================================================
+    // GAME 2: COMET SURVIVAL ENGINE
+    // Starship interceptor, twin plasma lasers, cascading comet fracture,
+    // shield hull integrity, screen shake.
+    // ==========================================================================
+    class CometSurvivalGame {
+      constructor() {
+        this.canvas = document.getElementById('cometCanvas');
+        this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+        this.width = 456;
+        this.height = 504;
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.soundEnabled = true;
+
+        this.ship = {
+          x: 228,
+          y: 440,
+          vx: 0,
+          vy: 0,
+          speed: 5.5,
+          invulnerable: 0
+        };
+
+        this.input = { up: false, down: false, left: false, right: false };
+        this.stars = [];
+        this.lasers = [];
+        this.comets = [];
+        this.particles = [];
+        this.score = 0;
+        this.hull = 3;
+        this.kills = 0;
+        this.wave = 1;
+        this.spawnTimer = 60;
+        this.shake = 0;
+
+        this.boundLoop = this.loop.bind(this);
+        this.animId = null;
+        this.initStars();
+      }
+
+      initStars() {
+        this.stars = [];
+        for (let i = 0; i < 45; i++) {
+          this.stars.push({
+            x: Math.random() * this.width,
+            y: Math.random() * this.height,
+            speed: 0.5 + Math.random() * 2,
+            size: Math.random() < 0.2 ? 2 : 1
+          });
+        }
+      }
+
+      init() {
+        if (this.canvas) {
+          this.width = this.canvas.width;
+          this.height = this.canvas.height;
+        }
+        this.render();
+      }
+
+      start() {
+        this.started = true;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.hull = 3;
+        this.kills = 0;
+        this.wave = 1;
+        this.spawnTimer = 60;
+        this.lasers = [];
+        this.comets = [];
+        this.particles = [];
+        this.shake = 0;
+        this.ship.x = this.width / 2;
+        this.ship.y = 440;
+        this.ship.invulnerable = 0;
+
+        const ovPause = document.getElementById('overlayCometPause');
+        const ovOver = document.getElementById('overlayCometGameOver');
+        const cover = document.getElementById('cometStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.add('hidden');
+
+        this.updateHUD();
+        if (!this.animId) {
+          this.animId = window.requestAnimationFrame(this.boundLoop);
+        }
+      }
+
+      pause() {
+        if (!this.started || this.gameOver) return;
+        this.paused = !this.paused;
+        const ovPause = document.getElementById('overlayCometPause');
+        if (ovPause) ovPause.classList.toggle('hidden', !this.paused);
+        this.updateHUD();
+      }
+
+      reset() {
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.hull = 3;
+        this.kills = 0;
+        this.lasers = [];
+        this.comets = [];
+        this.particles = [];
+        this.ship.x = this.width / 2;
+        this.ship.y = 440;
+        const ovPause = document.getElementById('overlayCometPause');
+        const ovOver = document.getElementById('overlayCometGameOver');
+        const cover = document.getElementById('cometStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.remove('hidden');
+        this.updateHUD();
+        this.render();
+      }
+
+      fire() {
+        if (!this.started || this.paused || this.gameOver) return;
+        this.lasers.push({ x: this.ship.x - 9, y: this.ship.y - 14, vy: -12 });
+        this.lasers.push({ x: this.ship.x + 9, y: this.ship.y - 14, vy: -12 });
+        if (this.soundEnabled) arcadeAudioSynth.playLaser();
+      }
+
+      update() {
+        if (!this.started || this.paused || this.gameOver) return;
+
+        for (const star of this.stars) {
+          star.y += star.speed;
+          if (star.y > this.height) {
+            star.y = 0;
+            star.x = Math.random() * this.width;
+          }
+        }
+
+        if (this.input.left) this.ship.x -= this.ship.speed;
+        if (this.input.right) this.ship.x += this.ship.speed;
+        if (this.input.up) this.ship.y -= this.ship.speed * 0.7;
+        if (this.input.down) this.ship.y += this.ship.speed * 0.7;
+
+        if (this.ship.x < 20) this.ship.x = 20;
+        if (this.ship.x > this.width - 20) this.ship.x = this.width - 20;
+        if (this.ship.y < 350) this.ship.y = 350;
+        if (this.ship.y > 475) this.ship.y = 475;
+
+        if (this.ship.invulnerable > 0) this.ship.invulnerable--;
+
+        for (let i = this.lasers.length - 1; i >= 0; i--) {
+          const l = this.lasers[i];
+          l.y += l.vy;
+          if (l.y < -10) this.lasers.splice(i, 1);
+        }
+
+        this.wave = 1 + Math.floor(this.kills / 10);
+
+        this.spawnTimer--;
+        if (this.spawnTimer <= 0) {
+          this.spawnComet();
+          const delay = Math.max(25, 60 - this.wave * 4);
+          this.spawnTimer = Math.floor(delay + Math.random() * 20);
+        }
+
+        for (let i = this.comets.length - 1; i >= 0; i--) {
+          const c = this.comets[i];
+          c.x += c.vx;
+          c.y += c.vy;
+          c.rot += c.vrot;
+
+          if (Math.random() < 0.4) {
+            this.particles.push({
+              x: c.x + (Math.random() - 0.5) * c.radius,
+              y: c.y - c.radius * 0.5,
+              vx: (Math.random() - 0.5) * 1.5,
+              vy: -Math.random() * 2 - 1,
+              alpha: 0.8,
+              color: c.tier === 3 ? '#ef233c' : '#f97316',
+              life: 20
+            });
+          }
+
+          let hit = false;
+          for (let j = this.lasers.length - 1; j >= 0; j--) {
+            const l = this.lasers[j];
+            const dist = Math.hypot(l.x - c.x, l.y - c.y);
+            if (dist < c.radius + 4) {
+              hit = true;
+              this.lasers.splice(j, 1);
+              break;
+            }
+          }
+
+          if (hit) {
+            this.destroyComet(i);
+            continue;
+          }
+
+          if (this.ship.invulnerable <= 0) {
+            const shipDist = Math.hypot(this.ship.x - c.x, this.ship.y - c.y);
+            if (shipDist < c.radius + 14) {
+              this.hull--;
+              this.ship.invulnerable = 60;
+              this.shake = 14;
+              if (this.soundEnabled) arcadeAudioSynth.playExplosion();
+              this.destroyComet(i, false);
+
+              if (this.hull <= 0) {
+                this.onGameOver();
+                return;
+              }
+              continue;
+            }
+          }
+
+          if (c.y > this.height + 30) {
+            this.comets.splice(i, 1);
+          }
+        }
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.alpha -= 1 / p.life;
+          if (p.alpha <= 0) this.particles.splice(i, 1);
+        }
+
+        if (this.shake > 0) this.shake *= 0.85;
+        this.updateHUD();
+      }
+
+      spawnComet(tier = 3, startX = null, startY = null, velX = null) {
+        const x = startX !== null ? startX : 30 + Math.random() * (this.width - 60);
+        const y = startY !== null ? startY : -25;
+        const radius = tier === 3 ? 22 : (tier === 2 ? 14 : 9);
+        const baseSpeed = tier === 3 ? 1.8 : (tier === 2 ? 2.6 : 3.6);
+        const vy = baseSpeed + Math.random() * 0.8 + (this.wave * 0.2);
+        const vx = velX !== null ? velX : (Math.random() - 0.5) * 1.5;
+
+        const verts = [];
+        const pointsCount = 7 + Math.floor(Math.random() * 4);
+        for (let p = 0; p < pointsCount; p++) {
+          const angle = (p / pointsCount) * Math.PI * 2;
+          const rad = radius * (0.75 + Math.random() * 0.45);
+          verts.push({ x: Math.cos(angle) * rad, y: Math.sin(angle) * rad });
+        }
+
+        this.comets.push({
+          x,
+          y,
+          vx,
+          vy,
+          radius,
+          tier,
+          rot: 0,
+          vrot: (Math.random() - 0.5) * 0.05,
+          verts
+        });
+      }
+
+      destroyComet(index, scored = true) {
+        const c = this.comets[index];
+        if (!c) return;
+
+        if (scored) {
+          this.kills++;
+          this.score += c.tier * 100;
+          if (this.soundEnabled) arcadeAudioSynth.playExplosion();
+        }
+
+        const particleCount = c.tier * 6;
+        for (let p = 0; p < particleCount; p++) {
+          this.particles.push({
+            x: c.x,
+            y: c.y,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6,
+            alpha: 1,
+            color: Math.random() < 0.5 ? '#facc15' : '#ef233c',
+            life: 25
+          });
+        }
+
+        if (c.tier > 1) {
+          this.spawnComet(c.tier - 1, c.x - 8, c.y, -1.2);
+          this.spawnComet(c.tier - 1, c.x + 8, c.y, 1.2);
+        }
+
+        this.comets.splice(index, 1);
+      }
+
+      onGameOver() {
+        this.gameOver = true;
+        const ovOver = document.getElementById('overlayCometGameOver');
+        const txt = document.getElementById('cometGameOverScoreText');
+        if (txt) txt.textContent = `Score: ${this.score} | Wave: ${this.wave} | Asteroids Vaporized: ${this.kills}`;
+        if (ovOver) ovOver.classList.remove('hidden');
+        showToast(`[MISSION OVER]: Comet Interceptor Score: ${this.score}`);
+      }
+
+      updateHUD() {
+        const elScore = document.getElementById('cometHudScore');
+        const elHull = document.getElementById('cometHudHull');
+        const elWave = document.getElementById('cometHudWave');
+        const elKills = document.getElementById('cometHudKills');
+        const elStatus = document.getElementById('cometHudStatus');
+
+        if (elScore) elScore.textContent = String(this.score).padStart(4, '0');
+        if (elHull) {
+          let hearts = '';
+          for (let i = 0; i < Math.max(0, this.hull); i++) hearts += '♥';
+          elHull.textContent = hearts || 'BREACH';
+        }
+        if (elWave) elWave.textContent = String(this.wave).padStart(2, '0');
+        if (elKills) elKills.textContent = String(this.kills);
+        if (elStatus) {
+          elStatus.textContent = this.hull <= 1 ? 'CRITICAL' : 'CLEAR';
+          elStatus.style.color = this.hull <= 1 ? '#ef233c' : '#38bdf8';
+        }
+      }
+
+      render() {
+        if (!this.ctx) return;
+        const ctx = this.ctx;
+
+        ctx.save();
+        if (this.shake > 0.5) {
+          ctx.translate((Math.random() - 0.5) * this.shake, (Math.random() - 0.5) * this.shake);
+        }
+
+        ctx.fillStyle = '#050711';
+        ctx.fillRect(0, 0, this.width, this.height);
+
+        ctx.fillStyle = '#f8fafc';
+        for (const s of this.stars) {
+          ctx.fillRect(s.x, s.y, s.size, s.size);
+        }
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 10;
+        for (const l of this.lasers) {
+          ctx.fillRect(l.x - 1.5, l.y, 3, 14);
+        }
+        ctx.shadowBlur = 0;
+
+        for (const c of this.comets) {
+          ctx.save();
+          ctx.translate(c.x, c.y);
+          ctx.rotate(c.rot);
+
+          ctx.fillStyle = c.tier === 3 ? '#1e293b' : (c.tier === 2 ? '#334155' : '#475569');
+          ctx.strokeStyle = c.tier === 3 ? '#ef233c' : (c.tier === 2 ? '#f97316' : '#facc15');
+          ctx.lineWidth = 1.8;
+
+          ctx.beginPath();
+          ctx.moveTo(c.verts[0].x, c.verts[0].y);
+          for (let v = 1; v < c.verts.length; v++) {
+            ctx.lineTo(c.verts[v].x, c.verts[v].y);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.restore();
+        }
+
+        for (const p of this.particles) {
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
+        }
+        ctx.globalAlpha = 1;
+
+        if (this.ship.invulnerable % 6 < 3) {
+          ctx.save();
+          ctx.translate(this.ship.x, this.ship.y);
+
+          ctx.fillStyle = Math.random() < 0.5 ? '#38bdf8' : '#60a5fa';
+          ctx.beginPath();
+          ctx.moveTo(-5, 14);
+          ctx.lineTo(0, 24 + Math.random() * 6);
+          ctx.lineTo(5, 14);
+          ctx.fill();
+
+          ctx.fillStyle = '#0f172a';
+          ctx.strokeStyle = '#ef233c';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(0, -18);
+          ctx.lineTo(14, 14);
+          ctx.lineTo(0, 8);
+          ctx.lineTo(-14, 14);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.moveTo(0, -10);
+          ctx.lineTo(3, 2);
+          ctx.lineTo(-3, 2);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
+
+      loop() {
+        this.update();
+        this.render();
+        this.animId = window.requestAnimationFrame(this.boundLoop);
+      }
+    }
+
+    // ==========================================================================
+    // GAME 3: AI SNAKE & DIJKSTRA VISUALIZER ENGINE
+    // Cyber neon snake grid, Dijkstra shortest-path algorithmic search,
+    // real-time exploration wavefront heat nodes, live route vector line.
+    // ==========================================================================
+    class AISnakeGame {
+      constructor() {
+        this.canvas = document.getElementById('snakeCanvas');
+        this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+        this.cols = 19;
+        this.rows = 21;
+        this.cell = 24;
+        this.width = 456;
+        this.height = 504;
+
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.aiMode = false;
+        this.soundEnabled = true;
+
+        this.snake = [{ x: 9, y: 10 }, { x: 9, y: 11 }, { x: 9, y: 12 }];
+        this.dir = { dx: 0, dy: -1 };
+        this.nextDir = { dx: 0, dy: -1 };
+        this.food = { x: 9, y: 5 };
+        this.score = 0;
+        this.stepInterval = 8;
+        this.frameCounter = 0;
+        this.shortestPath = [];
+        this.exploredWavefront = [];
+        this.foodPulse = 0;
+
+        this.boundLoop = this.loop.bind(this);
+        this.animId = null;
+      }
+
+      init() {
+        this.render();
+      }
+
+      start() {
+        this.started = true;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.snake = [{ x: 9, y: 10 }, { x: 9, y: 11 }, { x: 9, y: 12 }];
+        this.dir = { dx: 0, dy: -1 };
+        this.nextDir = { dx: 0, dy: -1 };
+        this.placeFood();
+
+        const ovPause = document.getElementById('overlaySnakePause');
+        const ovOver = document.getElementById('overlaySnakeGameOver');
+        const cover = document.getElementById('snakeStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.add('hidden');
+
+        this.updateHUD();
+        if (!this.animId) {
+          this.animId = window.requestAnimationFrame(this.boundLoop);
+        }
+      }
+
+      pause() {
+        if (!this.started || this.gameOver) return;
+        this.paused = !this.paused;
+        const ovPause = document.getElementById('overlaySnakePause');
+        if (ovPause) ovPause.classList.toggle('hidden', !this.paused);
+        this.updateHUD();
+      }
+
+      reset() {
+        this.started = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.score = 0;
+        this.snake = [{ x: 9, y: 10 }, { x: 9, y: 11 }, { x: 9, y: 12 }];
+        this.dir = { dx: 0, dy: -1 };
+        this.nextDir = { dx: 0, dy: -1 };
+        this.placeFood();
+        const ovPause = document.getElementById('overlaySnakePause');
+        const ovOver = document.getElementById('overlaySnakeGameOver');
+        const cover = document.getElementById('snakeStartMenuCover');
+        if (ovPause) ovPause.classList.add('hidden');
+        if (ovOver) ovOver.classList.add('hidden');
+        if (cover) cover.classList.remove('hidden');
+        this.updateHUD();
+        this.render();
+      }
+
+      toggleAI() {
+        this.aiMode = !this.aiMode;
+        const btn = document.getElementById('btnToggleSnakeAI');
+        const lbl = document.getElementById('btnSnakeAILabel');
+        if (btn) btn.classList.toggle('active', this.aiMode);
+        if (lbl) lbl.textContent = this.aiMode ? 'AI DIJKSTRA: ON' : 'AI DIJKSTRA: OFF';
+        if (this.soundEnabled) arcadeAudioSynth.playPing();
+        this.updateHUD();
+        showToast(this.aiMode ? '[AI MATRIX]: Dijkstra Autopilot Engaged' : '[MANUAL]: Player Steer Mode');
+      }
+
+      setDirection(dx, dy) {
+        if (!this.started) this.start();
+        if (this.paused) this.pause();
+        if (this.snake.length > 1 && dx === -this.dir.dx && dy === -this.dir.dy) return;
+        this.nextDir = { dx, dy };
+      }
+
+      placeFood() {
+        const emptyCells = [];
+        for (let x = 0; x < this.cols; x++) {
+          for (let y = 0; y < this.rows; y++) {
+            const onSnake = this.snake.some(s => s.x === x && s.y === y);
+            if (!onSnake) emptyCells.push({ x, y });
+          }
+        }
+        if (emptyCells.length > 0) {
+          this.food = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        }
+      }
+
+      findDijkstra(start, target) {
+        const visited = Array.from({ length: this.cols }, () => Array(this.rows).fill(false));
+        const parent = Array.from({ length: this.cols }, () => Array(this.rows).fill(null));
+        const explored = [];
+
+        for (let i = 0; i < this.snake.length - 1; i++) {
+          const s = this.snake[i];
+          if (s.x >= 0 && s.x < this.cols && s.y >= 0 && s.y < this.rows) visited[s.x][s.y] = true;
+        }
+
+        const queue = [{ x: start.x, y: start.y }];
+        visited[start.x][start.y] = true;
+        const dirs = [{ dx: 0, dy: -1 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 1, dy: 0 }];
+        let found = false;
+
+        while (queue.length > 0) {
+          const curr = queue.shift();
+          explored.push(curr);
+          if (curr.x === target.x && curr.y === target.y) { found = true; break; }
+          for (const d of dirs) {
+            const nx = curr.x + d.dx;
+            const ny = curr.y + d.dy;
+            if (nx >= 0 && nx < this.cols && ny >= 0 && ny < this.rows && !visited[nx][ny]) {
+              visited[nx][ny] = true;
+              parent[nx][ny] = curr;
+              queue.push({ x: nx, y: ny });
+            }
+          }
+        }
+
+        this.exploredWavefront = explored;
+        if (!found) return null;
+
+        const path = [];
+        let curr = { x: target.x, y: target.y };
+        while (curr.x !== start.x || curr.y !== start.y) {
+          path.unshift(curr);
+          curr = parent[curr.x][curr.y];
+        }
+        return path;
+      }
+
+      update() {
+        if (!this.started || this.paused || this.gameOver) return;
+        this.foodPulse = (this.foodPulse + 0.08) % (Math.PI * 2);
+
+        this.frameCounter++;
+        const path = this.findDijkstra(this.snake[0], this.food);
+        this.shortestPath = path || [];
+
+        if (this.frameCounter % this.stepInterval === 0) {
+          if (this.aiMode) {
+            if (path && path.length > 0) {
+              const next = path[0];
+              this.dir = { dx: next.x - this.snake[0].x, dy: next.y - this.snake[0].y };
+            } else {
+              const dirs = [{ dx: 0, dy: -1 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 1, dy: 0 }];
+              for (const d of dirs) {
+                const nx = this.snake[0].x + d.dx;
+                const ny = this.snake[0].y + d.dy;
+                if (nx >= 0 && nx < this.cols && ny >= 0 && ny < this.rows) {
+                  const blocked = this.snake.some(s => s.x === nx && s.y === ny);
+                  if (!blocked) { this.dir = d; break; }
+                }
+              }
+            }
+          } else {
+            this.dir = this.nextDir;
+          }
+
+          const head = this.snake[0];
+          const newHead = { x: head.x + this.dir.dx, y: head.y + this.dir.dy };
+
+          if (newHead.x < 0 || newHead.x >= this.cols || newHead.y < 0 || newHead.y >= this.rows) {
+            this.onGameOver();
+            return;
+          }
+
+          for (let i = 0; i < this.snake.length - 1; i++) {
+            if (newHead.x === this.snake[i].x && newHead.y === this.snake[i].y) {
+              this.onGameOver();
+              return;
+            }
+          }
+
+          this.snake.unshift(newHead);
+
+          if (newHead.x === this.food.x && newHead.y === this.food.y) {
+            this.score += 150;
+            if (this.soundEnabled) arcadeAudioSynth.playEat();
+            this.placeFood();
+          } else {
+            this.snake.pop();
+          }
+
+          this.updateHUD();
+        }
+      }
+
+      onGameOver() {
+        this.gameOver = true;
+        if (this.soundEnabled) arcadeAudioSynth.playHit();
+        const ovOver = document.getElementById('overlaySnakeGameOver');
+        const txt = document.getElementById('snakeGameOverScoreText');
+        if (txt) txt.textContent = `Score: ${this.score} | Snake Length: ${this.snake.length}`;
+        if (ovOver) ovOver.classList.remove('hidden');
+        showToast(`[SIMULATION CRASH]: Snake Score: ${this.score}`);
+      }
+
+      updateHUD() {
+        const elScore = document.getElementById('snakeHudScore');
+        const elLength = document.getElementById('snakeHudLength');
+        const elMode = document.getElementById('snakeHudMode');
+        const elPath = document.getElementById('snakeHudPath');
+        const elAlgo = document.getElementById('snakeHudAlgo');
+
+        if (elScore) elScore.textContent = String(this.score).padStart(4, '0');
+        if (elLength) elLength.textContent = String(this.snake.length);
+        if (elMode) {
+          elMode.textContent = this.aiMode ? 'AI DIJKSTRA' : 'MANUAL';
+          elMode.style.color = this.aiMode ? '#10b981' : '#f8fafc';
+        }
+        if (elPath) elPath.textContent = this.shortestPath ? `${this.shortestPath.length} STEPS` : 'BLOCKED';
+        if (elAlgo) elAlgo.textContent = 'DIJKSTRA / BFS';
+      }
+
+      render() {
+        if (!this.ctx) return;
+        const ctx = this.ctx;
+
+        ctx.fillStyle = '#060a12';
+        ctx.fillRect(0, 0, this.width, this.height);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+        ctx.lineWidth = 1;
+        for (let c = 0; c <= this.cols; c++) {
+          ctx.beginPath();
+          ctx.moveTo(c * this.cell, 0);
+          ctx.lineTo(c * this.cell, this.height);
+          ctx.stroke();
+        }
+        for (let r = 0; r <= this.rows; r++) {
+          ctx.beginPath();
+          ctx.moveTo(0, r * this.cell);
+          ctx.lineTo(this.width, r * this.cell);
+          ctx.stroke();
+        }
+
+        if (this.aiMode && this.exploredWavefront.length > 0) {
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.08)';
+          for (const w of this.exploredWavefront) {
+            ctx.fillRect(w.x * this.cell + 1, w.y * this.cell + 1, this.cell - 2, this.cell - 2);
+          }
+
+          if (this.shortestPath.length > 0) {
+            ctx.strokeStyle = 'rgba(52, 211, 153, 0.6)';
+            ctx.lineWidth = 2.5;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            const head = this.snake[0];
+            ctx.moveTo(head.x * this.cell + this.cell / 2, head.y * this.cell + this.cell / 2);
+            for (const pt of this.shortestPath) {
+              ctx.lineTo(pt.x * this.cell + this.cell / 2, pt.y * this.cell + this.cell / 2);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        }
+
+        const fx = this.food.x * this.cell + this.cell / 2;
+        const fy = this.food.y * this.cell + this.cell / 2;
+        const fRadius = 6 + Math.sin(this.foodPulse) * 1.5;
+
+        ctx.fillStyle = '#ef233c';
+        ctx.shadowColor = '#ef233c';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(fx, fy, fRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(fx, fy, fRadius + 4, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        for (let i = 0; i < this.snake.length; i++) {
+          const seg = this.snake[i];
+          const sx = seg.x * this.cell;
+          const sy = seg.y * this.cell;
+          const isHead = i === 0;
+
+          if (isHead) {
+            ctx.fillStyle = '#34d399';
+            ctx.shadowColor = '#10b981';
+            ctx.shadowBlur = 8;
+            ctx.fillRect(sx + 2, sy + 2, this.cell - 4, this.cell - 4);
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = '#064e3b';
+            ctx.fillRect(sx + 6, sy + 6, 3, 3);
+            ctx.fillRect(sx + 15, sy + 6, 3, 3);
+          } else {
+            const t = i / this.snake.length;
+            ctx.fillStyle = t < 0.5 ? '#10b981' : '#059669';
+            ctx.fillRect(sx + 3, sy + 3, this.cell - 6, this.cell - 6);
+          }
+        }
+      }
+
+      loop() {
+        this.update();
+        this.render();
+        this.animId = window.requestAnimationFrame(this.boundLoop);
+      }
+    }
+
+    // Game Instances
+    let stormGame = null;
+    let cometGame = null;
+    let snakeGame = null;
+
+    function initStormIfFirstTime() {
+      if (!stormGame) {
+        stormGame = new ThunderstormGame();
+        stormGame.init();
+      }
+    }
+
+    function initCometIfFirstTime() {
+      if (!cometGame) {
+        cometGame = new CometSurvivalGame();
+        cometGame.init();
+      }
+    }
+
+    function initSnakeIfFirstTime() {
+      if (!snakeGame) {
+        snakeGame = new AISnakeGame();
+        snakeGame.init();
+      }
+    }
+
+    // Thunderstorm Interaction Handlers
+    function startStormGame() {
+      setActiveArcade('storm');
+      initStormIfFirstTime();
+      stormGame.start();
+      showToast("[MISSION STARTED]: Survive the lightning strikes!");
+    }
+
+    function toggleStormPause() {
+      if (stormGame) stormGame.pause();
+    }
+
+    function resetStormGame() {
+      if (stormGame) stormGame.reset();
+    }
+
+    function handleStormDpad(dirName, isDown) {
+      initStormIfFirstTime();
+      setActiveArcade('storm');
+      if (!stormGame.started) startStormGame();
+      if (dirName === 'LEFT') stormGame.input.left = isDown;
+      if (dirName === 'RIGHT') stormGame.input.right = isDown;
+      if (dirName === 'UP' && isDown) stormGame.triggerDash();
+    }
+
+    function handleStormDash() {
+      initStormIfFirstTime();
+      setActiveArcade('storm');
+      if (!stormGame.started) startStormGame();
+      stormGame.triggerDash();
+    }
+
+    // Comet Survival Interaction Handlers
+    function startCometGame() {
+      setActiveArcade('comet');
+      initCometIfFirstTime();
+      cometGame.start();
+      showToast("[MISSION STARTED]: Blast incoming asteroids!");
+    }
+
+    function toggleCometPause() {
+      if (cometGame) cometGame.pause();
+    }
+
+    function resetCometGame() {
+      if (cometGame) cometGame.reset();
+    }
+
+    function handleCometDpad(dirName, isDown) {
+      initCometIfFirstTime();
+      setActiveArcade('comet');
+      if (!cometGame.started) startCometGame();
+      if (dirName === 'LEFT') cometGame.input.left = isDown;
+      if (dirName === 'RIGHT') cometGame.input.right = isDown;
+      if (dirName === 'UP') cometGame.input.up = isDown;
+      if (dirName === 'DOWN') cometGame.input.down = isDown;
+    }
+
+    function handleCometFire() {
+      initCometIfFirstTime();
+      setActiveArcade('comet');
+      if (!cometGame.started) startCometGame();
+      cometGame.fire();
+    }
+
+    // AI Snake Interaction Handlers
+    function startSnakeGame() {
+      setActiveArcade('snake');
+      initSnakeIfFirstTime();
+      snakeGame.start();
+      showToast("[SIMULATION STARTED]: Cyber Snake & Dijkstra Engine Active!");
+    }
+
+    function toggleSnakePause() {
+      if (snakeGame) snakeGame.pause();
+    }
+
+    function resetSnakeGame() {
+      if (snakeGame) snakeGame.reset();
+    }
+
+    function handleSnakeDpad(dirName) {
+      initSnakeIfFirstTime();
+      setActiveArcade('snake');
+      if (!snakeGame.started) startSnakeGame();
+      if (dirName === 'UP') snakeGame.setDirection(0, -1);
+      if (dirName === 'DOWN') snakeGame.setDirection(0, 1);
+      if (dirName === 'LEFT') snakeGame.setDirection(-1, 0);
+      if (dirName === 'RIGHT') snakeGame.setDirection(1, 0);
+    }
+
+    function toggleSnakeAIMode() {
+      initSnakeIfFirstTime();
+      setActiveArcade('snake');
+      if (!snakeGame.started) startSnakeGame();
+      snakeGame.toggleAI();
+    }
+
+    // Keyboard Controller dispatching to active arcade
+    window.addEventListener('keydown', (e) => {
+      const key = e.key;
+      const activeTag = document.activeElement ? document.activeElement.tagName : '';
+      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+
+      // 1. Thunderbolt Maze routing
+      if (activeArcade === 'pacman' && gamedevCurrentTab === 'play') {
         if (!game || !game.started) {
-          startArcadeGame();
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            e.preventDefault();
+            startArcadeGame();
+            return;
+          }
         }
+        if (key === 'ArrowUp' || key === 'w' || key === 'W') {
+          e.preventDefault();
+          handleDpadInput('UP');
+        } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
+          e.preventDefault();
+          handleDpadInput('DOWN');
+        } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
+          e.preventDefault();
+          handleDpadInput('LEFT');
+        } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
+          e.preventDefault();
+          handleDpadInput('RIGHT');
+        } else if (key === ' ' || key === 'Spacebar') {
+          e.preventDefault();
+          if (game && game.level_complete) nextArcadeLevel();
+          else handleShootInput();
+        } else if (key === 'p' || key === 'P') {
+          e.preventDefault();
+          toggleArcadePause();
+        } else if (key === 'r' || key === 'R') {
+          e.preventDefault();
+          resetArcadeGame();
+        }
+      }
+
+      // 2. Thunderstorm Survival routing
+      else if (activeArcade === 'storm' && stormCurrentTab === 'play') {
+        if (!stormGame || !stormGame.started) {
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            e.preventDefault();
+            startStormGame();
+            return;
+          }
+        }
+        if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
+          e.preventDefault();
+          if (stormGame) stormGame.input.left = true;
+        } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
+          e.preventDefault();
+          if (stormGame) stormGame.input.right = true;
+        } else if (key === ' ' || key === 'Spacebar' || key === 'Shift') {
+          e.preventDefault();
+          handleStormDash();
+        } else if (key === 'p' || key === 'P') {
+          e.preventDefault();
+          toggleStormPause();
+        } else if (key === 'r' || key === 'R') {
+          e.preventDefault();
+          resetStormGame();
+        }
+      }
+
+      // 3. Comet Survival routing
+      else if (activeArcade === 'comet' && cometCurrentTab === 'play') {
+        if (!cometGame || !cometGame.started) {
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            e.preventDefault();
+            startCometGame();
+            return;
+          }
+        }
+        if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
+          e.preventDefault();
+          if (cometGame) cometGame.input.left = true;
+        } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
+          e.preventDefault();
+          if (cometGame) cometGame.input.right = true;
+        } else if (key === 'ArrowUp' || key === 'w' || key === 'W') {
+          e.preventDefault();
+          if (cometGame) cometGame.input.up = true;
+        } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
+          e.preventDefault();
+          if (cometGame) cometGame.input.down = true;
+        } else if (key === ' ' || key === 'Spacebar') {
+          e.preventDefault();
+          handleCometFire();
+        } else if (key === 'p' || key === 'P') {
+          e.preventDefault();
+          toggleCometPause();
+        } else if (key === 'r' || key === 'R') {
+          e.preventDefault();
+          resetCometGame();
+        }
+      }
+
+      // 4. AI Snake routing
+      else if (activeArcade === 'snake' && snakeCurrentTab === 'play') {
+        if (!snakeGame || !snakeGame.started) {
+          if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+            e.preventDefault();
+            startSnakeGame();
+            return;
+          }
+        }
+        if (key === 'ArrowUp' || key === 'w' || key === 'W') {
+          e.preventDefault();
+          handleSnakeDpad('UP');
+        } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
+          e.preventDefault();
+          handleSnakeDpad('DOWN');
+        } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
+          e.preventDefault();
+          handleSnakeDpad('LEFT');
+        } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
+          e.preventDefault();
+          handleSnakeDpad('RIGHT');
+        } else if (key === ' ' || key === 'Spacebar') {
+          e.preventDefault();
+          toggleSnakeAIMode();
+        } else if (key === 'p' || key === 'P') {
+          e.preventDefault();
+          toggleSnakePause();
+        } else if (key === 'r' || key === 'R') {
+          e.preventDefault();
+          resetSnakeGame();
+        }
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const key = e.key;
+      if (activeArcade === 'storm' && stormGame) {
+        if (key === 'ArrowLeft' || key === 'a' || key === 'A') stormGame.input.left = false;
+        if (key === 'ArrowRight' || key === 'd' || key === 'D') stormGame.input.right = false;
+      } else if (activeArcade === 'comet' && cometGame) {
+        if (key === 'ArrowLeft' || key === 'a' || key === 'A') cometGame.input.left = false;
+        if (key === 'ArrowRight' || key === 'd' || key === 'D') cometGame.input.right = false;
+        if (key === 'ArrowUp' || key === 'w' || key === 'W') cometGame.input.up = false;
+        if (key === 'ArrowDown' || key === 's' || key === 'S') cometGame.input.down = false;
       }
     });
 
     // Arcade audio unlock: ONLY triggered when interacting directly with arcade elements
     function unlockArcadeAudioStrict(e) {
       initArcadeIfFirstTime();
+      initStormIfFirstTime();
+      initCometIfFirstTime();
+      initSnakeIfFirstTime();
       getAudioCtx();
-      if (game && game.started && !game.paused && !game.game_over && arcadeSoundEnabled) {
+      arcadeAudioSynth._init();
+      if (activeArcade === 'pacman' && game && game.started && !game.paused && !game.game_over && arcadeSoundEnabled) {
         pauseSiteBgm();
         game._ensure_audio();
       }
@@ -5913,7 +8346,22 @@
       'btnToggleSound',
       'btnArcadeShoot',
       'btnArcadePause',
-      'btnArcadeReset'
+      'btnArcadeReset',
+      'stormScreenFrame',
+      'stormCanvas',
+      'stormStartMenuCover',
+      'stormMusicIndicator',
+      'btnToggleStormSound',
+      'cometScreenFrame',
+      'cometCanvas',
+      'cometStartMenuCover',
+      'cometMusicIndicator',
+      'btnToggleCometSound',
+      'snakeScreenFrame',
+      'snakeCanvas',
+      'snakeStartMenuCover',
+      'snakeMusicIndicator',
+      'btnToggleSnakeSound'
     ].forEach(id => {
       const el = document.getElementById(id);
       if (el) {
@@ -5927,8 +8375,11 @@
       btn.addEventListener('pointerdown', unlockArcadeAudioStrict);
     });
 
-    // Immediate execution: Initialize arcade and cover right now
+    // Immediate execution: Initialize arcades and covers right now
     initArcadeIfFirstTime();
+    initStormIfFirstTime();
+    initCometIfFirstTime();
+    initSnakeIfFirstTime();
     updateMusicIndicator();
 
     // DOM ready fallback and Quest Filter initialization
@@ -6923,6 +9374,9 @@
       initShuffleSubtitle();
       initLiveBackground();
       initArcadeIfFirstTime();
+      initStormIfFirstTime();
+      initCometIfFirstTime();
+      initSnakeIfFirstTime();
       updateMusicIndicator();
 
       const filterBtns = document.querySelectorAll('.quest-filter-btn');
