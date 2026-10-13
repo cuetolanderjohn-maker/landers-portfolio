@@ -5,10 +5,11 @@
   line-height: 1.4;
   font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #94A3B8;
+  color: #f8fafc;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 24px rgba(239, 35, 60, 0.4);
   visibility: visible;
 }
 
@@ -39,7 +40,8 @@
   line-height: 1.4;
   display: inline-block;
   text-align: center;
-  color: #94A3B8;
+  color: #f8fafc;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 24px rgba(239, 35, 60, 0.4);
 }
 
 .shuffle-space {
