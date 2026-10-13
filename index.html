@@ -270,6 +270,13 @@
       background-color: rgba(239, 35, 60, 0.16);
       color: #ffffff;
       font-family: var(--font-display);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      line-height: 1;
     }
 
     .site-bgm-toggle:hover {
@@ -279,7 +286,8 @@
       box-shadow: 0 4px 14px rgba(239, 35, 60, 0.45);
     }
 
-    .site-bgm-toggle.muted {
+    .site-bgm-toggle.muted,
+    .site-bgm-toggle.is-muted {
       background-color: rgba(255, 255, 255, 0.05);
       border-color: rgba(255, 255, 255, 0.16);
       color: #94a3b8;
@@ -2873,8 +2881,8 @@
         <li><a href="#background" class="nav-link">Background</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
         <li>
-          <button type="button" class="nav-link site-bgm-toggle" id="btnToggleSiteBgm" onclick="toggleSiteBgm()" title="Toggle Website Soundtrack (deathnote.mp3)">
-            <span id="siteBgmIcon">🎵</span> BGM: ON
+          <button type="button" class="nav-link site-bgm-toggle" id="btnToggleSiteBgm" onclick="toggleSiteBgm()" title="Toggle Website Soundtrack (deathnote.mp3)" aria-label="Toggle Soundtrack">
+            <span id="siteBgmIcon">🎵</span>
           </button>
         </li>
       </ul>
@@ -4297,11 +4305,13 @@
       const btn = document.getElementById('btnToggleSiteBgm');
       if (!btn) return;
       if (siteBgmEnabled) {
-        btn.innerHTML = `<span id="siteBgmIcon">🎵</span> BGM: ON`;
-        btn.classList.remove('is-muted');
+        btn.innerHTML = `<span id="siteBgmIcon">🎵</span>`;
+        btn.classList.remove('muted', 'is-muted');
+        btn.setAttribute('title', 'Soundtrack: ON (Click to Mute)');
       } else {
-        btn.innerHTML = `<span id="siteBgmIcon">🔇</span> BGM: OFF`;
-        btn.classList.add('is-muted');
+        btn.innerHTML = `<span id="siteBgmIcon">🔇</span>`;
+        btn.classList.add('muted', 'is-muted');
+        btn.setAttribute('title', 'Soundtrack: MUTED (Click to Play)');
       }
     }
 
@@ -4330,10 +4340,10 @@
       const bgm = getSiteBgm();
       if (!siteBgmEnabled) {
         if (bgm) bgm.pause();
-        showToast("[SOUNDTRACK]: Website Ambient BGM Muted");
+        showToast("[SOUNDTRACK]: Muted");
       } else {
         if (!isArcadeActive()) playSiteBgm();
-        showToast("[SOUNDTRACK]: Website Ambient BGM Online (Death Note)");
+        showToast("[SOUNDTRACK]: Playing (Death Note)");
       }
       updateSiteBgmButton();
     }
@@ -5389,7 +5399,7 @@
 
       if (!arcadeSoundEnabled) {
         if (icon) icon.textContent = "🔇";
-        txt.textContent = "BGM: MUTED [Click to Unmute]";
+        txt.textContent = "MUTED [Click to Unmute]";
         ind.classList.remove('playing');
         if (btn) btn.textContent = "🔇 MUSIC: OFF";
         return;
