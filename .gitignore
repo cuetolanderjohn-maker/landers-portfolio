@@ -11,3 +11,6 @@ __pycache__/
 scratch/
 scratch_*.js
 body_snippet.txt
+
+# Binaries
+*.apk
