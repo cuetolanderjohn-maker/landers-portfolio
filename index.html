@@ -922,6 +922,7 @@
       background-color: rgba(0, 0, 0, 0.4);
       color: #ffffff;
       border-radius: 3px;
+      white-space: nowrap;
     }
 
     .class-title-wrap {
@@ -1009,7 +1010,7 @@
       display: none;
       flex-direction: column;
       flex: 1;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .uiux-tab-pane.active {
@@ -3171,12 +3172,22 @@
        Pure CSS/JS Neumorphic 3D CoverFlow Slider & Category Tabs (Games vs Website)
        ========================================================================== */
     .project-category-bar {
+      width: 100%;
+      max-width: 1300px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 15px 0 35px;
+      margin: 15px auto 35px auto;
       position: relative;
       z-index: 60;
+      text-align: center;
+    }
+
+    .project-category-track {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
     }
 
     .project-category-track {
@@ -4014,7 +4025,7 @@
       display: none;
       flex-direction: column;
       flex: 1;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .singularity-tab-pane.active,
@@ -4075,7 +4086,7 @@
       display: none;
       flex-direction: column;
       flex: 1;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .website-tab-pane.active {
@@ -4096,6 +4107,14 @@
 
     .website-card.expanded .uiux-browser-iframe {
       height: 640px;
+    }
+
+    .website-tab-pane .class-footer-quote,
+    .singularity-tab-pane .class-footer-quote,
+    .uiux-tab-pane .class-footer-quote,
+    .oop-tab-pane .class-footer-quote {
+      margin-top: auto;
+      padding-top: 14px;
     }
 
     .iwani-architecture-viewport,
@@ -5249,12 +5268,12 @@
           <div class="class-body singularity-tab-pane active" id="singularityPaneLive">
             <div class="uiux-browser-shell">
               <div class="uiux-browser-top-bar">
-                <div class="uiux-browser-address-bar" title="https://katlessonplan.netlify.app/">
+                <div class="uiux-browser-address-bar" title="https://cuetolanderjohn-maker.github.io/lesson-plan-maker/">
                   <span class="browser-dot-status">●</span>
-                  <span class="browser-url-text">https://katlessonplan.netlify.app/</span>
+                  <span class="browser-url-text">https://cuetolanderjohn-maker.github.io/lesson-plan-maker/</span>
                 </div>
                 <div class="uiux-browser-actions">
-                  <a href="https://katlessonplan.netlify.app/" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>OPEN</span></a>
+                  <a href="https://cuetolanderjohn-maker.github.io/lesson-plan-maker/" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>OPEN</span></a>
                   <button type="button" class="arcade-tool-btn" onclick="reloadKatLessonPlanFrame()" title="Reload Web App"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>RELOAD</span></button>
                   <button type="button" class="arcade-tool-btn" id="btnToggleSingularityExpand" onclick="toggleSingularityExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
                 </div>
@@ -5264,7 +5283,7 @@
               <div class="uiux-browser-frame-wrap">
                 <iframe
                   id="katLessonPlanFrame"
-                  src="https://katlessonplan.netlify.app/"
+                  src="https://cuetolanderjohn-maker.github.io/lesson-plan-maker/"
                   title="Kat's Lesson Plan Generator: La Consolacion College Pasig"
                   class="uiux-browser-iframe"
                   loading="lazy"
@@ -5289,9 +5308,9 @@
                   <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
                   cuetolanderjohn-maker/lesson-plan-maker
                 </a>
-                <a href="https://katlessonplan.netlify.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(74, 222, 128, 0.28); border-radius: 4px;">
+                <a href="https://cuetolanderjohn-maker.github.io/lesson-plan-maker/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(74, 222, 128, 0.28); border-radius: 4px;">
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                  katlessonplan.netlify.app
+                  cuetolanderjohn-maker.github.io/lesson-plan-maker
                 </a>
               </div>
             </div>
@@ -5326,9 +5345,9 @@
                     <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
                     cuetolanderjohn-maker/lesson-plan-maker
                   </a>
-                  <a href="https://katlessonplan.netlify.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                  <a href="https://cuetolanderjohn-maker.github.io/lesson-plan-maker/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
                     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    katlessonplan.netlify.app
+                    cuetolanderjohn-maker.github.io/lesson-plan-maker
                   </a>
                 </div>
               </div>
@@ -5694,7 +5713,7 @@
             </div>
             <div class="gamedev-tab-nav" role="tablist">
               <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabAlexanderLive" onclick="switchAlexanderTab('live')">
-                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> 3D Architecture
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Alexander 3D App
               </button>
               <button type="button" class="gamedev-tab-btn" id="btnTabAlexanderSpecs" onclick="switchAlexanderTab('specs')">
                 Specs
@@ -5702,36 +5721,37 @@
             </div>
           </div>
 
-          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (ALEXANDER) -->
+          <!-- TAB 1: LIVE INTERACTIVE BROWSER (ALEXANDER'S HOUSE 3D) -->
           <div class="class-body website-tab-pane active" id="alexanderPaneLive">
             <div class="uiux-browser-shell">
               <div class="uiux-browser-top-bar">
-                <div class="uiux-browser-address-bar" title="https://github.com/cuetolanderjohn-maker/alexander-house">
+                <div class="uiux-browser-address-bar" title="https://alexander-house-alpha.vercel.app/">
                   <span class="browser-dot-status">●</span>
-                  <span class="browser-url-text">https://github.com/cuetolanderjohn-maker/alexander-house</span>
+                  <span class="browser-url-text">https://alexander-house-alpha.vercel.app/</span>
                 </div>
                 <div class="uiux-browser-actions">
-                  <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open GitHub Repository in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>OPEN GITHUB</span></a>
+                  <a href="https://alexander-house-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>OPEN</span></a>
+                  <button type="button" class="arcade-tool-btn" onclick="reloadAlexanderFrame()" title="Reload Web App"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>RELOAD</span></button>
                   <button type="button" class="arcade-tool-btn" id="btnToggleAlexanderExpand" onclick="toggleAlexanderExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
                 </div>
               </div>
-              <div class="alexander-architecture-viewport">
-                <div class="oop-feature-card">
-                  <div class="alexander-feature-title"><span class="alexander-feature-code">01</span> GOOD MORNING SKILLION CLERESTORY ROOF</div>
-                  <div class="oop-feature-desc">Engineered high-slope roof pitch with upper clerestory louvers inducing passive stack ventilation to exhaust tropical heat naturally.</div>
-                </div>
-                <div class="oop-feature-card">
-                  <div class="alexander-feature-title"><span class="alexander-feature-code">02</span> INTERACTIVE WEBGL THREE.JS ORBITAL VIEWER</div>
-                  <div class="oop-feature-desc">Real-time client-side 3D model inspector with orbit controls, realistic solar shadows, materials, and dimension annotations.</div>
-                </div>
-                <div class="oop-feature-card">
-                  <div class="alexander-feature-title"><span class="alexander-feature-code">03</span> BLENDER PYTHON (BPY) PARAMETRIC SCRIPTS</div>
-                  <div class="oop-feature-desc">Procedural geometry generation, structural truss calculations, and automated architectural asset export via Python scripting.</div>
-                </div>
+
+              <!-- Live Interactive Iframe Frame Container -->
+              <div class="uiux-browser-frame-wrap">
+                <iframe
+                  id="alexanderHouseFrame"
+                  src="https://alexander-house-alpha.vercel.app/"
+                  title="Alexander's House 3D: Modern Philippine Tropical Architecture"
+                  class="uiux-browser-iframe"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                ></iframe>
               </div>
+
+              <!-- Browser Footer Info Bar -->
               <div class="uiux-browser-footer">
-                <span>Modern Philippine Tropical Architecture &bull; Dedicated to Lander's Father</span>
-                <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
+                <span>Alexander's House 3D &bull; Philippine Tropical Architecture</span>
+                <span class="badge-responsive">THREE.JS 3D WEBGL PLATFORM</span>
               </div>
             </div>
 
@@ -5744,6 +5764,10 @@
                 <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
                   <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
                   cuetolanderjohn-maker/alexander-house
+                </a>
+                <a href="https://alexander-house-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(74, 222, 128, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  alexander-house-alpha.vercel.app
                 </a>
               </div>
             </div>
@@ -5781,11 +5805,15 @@
                 </div>
               </div>
               <div class="spec-block">
-                <span class="spec-title">Repository Link:</span>
+                <span class="spec-title">Repository &amp; Live Links:</span>
                 <div class="pill-list">
                   <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
                     <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
                     cuetolanderjohn-maker/alexander-house
+                  </a>
+                  <a href="https://alexander-house-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    alexander-house-alpha.vercel.app
                   </a>
                 </div>
               </div>
@@ -6881,6 +6909,14 @@
     let alexanderCurrentTab = 'live';
     let alexanderIsExpanded = false;
 
+    function reloadAlexanderFrame() {
+      const f = document.getElementById('alexanderHouseFrame');
+      if (f) {
+        f.src = "https://alexander-house-alpha.vercel.app/";
+        showToast("Reloading Alexander 3D platform...");
+      }
+    }
+
     function switchAlexanderTab(tabName) {
       alexanderCurrentTab = tabName;
       const btnLive = document.getElementById('btnTabAlexanderLive');
@@ -6893,7 +6929,7 @@
       if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
       if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
 
-      showToast(tabName === 'live' ? "Alexander 3D architectural view active" : "Architectural specifications loaded");
+      showToast(tabName === 'live' ? "Alexander 3D web platform active" : "Architectural specifications loaded");
     }
 
     function toggleAlexanderExpand() {
