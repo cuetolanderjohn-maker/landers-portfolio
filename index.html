@@ -1503,17 +1503,19 @@
       border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
       overflow: hidden;
-      min-height: 480px;
+      min-height: 380px;
+      height: 380px;
       display: flex;
     }
 
     .uiux-card.expanded .uiux-browser-frame-wrap {
-      min-height: 640px;
+      min-height: 600px;
+      height: 600px;
     }
 
     .uiux-browser-iframe {
       width: 100%;
-      height: 480px;
+      height: 380px;
       border: none;
       display: block;
       background-color: #ffffff;
@@ -3218,7 +3220,9 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 9px;
+      min-width: 145px;
       transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
@@ -3929,10 +3933,29 @@
       text-transform: uppercase;
     }
 
+    .website-bottom-desc {
+      margin-top: 14px;
+      padding: 14px 18px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #cbd5e1;
+      min-height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
     .website-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
+      width: 100%;
+      box-sizing: border-box;
+      grid-auto-flow: dense;
     }
 
     .singularity-portal-viewport {
@@ -3982,8 +4005,10 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-height: 280px;
-      justify-content: center;
+      min-height: 380px;
+      height: 380px;
+      justify-content: space-evenly;
+      box-sizing: border-box;
     }
 
     .oop-feature-card {
@@ -4102,11 +4127,20 @@
     }
 
     .website-card.expanded .uiux-browser-frame-wrap {
-      min-height: 640px;
+      min-height: 600px;
+      height: 600px;
     }
 
     .website-card.expanded .uiux-browser-iframe {
-      height: 640px;
+      height: 600px;
+    }
+
+    .website-card.expanded .iwani-architecture-viewport,
+    .website-card.expanded .video-edit-architecture-viewport,
+    .website-card.expanded .cpu-scheduler-architecture-viewport,
+    .website-card.expanded .oop-architecture-viewport {
+      min-height: 520px;
+      height: auto;
     }
 
     .website-tab-pane .class-footer-quote,
@@ -4126,8 +4160,10 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-height: 280px;
-      justify-content: center;
+      min-height: 380px;
+      height: 380px;
+      justify-content: space-evenly;
+      box-sizing: border-box;
     }
 
     .iwani-feature-title {
@@ -4225,7 +4261,15 @@
         gap: 28px;
       }
       .website-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .website-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
       }
       .dynamic-slider-container {
         min-height: 500px;
