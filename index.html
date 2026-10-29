@@ -4045,11 +4045,158 @@
       color: #ffffff;
     }
 
+    /* Header gradients for website cards */
+    .class-card.sunny-card .class-header-bar {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(217, 119, 6, 0.9));
+      color: #ffffff;
+    }
+
+    .class-card.iwani-card .class-header-bar {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(2, 132, 199, 0.9));
+      color: #ffffff;
+    }
+
+    .class-card.video-edit-card .class-header-bar {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.9), rgba(126, 34, 206, 0.9));
+      color: #ffffff;
+    }
+
+    .class-card.alexander-card .class-header-bar {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.9), rgba(13, 148, 136, 0.9));
+      color: #ffffff;
+    }
+
+    .class-card.cpu-scheduler-card .class-header-bar {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(29, 78, 216, 0.9));
+      color: #ffffff;
+    }
+
+    .website-tab-pane {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .website-tab-pane.active {
+      display: flex;
+    }
+
+    .class-card.website-card.expanded,
     .class-card.singularity-card.expanded,
     .class-card.oop-card.expanded {
       grid-column: 1 / -1;
       border-color: var(--ink-black);
       box-shadow: var(--panel-shadow-lg);
+    }
+
+    .website-card.expanded .uiux-browser-frame-wrap {
+      min-height: 640px;
+    }
+
+    .website-card.expanded .uiux-browser-iframe {
+      height: 640px;
+    }
+
+    .iwani-architecture-viewport,
+    .video-edit-architecture-viewport,
+    .alexander-architecture-viewport,
+    .cpu-scheduler-architecture-viewport {
+      padding: 16px;
+      background: rgba(10, 12, 18, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 280px;
+      justify-content: center;
+    }
+
+    .iwani-feature-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #38bdf8;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .iwani-feature-code {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .video-edit-feature-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #c084fc;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .video-edit-feature-code {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      background: rgba(192, 132, 252, 0.15);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      color: #c084fc;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .alexander-feature-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #34d399;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .alexander-feature-code {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: #34d399;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .cpu-scheduler-feature-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #60a5fa;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cpu-scheduler-feature-code {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      background: rgba(96, 165, 250, 0.15);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: #60a5fa;
+      padding: 1px 5px;
+      border-radius: 3px;
     }
 
     /* Responsive Breakpoints */
@@ -4301,7 +4448,7 @@
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
             <span>Website</span>
-            <span class="category-count-badge">3</span>
+            <span class="category-count-badge">8</span>
           </button>
         </div>
       </div>
@@ -4957,14 +5104,15 @@
         </div>
       </div>
 
-      <!-- CATEGORY PANE 2: WEBSITE (EventEase, Kat's Lesson Plan Studio, OOP & Logic Suite) -->
+      <!-- CATEGORY PANE 2: WEBSITE / FULL-STACK CLOUD PLATFORMS (EventEase, Kat's Curriculum Studio, Sunny Events, iWani, Video Edit, Alexander's House, CPU Scheduler, OOP & Logic Suite) -->
       <div class="project-category-pane" id="paneCategoryWebsite" role="tabpanel" aria-labelledby="tabCategoryWebsite">
         <div class="website-header-wrap">
           <h3 class="website-section-heading">PRODUCTION WEB SYSTEMS &amp; ARCHITECTURES</h3>
-          <p class="website-section-sub">Full-Stack Cloud Applications, Educational AI Studios &amp; Core Object-Oriented Frameworks</p>
+          <p class="website-section-sub">Full-Stack Cloud Applications, Assistive AI, Computational Media Pipelines &amp; Systems Architecture</p>
         </div>
-
         <div class="website-grid">
+
+        <!-- WEBSITE PROJECT 1: EventEase (UI/UX JUNIOR DEVELOPER) -->
         <article class="class-card website-card uiux-card" id="uiux-card">
           <div class="class-header-bar">
             <div class="class-title-wrap">
@@ -5015,6 +5163,23 @@
                 <span class="badge-responsive">RESPONSIVE WEB APP</span>
               </div>
             </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (EventEase) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                Cloud-hosted event management platform with secure multi-tier user authentication, real-time database coordination, dynamic scheduling, attendee tracking, and cross-device responsive UI.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://eventeasemnt.web.app/login" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(74, 222, 128, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  eventeasemnt.web.app/login
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Building cloud-hosted event management systems with secure authentication, real-time updates, and responsive UI."
+            </p>
           </div>
 
           <!-- TAB 2: SPECS & DOSSIER -->
@@ -5038,22 +5203,32 @@
               </div>
 
               <div class="spec-block">
-                <span class="spec-title">Core Disciplines:</span>
+                <span class="spec-title">Key Responsibilities:</span>
                 <div class="pill-list">
-                  <span class="pill-tag">Authentication</span>
-                  <span class="pill-tag">Real-Time Database</span>
-                  <span class="pill-tag">Dynamic Scheduling</span>
+                  <span class="pill-tag">Frontend Implementation</span>
+                  <span class="pill-tag">Firebase Integration</span>
+                  <span class="pill-tag">User Auth Flows</span>
+                  <span class="pill-tag">Cross-Browser Testing</span>
+                </div>
+              </div>
+
+              <div class="spec-block">
+                <span class="spec-title">Live App:</span>
+                <div class="pill-list">
+                  <a href="https://eventeasemnt.web.app/login" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    eventeasemnt.web.app/login
+                  </a>
                 </div>
               </div>
             </div>
-
             <p class="class-footer-quote">
               "Building cloud-hosted event management systems with secure authentication, real-time updates, and responsive UI."
             </p>
           </div>
         </article>
 
-        <!-- WEBSITE PROJECT 2: Kat's Lesson Plan Studio -->
+        <!-- WEBSITE PROJECT 2: Kat's Lesson Plan Studio (CURRICULUM AI) -->
         <article class="class-card website-card kat-card singularity-card" id="singularity-card">
           <div class="class-header-bar">
             <div class="class-title-wrap">
@@ -5164,7 +5339,575 @@
           </div>
         </article>
 
-        <!-- WEBSITE PROJECT 3: OOP & Logic Suite -->
+        <!-- WEBSITE PROJECT 3: Sunny Events by Pam (PRODUCTION EVENT PLATFORM) -->
+        <article class="class-card website-card sunny-card" id="sunny-card">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Sunny Events by Pam</span>
+              <span class="class-tier">PRODUCTION WEB PLATFORM</span>
+            </div>
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabSunnyLive" onclick="switchSunnyTab('live')">
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Sunny Events App
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabSunnySpecs" onclick="switchSunnyTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: LIVE INTERACTIVE BROWSER (SUNNY EVENTS) -->
+          <div class="class-body website-tab-pane active" id="sunnyPaneLive">
+            <div class="uiux-browser-shell">
+              <div class="uiux-browser-top-bar">
+                <div class="uiux-browser-address-bar" title="https://sunnyeventsbypam.vercel.app/">
+                  <span class="browser-dot-status">●</span>
+                  <span class="browser-url-text">https://sunnyeventsbypam.vercel.app/</span>
+                </div>
+                <div class="uiux-browser-actions">
+                  <a href="https://sunnyeventsbypam.vercel.app/" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>OPEN</span></a>
+                  <button type="button" class="arcade-tool-btn" onclick="reloadSunnyFrame()" title="Reload Web App"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>RELOAD</span></button>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleSunnyExpand" onclick="toggleSunnyExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
+                </div>
+              </div>
+
+              <!-- Live Interactive Iframe Frame Container -->
+              <div class="uiux-browser-frame-wrap">
+                <iframe
+                  id="sunnyEventsFrame"
+                  src="https://sunnyeventsbypam.vercel.app/"
+                  title="Sunny Events by Pam: Event Coordination &amp; Catering Platform"
+                  class="uiux-browser-iframe"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                ></iframe>
+              </div>
+
+              <!-- Browser Footer Info Bar -->
+              <div class="uiux-browser-footer">
+                <span>Sunny Events by Pam &bull; Event Management Platform</span>
+                <span class="badge-responsive">REACT 19 + VERCEL CI/CD</span>
+              </div>
+            </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker/Sunny-Events) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                Production event coordination and catering web platform built for <strong>Sunny Events by Pam</strong>. Features an automated portfolio showcase of 53+ event archives synchronized daily from Meta Graph API via GitHub Actions, multi-channel booking dispatch (EmailJS &amp; direct messaging), customer reviews, and high-performance responsive styling.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker/Sunny-Events" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker/Sunny-Events
+                </a>
+                <a href="https://sunnyeventsbypam.vercel.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(74, 222, 128, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  sunnyeventsbypam.vercel.app
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Worry No More. Celebrate Like a Guest on Your Own Event."
+            </p>
+          </div>
+
+          <!-- TAB 2: SPECS & DOSSIER -->
+          <div class="class-body website-tab-pane" id="sunnyPaneSpecs">
+            <div>
+              <h3 class="class-role-title">Sunny Events by Pam (Production Platform)</h3>
+              <p class="class-desc">
+                Production-grade event management, catering, and styling platform. Powers client acquisition, service discovery, photo showcases from real wedding/debut events, and frictionless inquiry routing.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Technologies:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">React 19</span>
+                  <span class="pill-tag">TypeScript</span>
+                  <span class="pill-tag">Vite 6</span>
+                  <span class="pill-tag">Tailwind CSS v4</span>
+                  <span class="pill-tag">Meta Graph API</span>
+                  <span class="pill-tag">GitHub Actions CI/CD</span>
+                  <span class="pill-tag">EmailJS</span>
+                  <span class="pill-tag">Vercel</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Architectural Features:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Automated Meta Graph Cron Sync (53+ Archives)</span>
+                  <span class="pill-tag">Multi-Channel Direct Inquiry Dispatch</span>
+                  <span class="pill-tag">Categorized Portfolio Filter Engine</span>
+                  <span class="pill-tag">Fluid Touch-Enabled Responsive Layout</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository &amp; Live Links:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker/Sunny-Events" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker/Sunny-Events
+                  </a>
+                  <a href="https://sunnyeventsbypam.vercel.app/" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    sunnyeventsbypam.vercel.app
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Worry No More. Celebrate Like a Guest on Your Own Event."
+            </p>
+          </div>
+        </article>
+
+        <!-- WEBSITE PROJECT 4: iWani — Project Nexus (ON-DEVICE ASSISTIVE AI & ML) -->
+        <article class="class-card website-card iwani-card" id="iwani-card">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">iWani &mdash; Project Nexus</span>
+              <span class="class-tier">ASSISTIVE AI &amp; ML</span>
+            </div>
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabIwaniLive" onclick="switchIwaniTab('live')">
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span> iWani System
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabIwaniSpecs" onclick="switchIwaniTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (IWANI) -->
+          <div class="class-body website-tab-pane active" id="iwaniPaneLive">
+            <div class="uiux-browser-shell">
+              <div class="uiux-browser-top-bar">
+                <div class="uiux-browser-address-bar" title="https://github.com/cuetolanderjohn-maker/Iwani">
+                  <span class="browser-dot-status">●</span>
+                  <span class="browser-url-text">https://github.com/cuetolanderjohn-maker/Iwani</span>
+                </div>
+                <div class="uiux-browser-actions">
+                  <a href="https://github.com/cuetolanderjohn-maker/Iwani" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open GitHub Repository in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>OPEN GITHUB</span></a>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleIwaniExpand" onclick="toggleIwaniExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
+                </div>
+              </div>
+              <div class="iwani-architecture-viewport">
+                <div class="oop-feature-card">
+                  <div class="iwani-feature-title"><span class="iwani-feature-code">01</span> 21-JOINT 3D HAND TRACKING (30+ FPS)</div>
+                  <div class="oop-feature-desc">Real-time spatial landmark detection using MediaPipe Hands 0.10.14 and CameraX across mobile CPU/NPU hardware with zero cloud latency.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="iwani-feature-title"><span class="iwani-feature-code">02</span> NEURAL FSL GESTURE CLASSIFIER (97.38% ACCURACY)</div>
+                  <div class="oop-feature-desc">Custom PyTorch/TFLite feedforward neural network trained on normalized coordinates for instant recognition of all 26 FSL alphabet characters.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="iwani-feature-title"><span class="iwani-feature-code">03</span> ON-DEVICE QWEN2.5 LLM TRANSLATION &amp; SAKLOLO SOS</div>
+                  <div class="oop-feature-desc">Grammar translation via Qwen2.5-0.5B-Instruct into natural Tagalog/English syntax, paired with offline emergency Saklolo voice and alert broadcast.</div>
+                </div>
+              </div>
+              <div class="uiux-browser-footer">
+                <span>ICCT Colleges BSCpE Capstone Project &bull; Edge Intelligence</span>
+                <a href="https://github.com/cuetolanderjohn-maker/Iwani" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
+              </div>
+            </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker/Iwani) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                On-device Filipino Sign Language (FSL) translation system engineered for <strong>ICCT Colleges BSCpE Capstone</strong>. Operates 100% offline at 30+ FPS using MediaPipe 21-joint 3D hand landmark tracking, a neural gesture classifier achieving <strong>97.38% test accuracy</strong> across 26 FSL characters, an embedded Qwen2.5-0.5B-Instruct model for natural grammar translation, and an Emergency Saklolo SOS trigger.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker/Iwani" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker/Iwani
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Bridging communication barriers between the Filipino Deaf community and the hearing majority through offline edge intelligence."
+            </p>
+          </div>
+
+          <!-- TAB 2: SPECS & DOSSIER -->
+          <div class="class-body website-tab-pane" id="iwaniPaneSpecs">
+            <div>
+              <h3 class="class-role-title">iWani &mdash; Project Nexus (Assistive AI Platform)</h3>
+              <p class="class-desc">
+                High-performance offline assistive communication system translating Filipino Sign Language into Tagalog and English text and speech without requiring Internet connectivity.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Technologies:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Android SDK 24+</span>
+                  <span class="pill-tag">Kotlin 1.9.22</span>
+                  <span class="pill-tag">Jetpack Compose</span>
+                  <span class="pill-tag">MediaPipe Hands 0.10.14</span>
+                  <span class="pill-tag">CameraX</span>
+                  <span class="pill-tag">Qwen2.5-0.5B-Instruct</span>
+                  <span class="pill-tag">PyTorch / TFLite</span>
+                  <span class="pill-tag">Offline TTS</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Architectural Features:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">30+ FPS On-Device 21-Joint Spatial Landmark Tracking</span>
+                  <span class="pill-tag">97.38% Test Accuracy Neural Classifier (26 Alphabet Signs)</span>
+                  <span class="pill-tag">Edge LLM Contextual Grammar Reconstruction</span>
+                  <span class="pill-tag">Emergency Saklolo SOS Audio &amp; Visual Strobe Broadcast</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository Link:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker/Iwani" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker/Iwani
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Bridging communication barriers between the Filipino Deaf community and the hearing majority through offline edge intelligence."
+            </p>
+          </div>
+        </article>
+
+        <!-- WEBSITE PROJECT 5: Video Edit Automation (AGENTIC MEDIA PIPELINE) -->
+        <article class="class-card website-card video-edit-card" id="video-edit-card">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Video Edit Automation</span>
+              <span class="class-tier">AGENTIC MEDIA PIPELINE</span>
+            </div>
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabVideoEditLive" onclick="switchVideoEditTab('live')">
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></span> Media Pipeline
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabVideoEditSpecs" onclick="switchVideoEditTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (VIDEO EDIT) -->
+          <div class="class-body website-tab-pane active" id="videoEditPaneLive">
+            <div class="uiux-browser-shell">
+              <div class="uiux-browser-top-bar">
+                <div class="uiux-browser-address-bar" title="https://github.com/cuetolanderjohn-maker/Video-Edit-Automation">
+                  <span class="browser-dot-status">●</span>
+                  <span class="browser-url-text">https://github.com/cuetolanderjohn-maker/Video-Edit-Automation</span>
+                </div>
+                <div class="uiux-browser-actions">
+                  <a href="https://github.com/cuetolanderjohn-maker/Video-Edit-Automation" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open GitHub Repository in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>OPEN GITHUB</span></a>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleVideoEditExpand" onclick="toggleVideoEditExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
+                </div>
+              </div>
+              <div class="video-edit-architecture-viewport">
+                <div class="oop-feature-card">
+                  <div class="video-edit-feature-title"><span class="video-edit-feature-code">01</span> GROQ WHISPER SUB-WORD TIMING &amp; SPEECH ALIGNMENT</div>
+                  <div class="oop-feature-desc">Sub-second audio transcription with precise millisecond word timestamps and automatic capitalization formatting.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="video-edit-feature-title"><span class="video-edit-feature-code">02</span> KINETIC MOTION SUBTITLES &amp; GSAP GRAPHICS</div>
+                  <div class="oop-feature-desc">HyperFrames and GSAP programmatic motion animations, responsive layout centering, and audio-reactive text bounce.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="video-edit-feature-title"><span class="video-edit-feature-code">03</span> HEADLESS FFMPEG MULTI-TRACK ENCODING</div>
+                  <div class="oop-feature-desc">Automated 9:16 vertical video compositing, dynamic audio ducking, color grading LUTs, and hardware-accelerated MP4 rendering.</div>
+                </div>
+              </div>
+              <div class="uiux-browser-footer">
+                <span>Autonomous Agent-Driven Media Processing</span>
+                <a href="https://github.com/cuetolanderjohn-maker/Video-Edit-Automation" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
+              </div>
+            </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker/Video-Edit-Automation) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                Production automated video editing pipeline engineered to run natively inside AI coding agents (Claude Code, Gemini CLI, Cursor). Integrates Groq Whisper API for sub-second word alignment, dynamic motion subtitles, HyperFrames and GSAP animations, audio ducking, and automated 9:16 vertical MP4 export via FFmpeg.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker/Video-Edit-Automation" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker/Video-Edit-Automation
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Automating production media processing directly within AI coding agents with zero human friction."
+            </p>
+          </div>
+
+          <!-- TAB 2: SPECS & DOSSIER -->
+          <div class="class-body website-tab-pane" id="videoEditPaneSpecs">
+            <div>
+              <h3 class="class-role-title">Video Edit Automation (Agentic Pipeline)</h3>
+              <p class="class-desc">
+                Autonomous command-line video engineering pipeline that ingests raw speech video and generates professional animated captions, audio ducking, and formatted vertical exports with zero manual intervention.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Technologies:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Node.js 22+</span>
+                  <span class="pill-tag">Groq Whisper API</span>
+                  <span class="pill-tag">FFmpeg</span>
+                  <span class="pill-tag">HyperFrames</span>
+                  <span class="pill-tag">GSAP</span>
+                  <span class="pill-tag">Agent Skills Architecture</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Architectural Features:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Groq Whisper API Sub-Second Word Alignment</span>
+                  <span class="pill-tag">HyperFrames Kinetic Animated Caption Generation</span>
+                  <span class="pill-tag">Audio Waveform Ducking &amp; Multi-Track Mixing</span>
+                  <span class="pill-tag">Batch Headless FFmpeg Encoding (9:16 Vertical Export)</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository Link:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker/Video-Edit-Automation" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker/Video-Edit-Automation
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Automating production media processing directly within AI coding agents with zero human friction."
+            </p>
+          </div>
+        </article>
+
+        <!-- WEBSITE PROJECT 6: Alexander's House 3D (3D SPATIAL ARCHITECTURE) -->
+        <article class="class-card website-card alexander-card" id="alexander-card">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">Alexander's House 3D</span>
+              <span class="class-tier">3D SPATIAL ARCHITECTURE</span>
+            </div>
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabAlexanderLive" onclick="switchAlexanderTab('live')">
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> 3D Architecture
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabAlexanderSpecs" onclick="switchAlexanderTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (ALEXANDER) -->
+          <div class="class-body website-tab-pane active" id="alexanderPaneLive">
+            <div class="uiux-browser-shell">
+              <div class="uiux-browser-top-bar">
+                <div class="uiux-browser-address-bar" title="https://github.com/cuetolanderjohn-maker/alexander-house">
+                  <span class="browser-dot-status">●</span>
+                  <span class="browser-url-text">https://github.com/cuetolanderjohn-maker/alexander-house</span>
+                </div>
+                <div class="uiux-browser-actions">
+                  <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open GitHub Repository in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>OPEN GITHUB</span></a>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleAlexanderExpand" onclick="toggleAlexanderExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
+                </div>
+              </div>
+              <div class="alexander-architecture-viewport">
+                <div class="oop-feature-card">
+                  <div class="alexander-feature-title"><span class="alexander-feature-code">01</span> GOOD MORNING SKILLION CLERESTORY ROOF</div>
+                  <div class="oop-feature-desc">Engineered high-slope roof pitch with upper clerestory louvers inducing passive stack ventilation to exhaust tropical heat naturally.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="alexander-feature-title"><span class="alexander-feature-code">02</span> INTERACTIVE WEBGL THREE.JS ORBITAL VIEWER</div>
+                  <div class="oop-feature-desc">Real-time client-side 3D model inspector with orbit controls, realistic solar shadows, materials, and dimension annotations.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="alexander-feature-title"><span class="alexander-feature-code">03</span> BLENDER PYTHON (BPY) PARAMETRIC SCRIPTS</div>
+                  <div class="oop-feature-desc">Procedural geometry generation, structural truss calculations, and automated architectural asset export via Python scripting.</div>
+                </div>
+              </div>
+              <div class="uiux-browser-footer">
+                <span>Modern Philippine Tropical Architecture &bull; Dedicated to Lander's Father</span>
+                <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
+              </div>
+            </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker/alexander-house) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                Architectural web visualizer and computational design model for a modern Philippine tropical residence in the province, dedicated to the developer's father. Features the signature <strong>Good Morning skillion roof</strong> with clerestory louvers for passive stack ventilation, deep overhangs for monsoon resilience, an interactive 3D WebGL orbital inspector, and Blender Python parametric modeling scripts.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker/alexander-house
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Modern Philippine Tropical Architecture designed for natural ventilation and thermal comfort."
+            </p>
+          </div>
+
+          <!-- TAB 2: SPECS & DOSSIER -->
+          <div class="class-body website-tab-pane" id="alexanderPaneSpecs">
+            <div>
+              <h3 class="class-role-title">Alexander's House 3D (Philippine Tropical Architecture)</h3>
+              <p class="class-desc">
+                Computational architecture model and interactive web visualizer demonstrating passive cooling principles, climate-resilient structural design, and automated 3D parametric workflows.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Technologies:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Three.js WebGL</span>
+                  <span class="pill-tag">JavaScript</span>
+                  <span class="pill-tag">HTML5 / CSS3</span>
+                  <span class="pill-tag">Blender Python API (bpy)</span>
+                  <span class="pill-tag">Parametric CAD</span>
+                  <span class="pill-tag">Tropical Climate Engineering</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Architectural Features:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Signature Good Morning Clerestory Skillion Roof</span>
+                  <span class="pill-tag">Passive Thermal Stack Effect Ventilation</span>
+                  <span class="pill-tag">Monsoon Storm Overhangs &amp; Rainwater Shedding</span>
+                  <span class="pill-tag">Three.js 60 FPS Orbit Controls &amp; Material Inspection</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository Link:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker/alexander-house" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker/alexander-house
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Modern Philippine Tropical Architecture designed for natural ventilation and thermal comfort."
+            </p>
+          </div>
+        </article>
+
+        <!-- WEBSITE PROJECT 7: CPU Scheduler Simulation (SYSTEMS & ALGORITHMS) -->
+        <article class="class-card website-card cpu-scheduler-card" id="cpu-scheduler-card">
+          <div class="class-header-bar">
+            <div class="class-title-wrap">
+              <span class="class-name">CPU Scheduler Simulation</span>
+              <span class="class-tier">SYSTEMS &amp; ALGORITHMS</span>
+            </div>
+            <div class="gamedev-tab-nav" role="tablist">
+              <button type="button" class="gamedev-tab-btn highlight-tab active" id="btnTabCpuSchedulerLive" onclick="switchCpuSchedulerTab('live')">
+                <span class="pulse-spark"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span> Algorithm Simulator
+              </button>
+              <button type="button" class="gamedev-tab-btn" id="btnTabCpuSchedulerSpecs" onclick="switchCpuSchedulerTab('specs')">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (CPU SCHEDULER) -->
+          <div class="class-body website-tab-pane active" id="cpuSchedulerPaneLive">
+            <div class="uiux-browser-shell">
+              <div class="uiux-browser-top-bar">
+                <div class="uiux-browser-address-bar" title="https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation">
+                  <span class="browser-dot-status">●</span>
+                  <span class="browser-url-text">https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation</span>
+                </div>
+                <div class="uiux-browser-actions">
+                  <a href="https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation" target="_blank" rel="noopener noreferrer" class="arcade-tool-btn" title="Open GitHub Repository in New Tab"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>OPEN GITHUB</span></a>
+                  <button type="button" class="arcade-tool-btn" id="btnToggleCpuSchedulerExpand" onclick="toggleCpuSchedulerExpand()" title="Expand / Compact View"><svg class="arcade-tool-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:5px;"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>EXPAND</span></button>
+                </div>
+              </div>
+              <div class="cpu-scheduler-architecture-viewport">
+                <div class="oop-feature-card">
+                  <div class="cpu-scheduler-feature-title"><span class="cpu-scheduler-feature-code">01</span> FOUR CORE SCHEDULING ALGORITHMS</div>
+                  <div class="oop-feature-desc">Deterministic simulation of First-Come First-Served (FCFS), Shortest Job First (SJF Preemptive &amp; Non-Preemptive), Priority, and Round Robin (RR).</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="cpu-scheduler-feature-title"><span class="cpu-scheduler-feature-code">02</span> DYNAMIC GANTT CHART &amp; TIMELINE METRICS</div>
+                  <div class="oop-feature-desc">Real-time timeline rendering, CPU burst slicing, context-switching overhead simulation, and queue state progression tracking.</div>
+                </div>
+                <div class="oop-feature-card">
+                  <div class="cpu-scheduler-feature-title"><span class="cpu-scheduler-feature-code">03</span> PROCESS CONTROL BLOCK (PCB) &amp; BENCHMARKS</div>
+                  <div class="oop-feature-desc">Accurate turnaround time, waiting time, response time calculations, throughput benchmarking, and starvation analysis across C++ and Python.</div>
+                </div>
+              </div>
+              <div class="uiux-browser-footer">
+                <span>Operating Systems Simulation Suite &bull; C++ &amp; Python</span>
+                <a href="https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
+              </div>
+            </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker/cpu-scheduler-simulation) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                Comprehensive operating systems process scheduling simulator implemented in <strong>C++ and Python</strong>. Provides deterministic visualization and performance benchmarking across First-Come First-Served (FCFS), Shortest Job First (SJF Preemptive &amp; Non-Preemptive), Priority Scheduling, and Round Robin (RR) with dynamic time quanta, featuring real-time Gantt charts and turnaround latency metrics.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker/cpu-scheduler-simulation
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Algorithmic precision and deterministic state transitions in operating systems design."
+            </p>
+          </div>
+
+          <!-- TAB 2: SPECS & DOSSIER -->
+          <div class="class-body website-tab-pane" id="cpuSchedulerPaneSpecs">
+            <div>
+              <h3 class="class-role-title">CPU Scheduler Simulation (OS Architecture)</h3>
+              <p class="class-desc">
+                Operating systems scheduling visualizer simulating core scheduling algorithms, thread states, CPU burst cycles, preemptive interrupts, and real-time Gantt timeline metrics.
+              </p>
+              <div class="spec-block">
+                <span class="spec-title">Technologies:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">C++</span>
+                  <span class="pill-tag">Python</span>
+                  <span class="pill-tag">OS Architecture</span>
+                  <span class="pill-tag">Process Control Block (PCB)</span>
+                  <span class="pill-tag">Gantt Chart Rendering</span>
+                  <span class="pill-tag">Algorithmic Benchmarking</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Core Disciplines:</span>
+                <div class="pill-list">
+                  <span class="pill-tag">Preemptive &amp; Non-Preemptive SJF</span>
+                  <span class="pill-tag">Priority Inversion &amp; Aging Mitigation</span>
+                  <span class="pill-tag">Round Robin Quantum Optimization</span>
+                  <span class="pill-tag">Throughput &amp; Wait Time Minimization</span>
+                </div>
+              </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository Link:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker/cpu-scheduler-simulation" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker/cpu-scheduler-simulation
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="class-footer-quote">
+              "Algorithmic precision and deterministic state transitions in operating systems design."
+            </p>
+          </div>
+        </article>
+
+        <!-- WEBSITE PROJECT 8: OOP & Logic Suite (CORE REPOSITORY) -->
         <article class="class-card website-card oop-card" id="oop-card">
           <div class="class-header-bar">
             <div class="class-title-wrap">
@@ -5181,7 +5924,7 @@
             </div>
           </div>
 
-          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE -->
+          <!-- TAB 1: ARCHITECTURE REPOSITORY SHOWCASE (OOP) -->
           <div class="class-body oop-tab-pane active" id="oopPaneLive">
             <div class="uiux-browser-shell">
               <div class="uiux-browser-top-bar">
@@ -5213,6 +5956,23 @@
                 <a href="https://github.com/cuetolanderjohn-maker" target="_blank" rel="noopener noreferrer" class="badge-responsive" style="text-decoration:none; color:inherit;">VIEW REPOSITORY &rarr;</a>
               </div>
             </div>
+
+            <!-- BOTTOM TAB DESCRIPTION (cuetolanderjohn-maker) -->
+            <div class="website-bottom-desc" style="margin-top: 14px; padding: 14px 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+              <p style="margin: 0 0 10px;">
+                High-performance object-oriented programming repository encompassing clean architecture, software design patterns, fundamental data structures, stream sanitization, and algorithmic problem-solving across <strong>C++, Python, and Java</strong>.
+              </p>
+              <div class="pill-list" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                <a href="https://github.com/cuetolanderjohn-maker" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 4px;">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                  cuetolanderjohn-maker
+                </a>
+              </div>
+            </div>
+
+            <p class="class-footer-quote" style="margin-top: 14px;">
+              "Clean architecture and solid object-oriented design are the foundation of scalable engineering."
+            </p>
           </div>
 
           <!-- TAB 2: SPECS & DOSSIER -->
@@ -5241,12 +6001,22 @@
                   <span class="pill-tag">Performance Refactoring</span>
                 </div>
               </div>
+              <div class="spec-block">
+                <span class="spec-title">Repository Link:</span>
+                <div class="pill-list">
+                  <a href="https://github.com/cuetolanderjohn-maker" target="_blank" rel="noopener noreferrer" class="pill-tag" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                    cuetolanderjohn-maker
+                  </a>
+                </div>
+              </div>
             </div>
             <p class="class-footer-quote">
               "Clean architecture and solid object-oriented design are the foundation of scalable engineering."
             </p>
           </div>
         </article>
+
         </div>
       </div>
     </section>
@@ -6005,6 +6775,164 @@
       if (card) card.classList.toggle('expanded', oopIsExpanded);
       if (btn) btn.innerHTML = getSvgExpandBtn(oopIsExpanded);
       showToast(oopIsExpanded ? "OOP architecture expanded" : "OOP architecture compacted");
+    }
+
+    // ==========================================================================
+    // SUNNY EVENTS BY PAM TABS & VIEW EXPANSION
+    // ==========================================================================
+    let sunnyCurrentTab = 'live';
+    let sunnyIsExpanded = false;
+
+    function reloadSunnyFrame() {
+      const f = document.getElementById('sunnyEventsFrame');
+      if (f) {
+        f.src = f.src;
+        showToast("Reloading Sunny Events platform...");
+      }
+    }
+
+    function switchSunnyTab(tabName) {
+      sunnyCurrentTab = tabName;
+      const btnLive = document.getElementById('btnTabSunnyLive');
+      const btnSpecs = document.getElementById('btnTabSunnySpecs');
+      const paneLive = document.getElementById('sunnyPaneLive');
+      const paneSpecs = document.getElementById('sunnyPaneSpecs');
+
+      if (btnLive) btnLive.classList.toggle('active', tabName === 'live');
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+
+      showToast(tabName === 'live' ? "Sunny Events platform active" : "Event platform specifications loaded");
+    }
+
+    function toggleSunnyExpand() {
+      sunnyIsExpanded = !sunnyIsExpanded;
+      const card = document.getElementById('sunny-card');
+      const btn = document.getElementById('btnToggleSunnyExpand');
+      if (card) card.classList.toggle('expanded', sunnyIsExpanded);
+      if (btn) btn.innerHTML = getSvgExpandBtn(sunnyIsExpanded);
+      showToast(sunnyIsExpanded ? "Sunny Events platform expanded" : "Sunny Events platform compacted");
+    }
+
+    // ==========================================================================
+    // IWANI — PROJECT NEXUS TABS & VIEW EXPANSION
+    // ==========================================================================
+    let iwaniCurrentTab = 'live';
+    let iwaniIsExpanded = false;
+
+    function switchIwaniTab(tabName) {
+      iwaniCurrentTab = tabName;
+      const btnLive = document.getElementById('btnTabIwaniLive');
+      const btnSpecs = document.getElementById('btnTabIwaniSpecs');
+      const paneLive = document.getElementById('iwaniPaneLive');
+      const paneSpecs = document.getElementById('iwaniPaneSpecs');
+
+      if (btnLive) btnLive.classList.toggle('active', tabName === 'live');
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+
+      showToast(tabName === 'live' ? "iWani assistive AI view active" : "iWani specifications loaded");
+    }
+
+    function toggleIwaniExpand() {
+      iwaniIsExpanded = !iwaniIsExpanded;
+      const card = document.getElementById('iwani-card');
+      const btn = document.getElementById('btnToggleIwaniExpand');
+      if (card) card.classList.toggle('expanded', iwaniIsExpanded);
+      if (btn) btn.innerHTML = getSvgExpandBtn(iwaniIsExpanded);
+      showToast(iwaniIsExpanded ? "iWani frame expanded" : "iWani frame compacted");
+    }
+
+    // ==========================================================================
+    // VIDEO EDIT AUTOMATION TABS & VIEW EXPANSION
+    // ==========================================================================
+    let videoEditCurrentTab = 'live';
+    let videoEditIsExpanded = false;
+
+    function switchVideoEditTab(tabName) {
+      videoEditCurrentTab = tabName;
+      const btnLive = document.getElementById('btnTabVideoEditLive');
+      const btnSpecs = document.getElementById('btnTabVideoEditSpecs');
+      const paneLive = document.getElementById('videoEditPaneLive');
+      const paneSpecs = document.getElementById('videoEditPaneSpecs');
+
+      if (btnLive) btnLive.classList.toggle('active', tabName === 'live');
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+
+      showToast(tabName === 'live' ? "Video pipeline view active" : "Media pipeline specifications loaded");
+    }
+
+    function toggleVideoEditExpand() {
+      videoEditIsExpanded = !videoEditIsExpanded;
+      const card = document.getElementById('video-edit-card');
+      const btn = document.getElementById('btnToggleVideoEditExpand');
+      if (card) card.classList.toggle('expanded', videoEditIsExpanded);
+      if (btn) btn.innerHTML = getSvgExpandBtn(videoEditIsExpanded);
+      showToast(videoEditIsExpanded ? "Video pipeline frame expanded" : "Video pipeline frame compacted");
+    }
+
+    // ==========================================================================
+    // ALEXANDER'S HOUSE 3D TABS & VIEW EXPANSION
+    // ==========================================================================
+    let alexanderCurrentTab = 'live';
+    let alexanderIsExpanded = false;
+
+    function switchAlexanderTab(tabName) {
+      alexanderCurrentTab = tabName;
+      const btnLive = document.getElementById('btnTabAlexanderLive');
+      const btnSpecs = document.getElementById('btnTabAlexanderSpecs');
+      const paneLive = document.getElementById('alexanderPaneLive');
+      const paneSpecs = document.getElementById('alexanderPaneSpecs');
+
+      if (btnLive) btnLive.classList.toggle('active', tabName === 'live');
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+
+      showToast(tabName === 'live' ? "Alexander 3D architectural view active" : "Architectural specifications loaded");
+    }
+
+    function toggleAlexanderExpand() {
+      alexanderIsExpanded = !alexanderIsExpanded;
+      const card = document.getElementById('alexander-card');
+      const btn = document.getElementById('btnToggleAlexanderExpand');
+      if (card) card.classList.toggle('expanded', alexanderIsExpanded);
+      if (btn) btn.innerHTML = getSvgExpandBtn(alexanderIsExpanded);
+      showToast(alexanderIsExpanded ? "Alexander 3D architecture expanded" : "Alexander 3D architecture compacted");
+    }
+
+    // ==========================================================================
+    // CPU SCHEDULER SIMULATION TABS & VIEW EXPANSION
+    // ==========================================================================
+    let cpuSchedulerCurrentTab = 'live';
+    let cpuSchedulerIsExpanded = false;
+
+    function switchCpuSchedulerTab(tabName) {
+      cpuSchedulerCurrentTab = tabName;
+      const btnLive = document.getElementById('btnTabCpuSchedulerLive');
+      const btnSpecs = document.getElementById('btnTabCpuSchedulerSpecs');
+      const paneLive = document.getElementById('cpuSchedulerPaneLive');
+      const paneSpecs = document.getElementById('cpuSchedulerPaneSpecs');
+
+      if (btnLive) btnLive.classList.toggle('active', tabName === 'live');
+      if (btnSpecs) btnSpecs.classList.toggle('active', tabName === 'specs');
+      if (paneLive) paneLive.classList.toggle('active', tabName === 'live');
+      if (paneSpecs) paneSpecs.classList.toggle('active', tabName === 'specs');
+
+      showToast(tabName === 'live' ? "CPU scheduler simulation view active" : "OS scheduler specifications loaded");
+    }
+
+    function toggleCpuSchedulerExpand() {
+      cpuSchedulerIsExpanded = !cpuSchedulerIsExpanded;
+      const card = document.getElementById('cpu-scheduler-card');
+      const btn = document.getElementById('btnToggleCpuSchedulerExpand');
+      if (card) card.classList.toggle('expanded', cpuSchedulerIsExpanded);
+      if (btn) btn.innerHTML = getSvgExpandBtn(cpuSchedulerIsExpanded);
+      showToast(cpuSchedulerIsExpanded ? "CPU scheduler frame expanded" : "CPU scheduler frame compacted");
     }
 
     // Sleek vector SVG button renderers (Zero-slop human design)
@@ -11665,7 +12593,7 @@
       projects: {
         sector: 'PROJECTS // SHOWCASE',
         messages: [
-          "You're exploring Lander's Projects. Browse 5 arcade games in the Coverflow slider or 3 production web systems.",
+          "You're exploring Lander's Projects. Browse 5 arcade games in the Coverflow slider or 8 production web systems and architectures.",
           "Play Thunderbolt Maze, Storm Evasion, Comet Survival, or AI Dijkstra Snake directly in your browser.",
           "Pose a peace sign in the Vision Lab to see the dancing cat GIF.",
           "Switch to the Website tab to test live instances of Kat's Lesson Plan Studio and EventEase."
